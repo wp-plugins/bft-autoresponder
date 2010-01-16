@@ -1,0 +1,57 @@
+<div style="width:350px;float:left;padding:10px;">
+<form method="post">
+<input type="hidden" name="settings_ok" value="Y">
+<p><label>Sender of all emails:</label> <input type="text" name="bft_sender" value="<?php echo $bft_sender?>"></p>
+<p><label>URL after registration<br>(optional):</label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>"></p>
+<p><label>Double opt-in:</label> 
+<select name="bft_optin">
+<option value="0" <?if(!$bft_optin) echo "selected";?>>No</option>
+<option value="1" <?if($bft_optin) echo "selected";?>>Yes</option>
+</select></p>
+<p><input type="submit" value="Save Settings"></p>
+</form>
+</div>
+
+<div style="width:350px;float:left;padding:10px;">
+<p>Registration form HTML code <br>(Copy and paste in a post, page or your wordpress template):</p>
+<textarea rows="8" cols="60">
+<form method="post" action="<?php echo get_option('siteurl')?>/index.php?bft=register">
+<p><label>Name:</label>&nbsp;<input type="text" name="name"></p>
+<p><label>Email:</label>&nbsp;<input type="text" name="email"></p>
+<p align="center"><input type="submit" value="Register"></p>
+</form>
+</textarea>
+</div>
+
+<div style="clear:both;">
+<hr />
+
+<h2>User Manual</h2>
+
+<p>This is a short introduction to BFT Autoresponder. It's very simple and easy to use. For more advanced software you can check our <a href="http://calendarscripts.info/php-auto-responder.html">PHP autoresponder</a>.</p>
+ 
+<h3>General Settings</h3>
+<p>This is the current page. Here you can set several important settings:</p>
+<p><ul>
+   <li>Sender of all emails. This is the "From" email address that will be used to send your autoresponder messages.</li>
+   <li>URL after registration. This setting allows you to redirect the user to a specific page (some sales page, help etc) after they sign up for the autoresponder. You can leave it blank.</li>
+   <li>Double opt in. When "yes" is selected, the subscribers to your list will be sent an email with confirmation link and will be activated only when this link is clicked.</li>
+   <li>Registration form HTML code. Copy this code and paste it anywhere - in a blog post or page (in HTML mode), in the sidebar or even in other website. The code is non-editable here on the page - if you want to edit the appearance, do that on the code that you have copied.</li>
+</ul></p>
+
+<h3>Mailing List</h3>
+<p>Manage your mailing list on this page. You can add, edit and delete subscribers and activate/deactivate them. When you add a subscriber as active, she will receive the welcome mail if you have set such (more about welcome mails in "Email Messages" section).</p>
+
+<h3>Import/Export Members</h3>
+<p>In addition to adding members manually, you can import them in batches from a CSV file. BFT autoresponder allows you to import CSV file with any number and order of columns - you only need to specify which column number (from left to right) in the CSV contains user email and which one - user name.</p>
+ 
+<p>When importing members they will automatically be activated. If there are any welcome mails set, those will be sent out. Importing a lot of members at once and having a welcome mail scheduled at the same time may slow down your site.</p>
+
+<h3>Email Messages</h3>
+<p>Use this page to add, edit and delete autoresponder mails. In "Days after registration" enter a number which will represent how many days after user registration the email will be sent to the user. There should be only one email scheduled for each number of days.</p>
+
+<p>To create a <b>Welcome mail</b> just enter "0" in "Days after registration" field. Such emails will be sent out immediately when the user is imported, added or registers (when double opt-in is "yes" the last case to be read "when the user confirms").</p>
+
+<h3>Customization of the messages</h3>
+<p>You can use the tags <b>{{email}}</b> and <b>{{name}}</b> both in the subject and the contents of your messages. They will be replaced with user's email and name.</p>
+</div>

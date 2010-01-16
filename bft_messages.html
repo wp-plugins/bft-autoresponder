@@ -1,0 +1,64 @@
+<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
+<div style="clear:both;float:left;">
+	<div style="float:left;">
+	<p><label>Subject:&nbsp; </label> <input type="text" name="subject" size="80"></p>
+	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"></textarea></p>
+	<p><label>Days after registration:</label> <input type="text" name="days" size="4"></p>
+	<p><input type="submit" value="Add Message"></p></div>
+</div>
+<input type="hidden" name="add_message" value="1">
+</form>
+
+<?php foreach($mails as $mail): ?>
+<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
+<div style="clear:both;float:left;">
+<hr />
+	<div style="float:left;">
+	<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=$mail->subject?>" size="80"></p>
+	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"><?=$mail->message?></textarea></p>
+	<p><label>Days after registration:</label> 
+	<input type="text" name="days" size="4" value="<?=$mail->days?>"></p>
+	<p><input type="submit" name="save_message" value="Save Message">	
+	<input type="button" value="Delete" onclick="delMessage(this.form);"></p></div>
+</div>
+<input type="hidden" name="id" value="<?=$mail->id?>">
+<input type="hidden" name="del_message" value="0">
+</form>
+<?php endforeach; ?>
+
+<script language="javascript">
+function delMessage(frm)
+{
+	if(confirm("Are you sure?"))
+	{
+		frm.del_message.value=1;
+		frm.submit();
+	}
+}
+
+function validateMessage(frm)
+{
+	if(frm.subject.value=="")
+	{
+		alert("Please enter subject");
+		frm.subject.focus();
+		return false;
+	}
+	
+	if(frm.message.value=="")
+	{
+		alert("Please enter message");
+		frm.message.focus();
+		return false;
+	}
+	
+	if(isNaN(frm.days.value))
+	{
+		alert("Please enter number of days after registration");
+		frm.days.focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>
