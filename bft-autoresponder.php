@@ -332,6 +332,8 @@ if($_REQUEST['bft']=='register')
 	
 	if($status)
 	{
+		bft_welcome_mail($wpdb->insert_id);
+	
 		// display success message
 		echo "<script language='javascript'>
 		alert('You have been subcribed!');
