@@ -330,14 +330,15 @@ if($_REQUEST['bft']=='register')
 	VALUES (\"$name\",\"$email\",'$status','$code',CURDATE())";		
 	$wpdb->query($sql);
 	
+	$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
+	
 	if($status)
 	{
 		bft_welcome_mail($wpdb->insert_id);
-	
 		// display success message
 		echo "<script language='javascript'>
 		alert('You have been subcribed!');
-		window.location='index.php';
+		window.location='".($bft_redirect?$bft_redirect:"index.php")."';
 		</script>";
 		exit;
 	}
@@ -353,7 +354,7 @@ if($_REQUEST['bft']=='register')
 		
 		echo "<script language='javascript'>
 		alert('Please check your email. A confirmation link is sent to it.');
-		window.location='index.php';
+		window.location='".($bft_redirect?$bft_redirect:"index.php")."';
 		</script>";
 		exit;
 	}
@@ -381,6 +382,8 @@ if($_REQUEST['bft']=='bft_confirm')
 	$sql="SELECT * FROM $users_table WHERE email='$email' AND code='$code'";	
 	$member=$wpdb->get_row($sql);	
 	
+	$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
+	
 	if($member->id)
 	{
 		$sql="UPDATE $users_table SET 
@@ -392,7 +395,7 @@ if($_REQUEST['bft']=='bft_confirm')
 		bft_welcome_mail($member->id);
 	}
 	
-	wp_redirect(get_option('siteurl'));
+	wp_redirect($bft_redirect?$bft_redirect:get_option('siteurl'));
 }
 
 // the actual autoresponder hook - it's run when the index page is loaded
