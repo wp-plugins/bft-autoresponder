@@ -5,7 +5,7 @@
 <form method="post" enctype="multipart/form-data" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
 <p><label>Fields Delimiter:</label> <input type="text" name="delim" value="," size="3"> (enter <b>\t</b> for tabulator)</p>
 <p><label>Email column is number:</label> <input type="text" name="email_column" value="1" size="3"> in the CSV</p>
-<p><label>Email column is number:</label> <input type="text" name="name_column" value="2" size="3"> in the CSV</p>
+<p><label>Name column is number:</label> <input type="text" name="name_column" value="2" size="3"> in the CSV</p>
 <p><label>Upload CSV:</label> <input type="file" name="file"></p>
 <p><input type="submit" name="import" value="Import CSV File"></p>
 </form>
