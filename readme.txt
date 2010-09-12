@@ -3,7 +3,7 @@ Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
 Tested up to: 2.8
-Stable tag: 1.0
+Stable tag: 1.1
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
 
@@ -11,7 +11,7 @@ This plugin allows scheduling of automated autoresponder messages and managing a
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
 
-This plugin is free and simplified version of the more advanced and fully featured standalone [php autoresponder](http://calendarscripts.info/php-auto-responder.html "PHP Autoresponder").
+This plugin is free and simplified version of the more advanced and fully featured standalone [php autoresponder](http://calendarscripts.info/http://calendarscripts.info/php-auto-responder.html "PHP Autoresponder").
 
 == Installation ==
 
