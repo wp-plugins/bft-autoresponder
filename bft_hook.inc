@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is an include file called when the plugin is loaded from the front end. It checks if any mails need to be sent today and sends them. 
 Author: Bobby Handzhiev
-Version: 1.1
+Version: 1.2
 Author URI: http://pimteam.net/
 */ 
 
@@ -25,7 +25,7 @@ Author URI: http://pimteam.net/
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-require_once(ABSPATH . 'wp-includes/pluggable.php');
+global $wpdb;
 
 $last_date=get_option("bft_date");
 
