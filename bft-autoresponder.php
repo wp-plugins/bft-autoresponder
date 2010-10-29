@@ -402,7 +402,36 @@ if($_REQUEST['bft']=='bft_confirm')
 }
 
 // the actual autoresponder hook - it's run when the index page is loaded
-require("bft_hook.inc");
+##### HOOK ####
+$last_date=get_option("bft_date");
+
+// run only once per day
+if($last_date!=date("Y-m-d"))
+{
+	$sql="SELECT * FROM $mails_table WHERE days>0 ORDER BY id";
+	$mails=$wpdb->get_results($sql);
+			
+	foreach($mails as $mail)
+	{
+		// get users who need to get this mail sent today and send it
+		$sql="SELECT * FROM $users_table
+		WHERE date=CURDATE() - INTERVAL $mail->days DAY
+		AND status=1
+		ORDER BY id";			
+		$members=$wpdb->get_results($sql);
+		
+		if(sizeof($members))
+		{
+			foreach($members as $member)
+			{
+				bft_customize($mail,$member);
+			}
+		}
+	}
+	
+	update_option( 'bft_date', date("Y-m-d") );
+}
+##### END HOOK ####
 
 register_activation_hook(__FILE__,'bft_install');
 add_action('admin_menu', 'bft_autoresponder_menu');
