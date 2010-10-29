@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced stand-alone script check our <a href="http://calendarscripts.info/php-auto-responder.html">PHP Autoresponder</a>
 Author: Bobby Handzhiev
-Version: 1.1
+Version: 1.2
 Author URI: http://pimteam.net/
 */ 
 
