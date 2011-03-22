@@ -4,8 +4,8 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced stand-alone script check our <a href="http://calendarscripts.info/php-auto-responder.html">PHP Autoresponder</a>
 Author: Bobby Handzhiev
-Version: 1.2
-Author URI: http://pimteam.net/
+Version: 1.3
+Author URI: http://calendarscripts.info/
 */ 
 
 /*  Copyright 2008  Bobby Handzhiev (email : admin@pimteam.net)
@@ -41,7 +41,7 @@ function bft_autoresponder_menu() {
 
 
 /* Creates the mysql tables needed to store mailing list and messages */
-$bft_db_version="1.0";
+$bft_db_version="1.1";
 $users_table= $wpdb->prefix. "bft_users";
 $mails_table= $wpdb->prefix . "bft_mails";
 $sentmails_table= $wpdb->prefix . "bft_sentmails";
@@ -64,6 +64,7 @@ function bft_install()
 				  name VARCHAR(255)	NOT NULL,		  
 				  status TINYINT UNSIGNED NOT NULL,
 				  date DATE NOT NULL,
+              ip VARCHAR(100) NOT NULL,
 				  code VARCHAR(10) NOT NULL
 				);";
 			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');				
@@ -96,7 +97,17 @@ function bft_install()
 			dbDelta($sql);
 	  }
 	  
-	   add_option("bft_db_version", $bft_db_version);
+	  $old_bft_db_version=get_option('bft_db_version');
+	  
+	  // DB update in bft db version 1.1., plugin version 1.3
+	  if(empty($old_bft_db_version) or $old_bft_db_version=='1.0')
+     {
+         $sql="ALTER TABLE ".$users_table." ADD ip VARCHAR(100) NOT NULL";
+         $wpdb->query($sql);
+     }
+	  
+	  if(empty($old_bft_db_version)) add_option("bft_db_version", $bft_db_version);
+	  else update_option( 'bft_db_version', $bft_db_version);
 }
 
 /* Stores the autoresponder configuration */
@@ -130,8 +141,8 @@ function bft_list(){
 	
 	if(!empty($_POST['add_user']))
 	{
-		$sql="INSERT IGNORE INTO $users_table (name,email,status,date)
-		VALUES (\"$name\",\"$email\",\"$status\",CURDATE())";		
+		$sql="INSERT IGNORE INTO $users_table (name,email,status,date,ip)
+		VALUES (\"$name\",\"$email\",\"$status\",CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
 		$wpdb->query($sql);
 		
 		if($status) bft_welcome_mail($wpdb->insert_id);
@@ -329,8 +340,8 @@ if($_REQUEST['bft']=='register')
 	
 	$code=substr(md5($email.microtime()),0,8);
 	
-	$sql="INSERT IGNORE INTO $users_table (name,email,status,code,date)
-	VALUES (\"$name\",\"$email\",'$status','$code',CURDATE())";		
+	$sql="INSERT IGNORE INTO $users_table (name,email,status,code,date,ip)
+	VALUES (\"$name\",\"$email\",'$status','$code',CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
 	$wpdb->query($sql);
 	
 	$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	

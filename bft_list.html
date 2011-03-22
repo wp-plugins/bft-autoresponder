@@ -13,6 +13,8 @@
 <div style="clear:both;float:left;">
 	<div style="float:left;">Email: <input type="text" name="email" value="<?=$user->email?>"> 
 	&nbsp; Name: <input type="text" name="name" value="<?=$user->name?>"> 
+	&nbsp; IP: <?=$user->ip?>
+	&nbsp; Date: <?=$user->date?>	
 	&nbsp; <input type="checkbox" name="status" value="1" <?if($user->status) echo "checked"?>> Active 
 	<input type="submit" name="save_user" value="Save User">	
 	<input type="button" value="Delete" onclick="delUser(this.form);"></div>

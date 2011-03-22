@@ -2,8 +2,8 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
-Tested up to: 2.8
-Stable tag: 1.1
+Tested up to: 3.1
+Stable tag: 1.3
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
 
@@ -11,7 +11,7 @@ This plugin allows scheduling of automated autoresponder messages and managing a
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
 
-This plugin is free and simplified version of the more advanced and fully featured standalone [php autoresponder](http://calendarscripts.info/php-auto-responder.html "PHP Autoresponder").
+This plugin is free and simplified version of the more advanced and fully featured standalone [autoresponder software](http://calendarscripts.info/php-auto-responder.html "Autoresponder Software").
 
 == Installation ==
 
@@ -19,6 +19,7 @@ This plugin is free and simplified version of the more advanced and fully featur
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure the sender address and other options from the main page accessible from the newly appeared "BFT Autoresponder" menu.
 4. Manage your email messages and mailing list.
+5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it.
 
 == Frequently Asked Questions ==
 
