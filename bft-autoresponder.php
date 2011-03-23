@@ -324,9 +324,8 @@ function bft_mail($from,$to,$subject,$message)
    $mail_mime .= "Content-Type: text/html; charset=UTF-8\n";
    $mail_mime .= "Message-ID: <".md5($to).time()."@".$_SERVER['HTTP_HOST'].">\n";   
    
-   $message=stripcslashes($message);
-   
-   mail($to, $subject, $message,"Reply-to: $from\nFrom: $from\n".$mail_mime, "-f $from");
+   $message=stripcslashes($message);   
+   mail($to, $subject, $message,"Reply-to: $from\nFrom: $from\n".$mail_mime);
 }
 
 

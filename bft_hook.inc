@@ -28,13 +28,15 @@ Author URI: http://pimteam.net/
 global $wpdb;
 
 $last_date=get_option("bft_date");
+$mails_table= $wpdb->prefix . "bft_mails";
+$users_table= $wpdb->prefix. "bft_users";
 
 // run only once per day
 if($last_date!=date("Y-m-d"))
 {
 	$sql="SELECT * FROM $mails_table WHERE days>0 ORDER BY id";
 	$mails=$wpdb->get_results($sql);
-			
+        			
 	foreach($mails as $mail)
 	{
 		// get users who need to get this mail sent today and send it
@@ -43,7 +45,7 @@ if($last_date!=date("Y-m-d"))
 		AND status=1
 		ORDER BY id";			
 		$members=$wpdb->get_results($sql);
-		
+        		
 		if(sizeof($members))
 		{
 			foreach($members as $member)
