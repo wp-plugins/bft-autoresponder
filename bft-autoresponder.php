@@ -242,8 +242,8 @@ function bft_import()
 			$email=trim($values[$position]);
 			$name=trim($values[$name_position]);
 			
-			$sql="INSERT IGNORE INTO $users_table (date, name, email, status,date) 
-			VALUES (CURDATE(), '$name','$email',1,CURDATE())";
+			$sql="INSERT IGNORE INTO $users_table (date, name, email, status) 
+			VALUES (CURDATE(), '$name','$email',1)";
 			$wpdb->query($sql);
 			
 			bft_welcome_mail($wpdb->insert_id);
