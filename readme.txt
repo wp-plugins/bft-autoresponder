@@ -3,7 +3,7 @@ Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
 Tested up to: 3.1
-Stable tag: 1.3
+Stable tag: 1.4.1
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
 
