@@ -1,5 +1,5 @@
 === BFT Autoresponder ===
-Contributors: prasunsen
+Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
 Tested up to: 3.1
@@ -10,8 +10,6 @@ This plugin allows scheduling of automated autoresponder messages and managing a
 == Description ==
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
-
-This plugin is free and simplified version of the more advanced and fully featured standalone [autoresponder software](http://calendarscripts.info/php-auto-responder.html "Autoresponder Software").
 
 == Installation ==
 
