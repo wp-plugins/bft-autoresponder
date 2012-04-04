@@ -2,14 +2,16 @@
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
-Tested up to: 3.1
-Stable tag: 1.4.1
+Tested up to: 3.3.1
+Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
 
 == Description ==
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
+
+From version 1.5 you can also send fixed date messages.
 
 == Installation ==
 

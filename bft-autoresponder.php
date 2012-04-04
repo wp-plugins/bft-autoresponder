@@ -4,11 +4,11 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced stand-alone script check our <a href="http://calendarscripts.info/php-auto-responder.html">PHP Autoresponder</a>
 Author: Bobby Handzhiev
-Version: 1.4.1
+Version: 1.5
 Author URI: http://calendarscripts.info/
 */ 
 
-/*  Copyright 2008  Bobby Handzhiev (email : admin@pimteam.net)
+/*  Copyright 2012  Bobby Handzhiev (email : admin@pimteam.net)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@ Author URI: http://calendarscripts.info/
 */
 
 require_once(ABSPATH . 'wp-includes/pluggable.php');
+include(dirname( __FILE__ )."/bft-lib.php");
 $wpdb->show_errors=true;
 
 /* Adds the menu items */
@@ -41,7 +42,6 @@ function bft_autoresponder_menu() {
 
 
 /* Creates the mysql tables needed to store mailing list and messages */
-$bft_db_version="1.1";
 $users_table= $wpdb->prefix. "bft_users";
 $mails_table= $wpdb->prefix . "bft_mails";
 $sentmails_table= $wpdb->prefix . "bft_sentmails";
@@ -50,25 +50,25 @@ define('BFT_SENDER',get_option( 'bft_sender' ));
 
 function bft_install()
 {
-	 global $wpdb, $bft_db_version;    
+	 global $wpdb;
 	 
 	 $users_table= $wpdb->prefix."bft_users";
 	 $mails_table= $wpdb->prefix . "bft_mails";
 	 $sentmails_table= $wpdb->prefix . "bft_sentmails";
+     $bft_db_version="1.2";
 	 
-	  if($wpdb->get_var("SHOW TABLES LIKE '$users_table'") != $users_table) {
-	  		
+	  if($wpdb->get_var("SHOW TABLES LIKE '$users_table'") != $users_table) {        
 			$sql = "CREATE TABLE " . $users_table . " (
 				  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-				  email VARCHAR(255) NOT NULL UNIQUE,	
+				  email VARCHAR(100) NOT NULL UNIQUE,	
 				  name VARCHAR(255)	NOT NULL,		  
 				  status TINYINT UNSIGNED NOT NULL,
 				  date DATE NOT NULL,
-              ip VARCHAR(100) NOT NULL,
+                  ip VARCHAR(100) NOT NULL,
 				  code VARCHAR(10) NOT NULL
 				);";
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');				
-			dbDelta($sql);
+			
+			$wpdb->query($sql);
 	  }
 	  
 	  if($wpdb->get_var("SHOW TABLES LIKE '$mails_table'") != $mails_table) {
@@ -77,11 +77,12 @@ function bft_install()
 				  `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				  `subject` VARCHAR(255) NOT NULL,				  
 				  `message` TEXT NOT NULL,				  
-				  `days` INT UNSIGNED NOT NULL
-				);";
+				  `days` INT UNSIGNED NOT NULL,
+                  `send_on_date` TINYIN UNSIGNED NOT NULL,
+                   `date` DATE NOT NULL
+				);";			
 			
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-			dbDelta($sql);
+			$wpdb->query($sql);
 	  }
 	  
 	  if($wpdb->get_var("SHOW TABLES LIKE '$sentmails_table'") != $sentmails_table) {
@@ -92,22 +93,20 @@ function bft_install()
 				  `user_id` INT UNSIGNED NOT NULL,				  
 				  `date` DATE NOT NULL
 				);";
-			
-			require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-			dbDelta($sql);
+			$wpdb->query($sql);
 	  }
 	  
 	  $old_bft_db_version=get_option('bft_db_version');
 	  
-	  // DB update in bft db version 1.1., plugin version 1.3
-	  if(empty($old_bft_db_version) or $old_bft_db_version=='1.0')
+	  // DB version 1.2, plugin version 1.5
+      if(empty($old_bft_db_version) or $old_bft_db_version<1.2)
      {
-         $sql="ALTER TABLE ".$users_table." ADD ip VARCHAR(100) NOT NULL";
+         $sql="ALTER TABLE ".$mails_table." ADD `send_on_date` TINYINT UNSIGNED NOT NULL,
+            ADD `date` DATE NOT NULL";
          $wpdb->query($sql);
-     }
+     }  
 	  
-	  if(empty($old_bft_db_version)) add_option("bft_db_version", $bft_db_version);
-	  else update_option( 'bft_db_version', $bft_db_version);
+	  update_option( 'bft_db_version', $bft_db_version);
 }
 
 /* Stores the autoresponder configuration */
@@ -139,13 +138,27 @@ function bft_list(){
 	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
 	$status=$_POST['status'];
 	
+    $error=false;
+
 	if(!empty($_POST['add_user']))
 	{
-		$sql="INSERT IGNORE INTO $users_table (name,email,status,date,ip)
-		VALUES (\"$name\",\"$email\",\"$status\",CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
-		$wpdb->query($sql);
-		
-		if($status) bft_welcome_mail($wpdb->insert_id);
+        // user exists?
+        $exists=$wpdb->get_row($wpdb->prepare("SELECT *
+                FROM $users_table WHERE email=%s", $email));
+
+        if(empty($exists->id))
+        {
+            $sql="INSERT IGNORE INTO $users_table (name,email,status,date,ip)
+            VALUES (\"$name\",\"$email\",\"$status\",CURDATE(),'$_SERVER[REMOTE_ADDR]')";       
+            $wpdb->query($sql);
+            
+            if($status) bft_welcome_mail($wpdb->insert_id);    
+        }		
+        else
+        {
+            $error=true;
+            $err_msg="User with this email address already exists.";
+        }
 	}
 	
 	if(!empty($_POST['save_user']))
@@ -181,11 +194,16 @@ function bft_messages()
 	if(isset($_POST['message'])) $message=$wpdb->escape($_POST['message']);
 	if(isset($_POST['days'])) $days=$wpdb->escape($_POST['days']);
 	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
+    if(isset($_POST['send_on_date'])) $send_on_date=$wpdb->escape($_POST['send_on_date']);
+    
+    // prepare date
+    $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
+    $date=$wpdb->escape($date);
 
 	if(!empty($_POST['add_message']))
 	{
-		$sql="INSERT INTO $mails_table (subject,message,days)
-		VALUES (\"$subject\",\"$message\",\"$days\")";
+		$sql="INSERT INTO $mails_table (subject,message,days,send_on_date,date)
+		VALUES (\"$subject\",\"$message\",\"$days\",'$send_on_date','$date')";
 		$wpdb->query($sql);
 	}
 	
@@ -194,7 +212,9 @@ function bft_messages()
 		$sql="UPDATE $mails_table SET
 		subject=\"$subject\",
 		message=\"$message\",
-		days=\"$days\"
+		days=\"$days\",
+        send_on_date='$send_on_date',
+        date='$date'
 		WHERE id='$id'";		
 		$wpdb->query($sql);
 	}

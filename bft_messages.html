@@ -3,7 +3,8 @@
 	<div style="float:left;">
 	<p><label>Subject:&nbsp; </label> <input type="text" name="subject" size="80"></p>
 	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"></textarea></p>
-	<p><label>Days after registration:</label> <input type="text" name="days" size="4"></p>
+	<p><label>Days after registration:</label> <input type="text" name="days" size="4">
+    or <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);"> send on <?php echo quickDD_date("date", NULL, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
 	<p><input type="submit" value="Add Message"></p></div>
 </div>
 <input type="hidden" name="add_message" value="1">
@@ -17,7 +18,8 @@
 	<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=$mail->subject?>" size="80"></p>
 	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"><?=$mail->message?></textarea></p>
 	<p><label>Days after registration:</label> 
-	<input type="text" name="days" size="4" value="<?=$mail->days?>"></p>
+	<input type="text" name="days" size="4" value="<?=$mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
+    or <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> send on <?php echo quickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
 	<p><input type="submit" name="save_message" value="Save Message">	
 	<input type="button" value="Delete" onclick="delMessage(this.form);"></p></div>
 </div>
@@ -60,5 +62,18 @@ function validateMessage(frm)
 	}
 	
 	return true;
+}
+
+// when checked turns the days to disabled and vice versa
+function sendOnDate(chk)
+{
+    if(chk.checked)
+    {
+        chk.form['days'].disabled=true;
+    }
+    else
+    {
+        chk.form['days'].disabled=false;
+    }
 }
 </script>
