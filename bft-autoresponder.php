@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced stand-alone script check our <a href="http://calendarscripts.info/php-auto-responder.html">PHP Autoresponder</a>
 Author: Bobby Handzhiev
-Version: 1.6.1
+Version: 1.6.2
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -202,20 +202,20 @@ function bft_messages()
 
 	if(!empty($_POST['add_message']))
 	{
-		$sql="INSERT INTO $mails_table (subject,message,days,send_on_date,date)
-		VALUES (\"$subject\",\"$message\",\"$days\",'$send_on_date','$date')";
+		$sql=$wpdb->prepare("INSERT INTO $mails_table (subject,message,days,send_on_date,date)
+		VALUES (%s, %s, %d, %d, %s)", $subject, $message, $days, $send_on_date, $date);
 		$wpdb->query($sql);
 	}
 	
 	if(!empty($_POST['save_message']))
 	{
-		$sql="UPDATE $mails_table SET
-		subject=\"$subject\",
-		message=\"$message\",
-		days=\"$days\",
-        send_on_date='$send_on_date',
-        date='$date'
-		WHERE id='$id'";		
+		$sql=$wpdb->prepare("UPDATE $mails_table SET
+		subject=%s,
+		message=%s,
+		days=%d,
+   	send_on_date=%d,
+    date=%d
+		WHERE id=%d", $subject, $message, $days, $send_on_date, $date, $id);		
 		$wpdb->query($sql);
 	}
 	
@@ -441,4 +441,3 @@ hook_up();
 
 register_activation_hook(__FILE__,'bft_install');
 add_action('admin_menu', 'bft_autoresponder_menu');
-?>
