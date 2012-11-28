@@ -1,7 +1,7 @@
 <?php
 // Adapted code from the MIT licensed QuickDD class
 // created also by me
-function quickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_year=1900, $end_year=2100)
+function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_year=1900, $end_year=2100)
 {
    // normalize params
    if(empty($date) or !preg_match("/\d\d\d\d\-\d\d-\d\d/",$date)) $date=date("Y-m-d");
