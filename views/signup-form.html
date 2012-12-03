@@ -1,0 +1,18 @@
+<form method="post" action="<?php echo get_option('siteurl')?>/index.php?bft=register" onsubmit="return BFTValidate(this);">
+<p><label>Name:</label>&nbsp;<input type="text" name="name"></p>
+<p><label>Email:</label>&nbsp;<input type="text" name="email"></p>
+<p align="center"><input type="submit" value="Register"></p>
+</form>
+
+<script type="text/javascript" >
+function BFTValidate(frm) {
+	var email = frm.email.value;
+	if(email=="" || email.indexOf("@")<1 ||email.indexOf(".")<1) {
+		alert("Please fill in valid email address!");
+		frm.email.focus();
+		return false;
+	}
+	
+	return true;
+}
+</script>
