@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Bobby Handzhiev
-Version: 1.7
+Version: 1.7.1
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -388,14 +388,14 @@ function bft_template_redirect() {
 			// display success message
 			echo "<script language='javascript'>
 			alert('You have been subcribed!');
-			window.location='".($bft_redirect?$bft_redirect:"index.php")."';
+			window.location='".($bft_redirect?$bft_redirect:site_url())."';
 			</script>";
 			exit;
 		}
 		else
 		{
 			// send confirmation email
-			$url=get_option('siteurl')."/index.php?bft=bft_confirm&code=$code&id=$id";
+			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
 			
 			$subject="Please confirm your email";				
 			$message="Please click on the link below or copy and paste it in the browser address bar:<br><br>
@@ -404,7 +404,7 @@ function bft_template_redirect() {
 			
 			echo "<script language='javascript'>
 			alert('Please check your email. A confirmation link is sent to it.');
-			window.location='".($bft_redirect?$bft_redirect:"index.php")."';
+			window.location='".($bft_redirect?$bft_redirect:site_url())."';
 			</script>";
 			exit;
 		}
