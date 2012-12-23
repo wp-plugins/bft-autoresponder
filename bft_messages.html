@@ -16,7 +16,7 @@
 <hr />
 	<div style="float:left;">
 	<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=$mail->subject?>" size="80"></p>
-	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"><?=$mail->message?></textarea></p>
+	<p><label>Message: </label> <textarea name="message" rows="7" cols="80"><?=stripslashes($mail->message)?></textarea></p>
 	<p><label>Days after registration:</label> 
 	<input type="text" name="days" size="4" value="<?=$mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
     or <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> send on <?php echo BFTquickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
