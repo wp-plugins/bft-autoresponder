@@ -2,7 +2,7 @@
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
-Tested up to: 3.4.2
+Tested up to: 3.5
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
