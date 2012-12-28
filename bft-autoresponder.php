@@ -51,7 +51,6 @@ $bft_msg="";
 function bft_install()
 {
 	 global $wpdb;
-	 define('BFT_SENDER',get_option( 'bft_sender' ));
 	 
 	 $users_table= $wpdb->prefix."bft_users";
 	 $mails_table= $wpdb->prefix . "bft_mails";
@@ -452,7 +451,8 @@ function bft_template_redirect() {
 // the actual autoresponder hook - it's run when the index page is loaded
 function bft_hook_up()
 {
-    require(BFT_PATH."/bft_hook.inc");    
+	define('BFT_SENDER',get_option( 'bft_sender' ));
+  require(BFT_PATH."/bft_hook.inc");    
 }
 
 // handle shortcode
