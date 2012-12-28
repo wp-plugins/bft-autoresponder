@@ -47,11 +47,11 @@ $users_table= $wpdb->prefix. "bft_users";
 $mails_table= $wpdb->prefix . "bft_mails";
 $sentmails_table= $wpdb->prefix . "bft_sentmails";
 $bft_msg="";
-define('BFT_SENDER',get_option( 'bft_sender' ));
 
 function bft_install()
 {
 	 global $wpdb;
+	 define('BFT_SENDER',get_option( 'bft_sender' ));
 	 
 	 $users_table= $wpdb->prefix."bft_users";
 	 $mails_table= $wpdb->prefix . "bft_mails";
