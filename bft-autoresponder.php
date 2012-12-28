@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Bobby Handzhiev
-Version: 1.7.4
+Version: 1.7.5
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -346,7 +346,8 @@ function bft_mail($from,$to,$subject,$message)
 	 $headers[] = 'From: '.$from;
 	 $headers[] = 'sendmail_from: '.$from;
    
-   $message=stripcslashes($message);   
+   $subject=stripslashes($subject);
+   $message=stripslashes($message);   
    $message=wpautop($message);
    wp_mail($to, $subject, $message, $headers);
 }
