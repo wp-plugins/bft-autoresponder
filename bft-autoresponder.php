@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Bobby Handzhiev
-Version: 1.7.2
+Version: 1.7.3
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -191,11 +191,11 @@ function bft_messages()
 {
 	global $wpdb, $mails_table;
 	
-	if(isset($_POST['subject'])) $subject=$wpdb->escape($_POST['subject']);
-	if(isset($_POST['message'])) $message=$wpdb->escape($_POST['message']);
-	if(isset($_POST['days'])) $days=$wpdb->escape($_POST['days']);
-	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
-    if(isset($_POST['send_on_date'])) $send_on_date=$wpdb->escape($_POST['send_on_date']);
+	if(isset($_POST['subject'])) $subject=$_POST['subject'];
+	if(isset($_POST['message'])) $message=$_POST['message'];
+	if(isset($_POST['days'])) $days=$_POST['days'];
+	if(isset($_POST['id'])) $id=$_POST['id'];
+    if(isset($_POST['send_on_date'])) $send_on_date=$_POST['send_on_date'];
     
     // prepare date
     $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
