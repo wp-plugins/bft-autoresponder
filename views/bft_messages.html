@@ -24,7 +24,7 @@
 		<div style="clear:both;float:left;">
 		<hr />
 			<div style="float:left;">
-			<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=$mail->subject?>" size="80"></p>
+			<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=stripslashes($mail->subject)?>" size="80"></p>
 			<p><label>Message: </label> <?php wp_editor(stripslashes($mail->message), "message".$mail->id, array("textarea_name"=>"message"))?></p>
 			<p><label>Days after registration:</label> 
 			<input type="text" name="days" size="4" value="<?=$mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
