@@ -2,35 +2,35 @@
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
 
-		<h2>Create New Message:</h2>
+		<h2><?php _e('Create New Message:', 'broadfast')?></h2>
 		
 		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
 		<div style="clear:both;float:left;">
 			<div style="float:left;">
-			<p><label>Subject:&nbsp; </label> <input type="text" name="subject" size="80"></p>
-			<p><label>Message: </label> <?php wp_editor("", "message")?></p>
-			<p><label>Days after registration:</label> <input type="text" name="days" size="4">
-		    or <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);"> send on <?php echo BFTquickDD_date("date", NULL, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
-			<p><input type="submit" value="Add Message"></p></div>
+			<p><label><?php _e('Subject:', 'broadfast')?>&nbsp; </label> <input type="text" name="subject" size="80"></p>
+			<p><label><?php _e('Message:', 'broadfast')?> </label> <?php wp_editor("", "message")?></p>
+			<p><label><?php _e('Days after registration:', 'broadfast')?></label> <input type="text" name="days" size="4">
+		    <?php _e('or', 'broadfast')?> <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);"> <?php _e('send on', 'broadfast')?> <?php echo BFTquickDD_date("date", NULL, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
+			<p><input type="submit" value="<?php _e('Add Message', 'broadfast')?>"></p></div>
 		</div>
 		<input type="hidden" name="add_message" value="1">
 		</form>
 		
 		<div style="clear:both;">&nbsp;</div>
 		
-		<h2>Existing Messages:</h2>
+		<h2><?php _e('Existing Messages:', 'broadfast')?></h2>
 		<?php foreach($mails as $mail): ?>
 		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
 		<div style="clear:both;float:left;">
 		<hr />
 			<div style="float:left;">
-			<p><label>Subject:&nbsp; </label> <input type="text" name="subject" value="<?=stripslashes($mail->subject)?>" size="80"></p>
-			<p><label>Message: </label> <?php wp_editor(stripslashes($mail->message), "message".$mail->id, array("textarea_name"=>"message"))?></p>
-			<p><label>Days after registration:</label> 
+			<p><label><?php _e('Subject:', 'broadfast')?>&nbsp; </label> <input type="text" name="subject" value="<?=stripslashes($mail->subject)?>" size="80"></p>
+			<p><label><?php _e('Message:', 'broadfast')?> </label> <?php wp_editor(stripslashes($mail->message), "message".$mail->id, array("textarea_name"=>"message"))?></p>
+			<p><label><?php _e('Days after registration:', 'broadfast')?></label> 
 			<input type="text" name="days" size="4" value="<?=$mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
-		    or <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> send on <?php echo BFTquickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
-			<p><input type="submit" name="save_message" value="Save Message">	
-			<input type="button" value="Delete" onclick="delMessage(this.form);"></p></div>
+		    <?php _e('or', 'broadfast')?> <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> <?php _e('send on', 'broadfast')?> <?php echo BFTquickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
+			<p><input type="submit" name="save_message" value="<?php _e('Save Message', 'broadfast')?>">	
+			<input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delMessage(this.form);"></p></div>
 		</div>
 		<input type="hidden" name="id" value="<?=$mail->id?>">
 		<input type="hidden" name="del_message" value="0">
@@ -46,7 +46,7 @@
 <script language="javascript">
 function delMessage(frm)
 {
-	if(confirm("Are you sure?"))
+	if(confirm("<?php _e('Are you sure?', 'broadfast')?>"))
 	{
 		frm.del_message.value=1;
 		frm.submit();
@@ -57,14 +57,14 @@ function validateMessage(frm)
 {
 	if(frm.subject.value=="")
 	{
-		alert("Please enter subject");
+		alert("<?php _e('Please enter subject', 'broadfast')?>");
 		frm.subject.focus();
 		return false;
 	}
 
 	if(isNaN(frm.days.value))
 	{
-		alert("Please enter number of days after registration");
+		alert("<?php _e('Please enter number of days after registration', 'broadfast')?>");
 		frm.days.focus();
 		return false;
 	}

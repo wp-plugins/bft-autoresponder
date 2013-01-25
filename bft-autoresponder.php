@@ -3,8 +3,8 @@
 Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
-Author: Bobby Handzhiev
-Version: 1.7.5
+Author: Bobby Handzhiev / Kiboko Labs
+Version: 1.8
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -26,21 +26,29 @@ Author URI: http://calendarscripts.info/
 */
 
 define( 'BFT_PATH', dirname( __FILE__ ) );
+define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
 require_once(ABSPATH . 'wp-includes/pluggable.php');
-include(dirname( __FILE__ )."/bft-lib.php");
+include(BFT_PATH."/bft-lib.php");
 $wpdb->show_errors=true;
 
-/* Adds the menu items */
-
-function bft_autoresponder_menu() {  
-  add_menu_page('BFT Autoresponder', 'BFT Autoresponder', 7, __FILE__, 'bft_options');
-  add_submenu_page(__FILE__, 'Autoresponder', 'Options', 7, __FILE__, 'bft_options');
-  add_submenu_page(__FILE__,'Your Mailing List', 'Mailing List', 7, "bft_list", "bft_list");
-  add_submenu_page(__FILE__,'Import/Export Members', 'Import/Export', 7, "bft_import", "bft_import");
-  add_submenu_page(__FILE__,'Manage Messages', 'Email Messages', 7, "bft_messages", "bft_messages");
-  
+// initialize plugin
+function bft_init() {
+	global $wpdb;
+	load_plugin_textdomain( 'broadfast', false, BFT_RELATIVE_PATH."/languages/" );
+	
+	define( 'BFT_USERS', $wpdb->prefix. "bft_users" );
+	define( 'BFT_MAILS', $wpdb->prefix. "bft_mails" );
+	define( 'BFT_SENTMAILS', $wpdb->prefix. "bft_sentmails" );
 }
 
+/* Adds the menu items */
+function bft_autoresponder_menu() {  
+  add_menu_page(__('BFT Autoresponder', 'broadfast'), __('BFT Autoresponder', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
+  add_submenu_page('bft_options',__('Your Mailing List', 'broadfast'), __('Mailing List', 'broadfast'), 'manage_options', "bft_list", "bft_list");
+  add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
+  add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
+  
+}
 
 /* Creates the mysql tables needed to store mailing list and messages */
 $users_table= $wpdb->prefix. "bft_users";
@@ -179,7 +187,8 @@ function bft_list(){
 	}
 	
 	// select users from the mailing list
-	$sql="SELECT * FROM $users_table ORDER BY email";
+	$ob = in_array($_GET['ob'], array("email","name","ip","date","status,email"))? $_GET['ob'] : 'email';
+	$sql="SELECT * FROM $users_table ORDER BY $ob";
 	$users=$wpdb->get_results($sql);
 	
 	require(BFT_PATH."/views/bft_list.html");	
@@ -397,13 +406,13 @@ function bft_template_redirect() {
 			// send confirmation email
 			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
 			
-			$subject="Please confirm your email";				
-			$message="Please click on the link below or copy and paste it in the browser address bar:<br><br>
-			$url";		
+			$subject=__("Please confirm your email", 'broadfast');				
+			$message=__("Please click on the link below or copy and paste it in the browser address bar:<br><br>", 'broadfast').
+			$url;		
 			bft_mail(BFT_SENDER,$_POST['email'],$subject,$message);
 			
 			echo "<script language='javascript'>
-			alert('Please check your email. A confirmation link is sent to it.');
+			alert('".__('Please check your email. A confirmation link is sent to it.', 'broadfast')."');
 			window.location='".($bft_redirect?$bft_redirect:site_url())."';
 			</script>";
 			exit;
@@ -414,8 +423,7 @@ function bft_template_redirect() {
 	
 	
 	// unsubscribe user
-	if($_REQUEST['bft']=='bft_unsubscribe')
-	{
+	if($_REQUEST['bft']=='bft_unsubscribe') {
 		$email=$wpdb->escape($_GET['email']);
 		$sql="DELETE FROM $users_table WHERE email=\"$email\"";
 		$wpdb->query($sql);
@@ -469,6 +477,7 @@ function bft_shortcode_signup($attr) {
 add_action('plugins_loaded', "bft_hook_up");
 
 register_activation_hook(__FILE__,'bft_install');
+add_action('plugins_loaded', 'bft_init');
 add_action('admin_menu', 'bft_autoresponder_menu');
 add_action('template_redirect', 'bft_template_redirect');
 add_shortcode( 'BFTWP', "bft_shortcode_signup" );

@@ -1,6 +1,6 @@
 <div class="wrap">
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
-    <h1>Manage Your Mailing List</h1>
+    <h1><?php _e('Manage Your Mailing List', 'broadfast')?></h1>
 
     <?php if($error):?>
         <p class="error"><?php echo $err_msg;?></p>
@@ -8,29 +8,43 @@
 
     <form method="post" style="margin:none;" onsubmit="return validateUser(this);">
     <div style="clear:both;float:left;">
-        <div style="float:left;">Email: <input type="text" name="email"> 
-        &nbsp; Name: <input type="text" name="name"> 
-        &nbsp; <input type="checkbox" name="status" value="1" checked="checked"> Active 
-        <input type="submit" value="Add User"></div>
+        <div style="float:left;"><?php _e('Email:', 'broadfast')?> <input type="text" name="email"> 
+        &nbsp; <?php _e('Name:', 'broadfast')?> <input type="text" name="name"> 
+        &nbsp; <input type="checkbox" name="status" value="1" checked="checked"> <?php _e('Active', 'broadfast')?> 
+        <input type="submit" value="<?php _e('Add User', 'broadfast')?>"></div>
     </div>
     <input type="hidden" name="add_user" value="1">
     </form>
+    
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
 
+		<table class="widefat">
+			<tr><th width="23%"><a href="admin.php?page=bft_list&ob=email"><?php _e('User Email', 'broadfast')?></a></th>
+			<th width="23%"><a href="admin.php?page=bft_list&ob=name"><?php _e('User Name', 'broadfast')?></a></th>
+			<th width="9%"><a href="admin.php?page=bft_list&ob=ip"><?php _e('IP', 'broadfast')?></a></th>
+			<th width="15%"><a href="admin.php?page=bft_list&ob=date"><?php _e('Date Signed', 'broadfast')?></a></th>
+			<th width="9%"><a href="admin.php?page=bft_list&ob=status,email"><?php _e('Active?', 'broadfast')?></a></th>
+			<th width="21%"><a<?php _e('Action', 'broadfast')?></th></tr>
+		</table>
+		
     <?php foreach($users as $user): ?>
+    
     <form method="post" style="margin:none;" onsubmit="return validateUser(this);">
-    <div style="clear:both;float:left;">
-        <div style="float:left;">Email: <input type="text" name="email" value="<?=$user->email?>"> 
-        &nbsp; Name: <input type="text" name="name" value="<?=$user->name?>"> 
-        &nbsp; IP: <?=$user->ip?>
-        &nbsp; Date: <?=$user->date?>	
-        &nbsp; <input type="checkbox" name="status" value="1" <?if($user->status) echo "checked"?>> Active 
-        <input type="submit" name="save_user" value="Save User">	
-        <input type="button" value="Delete" onclick="delUser(this.form);"></div>
-    </div>
+    <table class="widefat">
+	    <tr><td width="23%"><input type="text" name="email" value="<?=$user->email?>"></td>
+	    <td width="23%"><input type="text" name="name" value="<?=$user->name?>"></td>
+	    <td width="9%"><?=$user->ip?></td>
+	    <td width="15%"><?=$user->date?></td>
+	    <td width="9%" align="center"><input type="checkbox" name="status" value="1" <?if($user->status) echo "checked"?>></td>
+	    <td width="21%"><input type="submit" name="save_user" value="<?php _e('Save User', 'broadfast')?>">	
+      <input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delUser(this.form);"></td></tr>
+    </table> 
     <input type="hidden" name="del_user" value="0">
     <input type="hidden" name="id" value="<?=$user->id?>">
     </form>
     <?php endforeach; ?>
+    </table>
   </div>
 	<div id="bft-sidebar">
 				<?php require(BFT_PATH."/views/sidebar.html");?>
@@ -40,7 +54,7 @@
 <script language="javascript">
 function delUser(frm)
 {
-	if(confirm("Are you sure?"))
+	if(confirm("<?php _e('Are you sure?', 'broadfast')?>"))
 	{
 		frm.del_user.value=1;
 		frm.submit();
@@ -51,7 +65,7 @@ function validateUser(frm)
 {
 	if(frm.email.value=="")
 	{
-		alert("Please enter email");
+		alert("<?php _e('Please enter email', 'broadfast')?>");
 		frm.email.focus();
 		return false;
 	}

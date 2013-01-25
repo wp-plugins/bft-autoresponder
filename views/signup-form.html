@@ -1,6 +1,6 @@
 <form method="post" onsubmit="return BFTValidate(this);">
-<p><label>Name:</label>&nbsp;<input type="text" name="name"></p>
-<p><label>Email:</label>&nbsp;<input type="text" name="email"></p>
+<p><label><?php _e('Name:', 'broadfast')?></label>&nbsp;<input type="text" name="name"></p>
+<p><label><?php _e('Email:', 'broadfast')?></label>&nbsp;<input type="text" name="email"></p>
 <p align="center"><input type="submit" value="Register"></p>
 <input type="hidden" name="bft" value="register">
 </form>
@@ -9,7 +9,7 @@
 function BFTValidate(frm) {
 	var email = frm.email.value;
 	if(email=="" || email.indexOf("@")<1 ||email.indexOf(".")<1) {
-		alert("Please fill in valid email address!");
+		alert("<?php _e('Please fill in valid email address!', 'broadfast')?>");
 		frm.email.focus();
 		return false;
 	}
