@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Bobby Handzhiev / Kiboko Labs
-Version: 1.8
+Version: 1.8.1
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -142,7 +142,7 @@ function bft_list(){
 	global $wpdb, $users_table;
 	
 	if(isset($_POST['email'])) $email=$wpdb->escape($_POST['email']);
-	if(isset($_POST['name'])) $name=$wpdb->escape($_POST['name']);
+	if(isset($_POST['user_name'])) $name=$wpdb->escape($_POST['user_name']);
 	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
 	$status=$_POST['status'];
 	
@@ -306,8 +306,7 @@ function bft_import()
 
 /* sends the first welcome mail to newly registered or imported user
 if such has been scheduled. Scheduling of those mails is done by setting "0" for "days" */
-function bft_welcome_mail($uid)
-{
+function bft_welcome_mail($uid) {
 	global $wpdb, $users_table, $mails_table;
 	
 	// select email
@@ -366,12 +365,11 @@ function bft_template_redirect() {
 	global $wpdb, $users_table;	
 	
 	//  subscribe user
-	if($_REQUEST['bft']=='register')
-	{
+	if($_REQUEST['bft']=='register') {
 		$status=!get_option( 'bft_optin' );
 		
 		$email=$wpdb->escape($_POST['email']);
-		$name=$wpdb->escape($_POST['name']);
+		$name=$wpdb->escape($_POST['user_name']);
 		
 		$code=substr(md5($email.microtime()),0,8);
 		
@@ -453,12 +451,10 @@ function bft_template_redirect() {
 		
 		wp_redirect($bft_redirect?$bft_redirect:get_option('siteurl'));
 	}
-
 }
 
 // the actual autoresponder hook - it's run when the index page is loaded
-function bft_hook_up()
-{
+function bft_hook_up() { 
 	define('BFT_SENDER',get_option( 'bft_sender' ));
   require(BFT_PATH."/bft_hook.inc");    
 }
