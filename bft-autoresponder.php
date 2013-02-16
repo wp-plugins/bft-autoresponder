@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Bobby Handzhiev / Kiboko Labs
-Version: 1.8.1
+Version: 1.8.2
 Author URI: http://calendarscripts.info/
 */ 
 
@@ -169,8 +169,7 @@ function bft_list(){
         }
 	}
 	
-	if(!empty($_POST['save_user']))
-	{
+	if(!empty($_POST['save_user'])) {
 		$sql="UPDATE $users_table SET 
 		date=CURDATE(),
 		name=\"$name\",
@@ -324,8 +323,7 @@ function bft_welcome_mail($uid) {
 }
 
 /* private function called to customize an email message and send it */
-function bft_customize($mail,$member)
-{
+function bft_customize($mail,$member) {
 	// send mail to member
 	$subject=$mail->subject;				
 	$message=$mail->message;
@@ -337,9 +335,10 @@ function bft_customize($mail,$member)
 	$message=str_replace("{{email}}",$member->email,$message);
 				
 	// add unsubscribe link
+	$unsub_url = get_option('siteurl')."/?bft=bft_unsubscribe&email=".$member->email;
 	$message.="<br><br>
-	To unsubscribe from our list visit the url below:<br>".get_option('siteurl')
-						."?bft=bft_unsubscribe&email=".$member->email;
+	To unsubscribe from our list visit the url below:<br>
+	<a href='$unsub_url'>$unsub_url</a>";
 	$message=str_replace("\t","",$message);
 	
 	bft_mail(BFT_SENDER,$member->email,$subject,$message);

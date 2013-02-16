@@ -9,7 +9,7 @@
     <form method="post" style="margin:none;" onsubmit="return validateUser(this);">
     <div style="clear:both;float:left;">
         <div style="float:left;"><?php _e('Email:', 'broadfast')?> <input type="text" name="email"> 
-        &nbsp; <?php _e('Name:', 'broadfast')?> <input type="text" name="name"> 
+        &nbsp; <?php _e('Name:', 'broadfast')?> <input type="text" name="user_name"> 
         &nbsp; <input type="checkbox" name="status" value="1" checked="checked"> <?php _e('Active', 'broadfast')?> 
         <input type="submit" value="<?php _e('Add User', 'broadfast')?>"></div>
     </div>
@@ -33,7 +33,7 @@
     <form method="post" style="margin:none;" onsubmit="return validateUser(this);">
     <table class="widefat">
 	    <tr><td width="23%"><input type="text" name="email" value="<?=$user->email?>"></td>
-	    <td width="23%"><input type="text" name="name" value="<?=$user->name?>"></td>
+	    <td width="23%"><input type="text" name="user_name" value="<?=$user->name?>"></td>
 	    <td width="9%"><?=$user->ip?></td>
 	    <td width="15%"><?=$user->date?></td>
 	    <td width="9%" align="center"><input type="checkbox" name="status" value="1" <?if($user->status) echo "checked"?>></td>
