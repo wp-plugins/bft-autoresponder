@@ -1,8 +1,7 @@
 <?php
 // Adapted code from the MIT licensed QuickDD class
 // created also by me
-function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_year=1900, $end_year=2100)
-{
+function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_year=1900, $end_year=2100) {
    // normalize params
    if(empty($date) or !preg_match("/\d\d\d\d\-\d\d-\d\d/",$date)) $date=date("Y-m-d");
     if(empty($format)) $format="YYYY-MM-DD";
@@ -69,14 +68,12 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
         }
 
         // day - we simply display 1-31 here, no extra intelligence depending on month
-        if(strstr($f,"D"))
-        {
+        if(strstr($f,"D")) {
             $extra_html="";
             if(isset($markup[$cnt]) and !empty($markup[$cnt])) $extra_html=" ".$markup[$cnt];
             $html.=" <select name=\"".$name."day\"".$extra_html.">\n";
 
-            for($i=1;$i<=31;$i++)
-            {
+            for($i=1;$i<=31;$i++) {
                 $selected="";
                 if(!empty($parts[2]) and intval($parts[2])==$i) $selected=" selected";
                 
@@ -92,4 +89,26 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
 
     // that's it, return dropdowns:
     return $html;
+}
+
+// send notice when someone subscribes
+function bft_subscribe_notify($mid) {
+	global $wpdb;
+	
+	$member = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d", $mid));
+	$subject = __("New user subscribed to the mailing list at", 'broadfast').' '.get_option('blogname');
+	$message = __('User details:', 'broadfast')."<br><p>".__('Name:', 'broadfast').' '.$member->name.
+		'</p><p>'.__('Email:', 'broadfast').' '.$member->email;
+	
+	$admin_email = get_option('bft_sender');	
+	bft_mail($admin_email, $admin_email, $subject, $message);	 
+}
+
+// send notice when someone unsubscribes
+function bft_unsubscribe_notify($email) {
+	 $subject = __("An user unsubscribed from the mailing list at", 'broadfast').' '.get_option('blogname');	
+	 $message = __('User email:', 'broadfast').' '.$email;
+	 
+	 $admin_email = get_option('bft_sender');	
+	 bft_mail($admin_email, $admin_email, $subject, $message);	 
 }

@@ -3,9 +3,10 @@
 Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
-Author: Bobby Handzhiev / Kiboko Labs
-Version: 1.8.2
-Author URI: http://calendarscripts.info/
+Author: Kiboko Labs
+Version: 1.9
+Author URI: http://calendarscripts.info
+License: GPL 2
 */ 
 
 /*  Copyright 2012  Bobby Handzhiev (email : admin@pimteam.net)
@@ -56,8 +57,7 @@ $mails_table= $wpdb->prefix . "bft_mails";
 $sentmails_table= $wpdb->prefix . "bft_sentmails";
 $bft_msg="";
 
-function bft_install()
-{
+function bft_install() {
 	 global $wpdb;
 	 
 	 $users_table= $wpdb->prefix."bft_users";
@@ -120,12 +120,13 @@ function bft_install()
 /* Stores the autoresponder configuration */
 function bft_options() {
 
-  if(!empty($_POST['settings_ok']))
-  {
+  if(!empty($_POST['settings_ok'])) {
   	 // save autoresponder settings
-	 update_option( 'bft_sender', $_POST['bft_sender'] );
-	 update_option( 'bft_redirect', $_POST['bft_redirect'] );
-	 update_option( 'bft_optin', $_POST['bft_optin'] );
+		 update_option( 'bft_sender', $_POST['bft_sender'] );
+		 update_option( 'bft_redirect', $_POST['bft_redirect'] );
+		 update_option( 'bft_optin', $_POST['bft_optin'] );
+		 update_option( 'bft_subscribe_notify', $_POST['subscribe_notify'] );
+		 update_option( 'bft_unsubscribe_notify', $_POST['unsubscribe_notify'] );
   }
 
   $bft_sender = stripslashes( get_option( 'bft_sender' ) );	
@@ -148,22 +149,19 @@ function bft_list(){
 	
     $error=false;
 
-	if(!empty($_POST['add_user']))
-	{
+	if(!empty($_POST['add_user'])) {
         // user exists?
         $exists=$wpdb->get_row($wpdb->prepare("SELECT *
                 FROM $users_table WHERE email=%s", $email));
 
-        if(empty($exists->id))
-        {
+        if(empty($exists->id)) {
             $sql="INSERT IGNORE INTO $users_table (name,email,status,date,ip)
             VALUES (\"$name\",\"$email\",\"$status\",CURDATE(),'$_SERVER[REMOTE_ADDR]')";       
             $wpdb->query($sql);
             
             if($status) bft_welcome_mail($wpdb->insert_id);    
         }		
-        else
-        {
+        else {
             $error=true;
             $err_msg="User with this email address already exists.";
         }
@@ -179,8 +177,7 @@ function bft_list(){
 		$wpdb->query($sql);
 	}
 	
-	if(!empty($_POST['del_user']))
-	{
+	if(!empty($_POST['del_user'])) {
 		$sql="DELETE FROM $users_table WHERE id='$id'";
 		$wpdb->query($sql);
 	}
@@ -194,8 +191,7 @@ function bft_list(){
 }
 
 /* Manages the messages */
-function bft_messages()
-{
+function bft_messages() {
 	global $wpdb, $mails_table;
 	
 	if(isset($_POST['subject'])) $subject=$_POST['subject'];
@@ -208,15 +204,13 @@ function bft_messages()
     $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
     $date=$wpdb->escape($date);
 
-	if(!empty($_POST['add_message']))
-	{
+	if(!empty($_POST['add_message'])) {
 		$sql=$wpdb->prepare("INSERT INTO $mails_table (subject,message,days,send_on_date,date)
 		VALUES (%s, %s, %d, %d, %s)", $subject, $message, $days, $send_on_date, $date);
 		$wpdb->query($sql);
 	}
 	
-	if(!empty($_POST['save_message']))
-	{
+	if(!empty($_POST['save_message'])) {
 		$sql=$wpdb->prepare("UPDATE $mails_table SET
 		subject=%s,
 		message=%s,
@@ -227,8 +221,7 @@ function bft_messages()
 		$wpdb->query($sql);
 	}
 	
-	if(!empty($_POST['del_message']))
-	{
+	if(!empty($_POST['del_message'])) {
 		$sql="DELETE FROM $mails_table WHERE id='$id'";		
 		$wpdb->query($sql);
 	}
@@ -241,26 +234,21 @@ function bft_messages()
 }
 
 /* import/export */
-function bft_import()
-{
+function bft_import() {
 	global $wpdb, $users_table;
 
-	if(!empty($_POST['import']))
-	{
-		if(empty($_FILES["file"]["name"]))
-		{
+	if(!empty($_POST['import'])) {
+		if(empty($_FILES["file"]["name"])) {
 			die("Please upload file");
 		}
 		
-		if(empty($_POST["delim"]))
-		{
+		if(empty($_POST["delim"])) {
 			die("There must be a delimiter");
 		}
 		
 		$rows=file($_FILES["file"]["tmp_name"]);
 	
-		foreach($rows as $row)
-		{
+		foreach($rows as $row) {
 			//explode values
 			$values=explode($_POST["delim"],$row);
 			$position=$_POST['email_column']-1;
@@ -280,10 +268,8 @@ function bft_import()
 		$success_text="<p style='color:red;'><b>".sizeof($rows)." members have been imported.</b></p>";
 	}
 	
-	if(!empty($_POST['export']))
-	{
-		if($_POST['active'])
-		{
+	if(!empty($_POST['export'])) {
+		if($_POST['active']) {
 			$active_sql=" AND status='1' ";
 		}
 	
@@ -294,8 +280,7 @@ function bft_import()
 		
 		$content="";
 			
-		foreach($members as $member)
-		{
+		foreach($members as $member) {
 			$content.="{$member->email},{$member->name}\n";
 		}
 	}
@@ -341,12 +326,13 @@ function bft_customize($mail,$member) {
 	<a href='$unsub_url'>$unsub_url</a>";
 	$message=str_replace("\t","",$message);
 	
+	$message = do_shortcode($message);
+	
 	bft_mail(BFT_SENDER,$member->email,$subject,$message);
 }
 
 /* wrapper for wp_mail() function */
-function bft_mail($from,$to,$subject,$message)
-{   	
+function bft_mail($from,$to,$subject,$message) {   	
    $headers=array();
 	 $headers[] = "Content-Type: text/html";
 	 $headers[] = 'From: '.$from;
@@ -388,18 +374,23 @@ function bft_template_redirect() {
 		}
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
 		
-		if($status)
-		{
-			bft_welcome_mail($wpdb->insert_id);
+		if($status) {
+			$mid = $wpdb->insert_id;
+			bft_welcome_mail($mid);
+					
+			// notify admin?
+			if(get_option('bft_subscribe_notify')) {
+				bft_subscribe_notify($mid);
+			}	
+			
 			// display success message
 			echo "<script language='javascript'>
-			alert('You have been subcribed!');
+			alert('".__('You have been subcribed!', 'broadfast')."');
 			window.location='".($bft_redirect?$bft_redirect:site_url())."';
 			</script>";
 			exit;
 		}
-		else
-		{
+		else {
 			// send confirmation email
 			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
 			
@@ -425,20 +416,23 @@ function bft_template_redirect() {
 		$sql="DELETE FROM $users_table WHERE email=\"$email\"";
 		$wpdb->query($sql);
 		
+		//  notify admin?
+		if(get_option('bft_unsubscribe_notify')) {
+			bft_unsubscribe_notify($email);
+		}
+		
 		wp_redirect(get_option('siteurl'));
 	}
 	
 	// confirm user registration
-	if($_REQUEST['bft']=='bft_confirm')
-	{
+	if($_REQUEST['bft']=='bft_confirm') {
 		// select user
 		$sql=$wpdb->prepare("SELECT * FROM $users_table WHERE id=%d AND code=%s", $_GET['id'], $_GET['code']);	
 		$member=$wpdb->get_row($sql);	
 		
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
 		
-		if($member->id)
-		{
+		if($member->id) {
 			$sql="UPDATE $users_table SET 
 			code='".substr(0,8,md5($code.time()))."',
 			status=1
@@ -446,6 +440,11 @@ function bft_template_redirect() {
 			$wpdb->query($sql);
 			
 			bft_welcome_mail($member->id);
+			
+			// notify admin?
+			if(get_option('bft_subscribe_notify')) {
+				bft_subscribe_notify($member->id);
+			}
 		}
 		
 		wp_redirect($bft_redirect?$bft_redirect:get_option('siteurl'));

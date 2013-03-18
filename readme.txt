@@ -27,7 +27,18 @@ From version 1.5 you can also send fixed date messages.
 
 == Changelog ==
 
-Changelog starts from version 1.7:
+= Changes in 1.9: =
+
+1. Shortcodes get executed in messages. Be careful with this though as CSS and Javascript effects will not always work.
+2. Optional notification when new user registers (and confirms their email, if double opt-in is selected)
+3. Optional notification when user unsubscribes
+
+= Changes in version 1.8: =
+1. Sortable mailing list + visual improvements
+2. Localization-friendly (pot file inside)
+3. Of course various bug fixes as always
+
+= Changes in version 1.7: =
 
 1. Using wp_mail so now you can use any of the existing SMTP plugins
 2. Rich text editor available to format the messages

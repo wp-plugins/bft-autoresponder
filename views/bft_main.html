@@ -14,6 +14,11 @@
 			<option value="0" <?if(!$bft_optin) echo "selected";?>><?php _e('No', 'broadfast')?></option>
 			<option value="1" <?if($bft_optin) echo "selected";?>><?php _e('Yes', 'broadfast')?></option>
 			</select></p>
+			
+			<p><input type="checkbox" name="subscribe_notify" value="1" <?php if(get_option('bft_subscribe_notify')) echo 'checked'?>> <?php _e('Notify me when someone subscribes/activates', 'broadfast')?></p>
+			
+			<p><input type="checkbox" name="unsubscribe_notify" value="1" <?php if(get_option('bft_unsubscribe_notify')) echo 'checked'?>> <?php _e('Notify me when someone unsubscribes', 'broadfast')?></p>			
+			
 			<p><input type="submit" value="Save Settings"></p>
 			</form>
 			</div>
