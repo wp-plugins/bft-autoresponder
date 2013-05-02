@@ -6,8 +6,9 @@ $mails_table= $wpdb->prefix . "bft_mails";
 $users_table= $wpdb->prefix. "bft_users";
 
 // run only once per day
-if($last_date!=date("Y-m-d"))
-{
+if($last_date!=date("Y-m-d")) {
+	update_option( 'bft_date', date("Y-m-d") );	
+	
     // sequential mails
 	$sql="SELECT * FROM $mails_table 
     WHERE days>0 AND send_on_date=0 ORDER BY id";
@@ -52,6 +53,4 @@ if($last_date!=date("Y-m-d"))
             }
         }
     }
-	
-	update_option( 'bft_date', date("Y-m-d") );
 }	
