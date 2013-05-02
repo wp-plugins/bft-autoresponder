@@ -27,6 +27,9 @@ From version 1.5 you can also send fixed date messages.
 
 == Changelog ==
 
+= Changes in 1.9.2 =
+1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about
+
 = Changes in 1.9: =
 
 1. Shortcodes get executed in messages. Be careful with this though as CSS and Javascript effects will not always work.

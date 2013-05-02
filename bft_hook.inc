@@ -5,6 +5,9 @@ $last_date=get_option("bft_date");
 $mails_table= $wpdb->prefix . "bft_mails";
 $users_table= $wpdb->prefix. "bft_users";
 
+// in 1.9.3 to improve this with a timestamp of the last start
+// it will be cleaned at the end confirming that the cron job has been completed
+
 // run only once per day
 if($last_date!=date("Y-m-d")) {
 	update_option( 'bft_date', date("Y-m-d") );	
