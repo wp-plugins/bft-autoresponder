@@ -2,20 +2,22 @@
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 2.0.2
-Tested up to: 3.5.1
+Tested up to: 3.5.2
 Stable tag: trunk
 
-This plugin allows scheduling of automated autoresponder messages and managing a mailing list.
+This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
 
 == Description ==
 
 [PRO](http://calendarscripts.info/bft-pro/ "Go Pro") |
-[Support Forum](http://calendarscripts.info/forum/ "Support if you don't have a Wordpress acccount")
+[Email Support](http://calendarscripts.info/contact/ "Support only if you don't have a Wordpress acccount")
 
 
-This plugin allows scheduling of automated autoresponder messages and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
+This plugin allows scheduling of automated autoresponder messages and newsletters, and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
 
 From version 1.5 you can also send fixed date messages.
+
+From version 2.0 you can send immediate newsletters.
 
 == Installation ==
 
@@ -27,11 +29,13 @@ From version 1.5 you can also send fixed date messages.
 
 == Changelog ==
 
-= Changes in 1.9.3 =
+= Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about
 2. Improved the cron job logic further to avoid simultaneous runnings of the same
 3. When the sender's detail are left empty will use the default sender from your Wordpress Settings page
-4. Other code fixes and code improvements
+4. Many strings were missing in the .pot file, fixed this.
+5. From version 2.0 you can send immediate newsletters. Do it with caution.
+6. Other code fixes and code improvements
 
 = Changes in 1.9: =
 

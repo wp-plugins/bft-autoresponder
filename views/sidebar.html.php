@@ -33,9 +33,7 @@
 <div id="bft-help" class="bft-sidebox">
 	<h3><?php _e('Need Support?', 'broadfast')?></h3>
 	
-	<p><?php _e('Please ask your question in the', 'broadfast')?> <a href="http://wordpress.org/support/plugin/bft-autoresponder" target="_blank"><?php _e('support forum at Wordpress.', 'broadfast')?></a></p>
-	
-	<p><?php _e("If you don't have an account there you can open a discussion at", 'broadfast')?> <a href="http://calendarscripts.info/forum/" target="_blank"><?php _e('CalendarScripts forum', 'broadfast')?></a> <?php _e('as well.', 'broadfast')?></p>
+	<p><?php _e('Please ask your question in the', 'broadfast')?> <a href="http://wordpress.org/support/plugin/bft-autoresponder" target="_blank"><?php _e('support forum at Wordpress.', 'broadfast')?></a></p>	
 </div>
 
 <div id="bft-related" class="bft-sidebox">
@@ -53,6 +51,7 @@
 		<li><strong><?php _e('Fine-tune the number of emails', 'broadfast')?></strong> <?php _e('that will be sent at once, and per day.', 'broadfast')?></li>
 		<li><strong><?php _e('Localization-ready', 'broadfast')?></strong> <?php _e('with translation .po files', 'broadfast')?></li>
 		<li><strong><?php _e('Unlimited domains license', 'broadfast')?></strong> <?php _e('for domains you own', 'broadfast')?></li>
+		<li><strong><?php _e('Customize the messages', 'broadfast')?></strong> <?php _e('with dynamic tags (variables)', 'broadfast')?></li>
 		<li><?php _e('And a lot more - just come to see!', 'broadfast')?></li>
 	</ol>
 	

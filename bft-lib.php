@@ -112,3 +112,18 @@ function bft_unsubscribe_notify($email) {
 	 $admin_email = get_option('bft_sender');	
 	 bft_mail($admin_email, $admin_email, $subject, $message);	 
 }
+
+/* wrapper for wp_mail() function */
+function bft_mail($from,$to,$subject,$message) {   	
+	if(empty($from)) $from = get_option('admin_email');
+
+   $headers=array();
+	 $headers[] = "Content-Type: text/html";
+	 $headers[] = 'From: '.$from;
+	 $headers[] = 'sendmail_from: '.$from;
+   
+   $subject=stripslashes($subject);
+   $message=stripslashes($message);   
+   $message=wpautop($message);
+   return wp_mail($to, $subject, $message, $headers);
+}

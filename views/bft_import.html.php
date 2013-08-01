@@ -30,6 +30,6 @@
 		<?php endif; ?>
 	</div>
 	<div id="bft-sidebar">
-				<?php require(BFT_PATH."/views/sidebar.html");?>
+				<?php require(BFT_PATH."/views/sidebar.html.php");?>
 	</div>	
 </div>	

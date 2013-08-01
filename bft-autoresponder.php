@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 1.9.3
+Version: 2.0
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -30,6 +30,7 @@ define( 'BFT_PATH', dirname( __FILE__ ) );
 define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 include(BFT_PATH."/bft-lib.php");
+include(BFT_PATH."/controllers/newsletter.php");
 
 // initialize plugin
 function bft_init() {
@@ -44,11 +45,11 @@ function bft_init() {
 
 /* Adds the menu items */
 function bft_autoresponder_menu() {  
-  add_menu_page(__('BFT Autoresponder', 'broadfast'), __('BFT Autoresponder', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
+  add_menu_page(__('BFT Light', 'broadfast'), __('BFT Light', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
   add_submenu_page('bft_options',__('Your Mailing List', 'broadfast'), __('Mailing List', 'broadfast'), 'manage_options', "bft_list", "bft_list");
   add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
   add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
-  
+  add_submenu_page('bft_options',__('Send Newsletter', 'broadfast'), __('Send Newsletter', 'broadfast'), 'manage_options', "bft_newsletter", "bft_newsletter");  
 }
 
 /* Creates the mysql tables needed to store mailing list and messages */
@@ -130,7 +131,7 @@ function bft_options() {
   $bft_optin = stripslashes( get_option( 'bft_optin' ) );	
   
   echo '<div class="wrap">';
-  require(BFT_PATH."/views/bft_main.html");
+  require(BFT_PATH."/views/bft_main.html.php");
   echo '</div>';
 }
 
@@ -183,7 +184,7 @@ function bft_list(){
 	$sql="SELECT * FROM ".BFT_USERS." ORDER BY $ob";
 	$users=$wpdb->get_results($sql);
 	
-	require(BFT_PATH."/views/bft_list.html");	
+	require(BFT_PATH."/views/bft_list.html.php");	
 }
 
 /* Manages the messages */
@@ -228,7 +229,7 @@ function bft_messages() {
 	$sql="SELECT * FROM ".BFT_MAILS." ORDER BY days";
 	$mails=$wpdb->get_results($sql);
 	
-	require(BFT_PATH."/views/bft_messages.html");
+	require(BFT_PATH."/views/bft_messages.html.php");
 }
 
 /* import/export */
@@ -282,7 +283,7 @@ function bft_import() {
 		}
 	}
 
-	require(BFT_PATH."/views/bft_import.html");
+	require(BFT_PATH."/views/bft_import.html.php");
 }
 
 /* sends the first welcome mail to newly registered or imported user
@@ -326,21 +327,6 @@ function bft_customize($mail,$member) {
 	$message = do_shortcode($message);
 	
 	bft_mail(BFT_SENDER,$member->email,$subject,$message);
-}
-
-/* wrapper for wp_mail() function */
-function bft_mail($from,$to,$subject,$message) {   	
-	if(empty($from)) $from = get_option('admin_email');
-
-   $headers=array();
-	 $headers[] = "Content-Type: text/html";
-	 $headers[] = 'From: '.$from;
-	 $headers[] = 'sendmail_from: '.$from;
-   
-   $subject=stripslashes($subject);
-   $message=stripslashes($message);   
-   $message=wpautop($message);
-   wp_mail($to, $subject, $message, $headers);
 }
 
 // handle all this stuff on template_redirect call so
@@ -459,7 +445,7 @@ function bft_hook_up() {
 // handle shortcode
 function bft_shortcode_signup($attr) {			
 	ob_start();
-	require_once(BFT_PATH."/views/signup-form.html");
+	require_once(BFT_PATH."/views/signup-form.html.php");
 	$contents = ob_get_contents();
 	ob_end_clean();
 	
