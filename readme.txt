@@ -27,8 +27,11 @@ From version 1.5 you can also send fixed date messages.
 
 == Changelog ==
 
-= Changes in 1.9.2 =
+= Changes in 1.9.3 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about
+2. Improved the cron job logic further to avoid simultaneous runnings of the same
+3. When the sender's detail are left empty will use the default sender from your Wordpress Settings page
+4. Other code fixes and code improvements
 
 = Changes in 1.9: =
 

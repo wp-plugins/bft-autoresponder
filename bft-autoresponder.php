@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 1.9.2
+Version: 1.9.3
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -30,11 +30,11 @@ define( 'BFT_PATH', dirname( __FILE__ ) );
 define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 include(BFT_PATH."/bft-lib.php");
-$wpdb->show_errors=true;
 
 // initialize plugin
 function bft_init() {
 	global $wpdb;
+	$wpdb->show_errors=true;
 	load_plugin_textdomain( 'broadfast', false, BFT_RELATIVE_PATH."/languages/" );
 	
 	define( 'BFT_USERS', $wpdb->prefix. "bft_users" );
@@ -52,21 +52,16 @@ function bft_autoresponder_menu() {
 }
 
 /* Creates the mysql tables needed to store mailing list and messages */
-$users_table= $wpdb->prefix. "bft_users";
-$mails_table= $wpdb->prefix . "bft_mails";
-$sentmails_table= $wpdb->prefix . "bft_sentmails";
 $bft_msg="";
 
 function bft_install() {
 	 global $wpdb;
 	 
-	 $users_table= $wpdb->prefix."bft_users";
-	 $mails_table= $wpdb->prefix . "bft_mails";
-	 $sentmails_table= $wpdb->prefix . "bft_sentmails";
-     $bft_db_version="1.2";
+	 bft_init();
+    $bft_db_version="1.2";
 	 
-	  if($wpdb->get_var("SHOW TABLES LIKE '$users_table'") != $users_table) {        
-			$sql = "CREATE TABLE " . $users_table . " (
+	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_USERS."'") != BFT_USERS) {        
+			$sql = "CREATE TABLE " . BFT_USERS . " (
 				  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				  email VARCHAR(100) NOT NULL UNIQUE,	
 				  name VARCHAR(255)	NOT NULL,		  
@@ -79,9 +74,9 @@ function bft_install() {
 			$wpdb->query($sql);
 	  }
 	  
-	  if($wpdb->get_var("SHOW TABLES LIKE '$mails_table'") != $mails_table) {
+	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_MAILS."'") != BFT_MAILS) {
 	  
-			$sql = "CREATE TABLE `" . $mails_table . "` (
+			$sql = "CREATE TABLE `" . BFT_MAILS . "` (
 				  `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				  `subject` VARCHAR(255) NOT NULL,				  
 				  `message` TEXT NOT NULL,				  
@@ -93,9 +88,9 @@ function bft_install() {
 			$wpdb->query($sql);
 	  }
 	  
-	  if($wpdb->get_var("SHOW TABLES LIKE '$sentmails_table'") != $sentmails_table) {
+	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_SENTMAILS."'") != BFT_SENTMAILS) {
 	  
-			$sql = "CREATE TABLE `" . $sentmails_table . "` (
+			$sql = "CREATE TABLE `" . BFT_SENTMAILS . "` (
 				  `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 				  `mail_id` INT UNSIGNED NOT NULL,				  
 				  `user_id` INT UNSIGNED NOT NULL,				  
@@ -109,12 +104,13 @@ function bft_install() {
 	  // DB version 1.2, plugin version 1.5
       if(empty($old_bft_db_version) or $old_bft_db_version<1.2)
      {
-         $sql="ALTER TABLE ".$mails_table." ADD `send_on_date` TINYINT UNSIGNED NOT NULL,
+         $sql="ALTER TABLE ".BFT_MAILS." ADD `send_on_date` TINYINT UNSIGNED NOT NULL,
             ADD `date` DATE NOT NULL";
          $wpdb->query($sql);
      }  
 	  
 	  update_option( 'bft_db_version', $bft_db_version);
+	  //exit;
 }
 
 /* Stores the autoresponder configuration */
@@ -125,8 +121,8 @@ function bft_options() {
 		 update_option( 'bft_sender', $_POST['bft_sender'] );
 		 update_option( 'bft_redirect', $_POST['bft_redirect'] );
 		 update_option( 'bft_optin', $_POST['bft_optin'] );
-		 update_option( 'bft_subscribe_notify', $_POST['subscribe_notify'] );
-		 update_option( 'bft_unsubscribe_notify', $_POST['unsubscribe_notify'] );
+		 update_option( 'bft_subscribe_notify', @$_POST['subscribe_notify'] );
+		 update_option( 'bft_unsubscribe_notify', @$_POST['unsubscribe_notify'] );
   }
 
   $bft_sender = stripslashes( get_option( 'bft_sender' ) );	
@@ -140,22 +136,22 @@ function bft_options() {
 
 /* Manages the mailing list */
 function bft_list(){
-	global $wpdb, $users_table;
+	global $wpdb;
 	
 	if(isset($_POST['email'])) $email=$wpdb->escape($_POST['email']);
 	if(isset($_POST['user_name'])) $name=$wpdb->escape($_POST['user_name']);
 	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
-	$status=$_POST['status'];
+	$status=@$_POST['status'];
 	
     $error=false;
 
 	if(!empty($_POST['add_user'])) {
         // user exists?
         $exists=$wpdb->get_row($wpdb->prepare("SELECT *
-                FROM $users_table WHERE email=%s", $email));
+                FROM ".BFT_USERS." WHERE email=%s", $email));
 
         if(empty($exists->id)) {
-            $sql="INSERT IGNORE INTO $users_table (name,email,status,date,ip)
+            $sql="INSERT IGNORE INTO ".BFT_USERS." (name,email,status,date,ip)
             VALUES (\"$name\",\"$email\",\"$status\",CURDATE(),'$_SERVER[REMOTE_ADDR]')";       
             $wpdb->query($sql);
             
@@ -168,7 +164,7 @@ function bft_list(){
 	}
 	
 	if(!empty($_POST['save_user'])) {
-		$sql="UPDATE $users_table SET 
+		$sql="UPDATE ".BFT_USERS." SET 
 		date=CURDATE(),
 		name=\"$name\",
 		email=\"$email\",
@@ -178,13 +174,13 @@ function bft_list(){
 	}
 	
 	if(!empty($_POST['del_user'])) {
-		$sql="DELETE FROM $users_table WHERE id='$id'";
+		$sql="DELETE FROM ".BFT_USERS." WHERE id='$id'";
 		$wpdb->query($sql);
 	}
 	
 	// select users from the mailing list
-	$ob = in_array($_GET['ob'], array("email","name","ip","date","status,email"))? $_GET['ob'] : 'email';
-	$sql="SELECT * FROM $users_table ORDER BY $ob";
+	$ob = in_array(@$_GET['ob'], array("email","name","ip","date","status,email"))? $_GET['ob'] : 'email';
+	$sql="SELECT * FROM ".BFT_USERS." ORDER BY $ob";
 	$users=$wpdb->get_results($sql);
 	
 	require(BFT_PATH."/views/bft_list.html");	
@@ -192,26 +188,28 @@ function bft_list(){
 
 /* Manages the messages */
 function bft_messages() {
-	global $wpdb, $mails_table;
+	global $wpdb;
 	
+	$send_on_date='';
 	if(isset($_POST['subject'])) $subject=$_POST['subject'];
 	if(isset($_POST['message'])) $message=$_POST['message'];
 	if(isset($_POST['days'])) $days=$_POST['days'];
 	if(isset($_POST['id'])) $id=$_POST['id'];
-    if(isset($_POST['send_on_date'])) $send_on_date=$_POST['send_on_date'];
+   if(isset($_POST['send_on_date'])) $send_on_date=$_POST['send_on_date'];
     
     // prepare date
-    $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
+    if(!empty($_POST['dateyear'])) $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
+    else $date = date("Y-m-d");
     $date=$wpdb->escape($date);
 
 	if(!empty($_POST['add_message'])) {
-		$sql=$wpdb->prepare("INSERT INTO $mails_table (subject,message,days,send_on_date,date)
+		$sql=$wpdb->prepare("INSERT INTO ".BFT_MAILS." (subject,message,days,send_on_date,date)
 		VALUES (%s, %s, %d, %d, %s)", $subject, $message, $days, $send_on_date, $date);
 		$wpdb->query($sql);
 	}
 	
 	if(!empty($_POST['save_message'])) {
-		$sql=$wpdb->prepare("UPDATE $mails_table SET
+		$sql=$wpdb->prepare("UPDATE ".BFT_MAILS." SET
 		subject=%s,
 		message=%s,
 		days=%d,
@@ -222,12 +220,12 @@ function bft_messages() {
 	}
 	
 	if(!empty($_POST['del_message'])) {
-		$sql="DELETE FROM $mails_table WHERE id='$id'";		
+		$sql="DELETE FROM ".BFT_MAILS." WHERE id='$id'";		
 		$wpdb->query($sql);
 	}
 	
 	// select all messages ordered by days
-	$sql="SELECT * FROM $mails_table ORDER BY days";
+	$sql="SELECT * FROM ".BFT_MAILS." ORDER BY days";
 	$mails=$wpdb->get_results($sql);
 	
 	require(BFT_PATH."/views/bft_messages.html");
@@ -235,7 +233,7 @@ function bft_messages() {
 
 /* import/export */
 function bft_import() {
-	global $wpdb, $users_table;
+	global $wpdb;
 
 	if(!empty($_POST['import'])) {
 		if(empty($_FILES["file"]["name"])) {
@@ -258,7 +256,7 @@ function bft_import() {
 			$email=trim($values[$position]);
 			$name=trim($values[$name_position]);
 			
-			$sql="INSERT IGNORE INTO $users_table (date, name, email, status) 
+			$sql="INSERT IGNORE INTO ".BFT_USERS." (date, name, email, status) 
 			VALUES (CURDATE(), '$name','$email',1)";
 			$wpdb->query($sql);
 			
@@ -273,8 +271,7 @@ function bft_import() {
 			$active_sql=" AND status='1' ";
 		}
 	
-		$sql="SELECT * FROM $users_table
-		WHERE 1 $active_sql
+		$sql="SELECT * FROM ".BFT_USERS." WHERE 1 $active_sql
 		ORDER BY email";		
 		$members=$wpdb->get_results($sql);
 		
@@ -291,16 +288,16 @@ function bft_import() {
 /* sends the first welcome mail to newly registered or imported user
 if such has been scheduled. Scheduling of those mails is done by setting "0" for "days" */
 function bft_welcome_mail($uid) {
-	global $wpdb, $users_table, $mails_table;
+	global $wpdb;
 	
 	// select email
-	$sql="SELECT * FROM $mails_table WHERE days=0";	
+	$sql="SELECT * FROM ".BFT_MAILS." WHERE days=0";	
 	$mail=$wpdb->get_row($sql);
 		
 	if(!$mail->id) return false;
 	
 	// select member
-	$sql="SELECT * FROM $users_table WHERE id='$uid' AND status=1";
+	$sql="SELECT * FROM ".BFT_USERS." WHERE id='$uid' AND status=1";
 	$member=$wpdb->get_row($sql);
 	if(!$member->id) return false;
 	
@@ -333,6 +330,8 @@ function bft_customize($mail,$member) {
 
 /* wrapper for wp_mail() function */
 function bft_mail($from,$to,$subject,$message) {   	
+	if(empty($from)) $from = get_option('admin_email');
+
    $headers=array();
 	 $headers[] = "Content-Type: text/html";
 	 $headers[] = 'From: '.$from;
@@ -347,10 +346,10 @@ function bft_mail($from,$to,$subject,$message) {
 // handle all this stuff on template_redirect call so
 // plugins and especially the possible WP MAIL SMTP are loaded!!
 function bft_template_redirect() {
-	global $wpdb, $users_table;	
+	global $wpdb;	
 	
 	//  subscribe user
-	if($_REQUEST['bft']=='register') {
+	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='register') {
 		$status=!get_option( 'bft_optin' );
 		
 		$email=$wpdb->escape($_POST['email']);
@@ -359,17 +358,17 @@ function bft_template_redirect() {
 		$code=substr(md5($email.microtime()),0,8);
 		
 		// user exists
-		$sql=$wpdb->prepare("SELECT id FROM $users_table WHERE email=%s", $email);
+		$sql=$wpdb->prepare("SELECT id FROM ".BFT_USERS." WHERE email=%s", $email);
 		$id = $wpdb->get_var($sql);		
 		
 		if(!$id) {			
-			$sql="INSERT IGNORE INTO $users_table (name,email,status,code,date,ip)
+			$sql="INSERT IGNORE INTO ".BFT_USERS." (name,email,status,code,date,ip)
 			VALUES (\"$name\",\"$email\",'$status','$code',CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
 			$wpdb->query($sql);
 			$id = $wpdb->insert_id;
 		}
 		else {
-			$sql=$wpdb->prepare("UPDATE $users_table SET code=%s WHERE id=%d", $code, $id);
+			$sql=$wpdb->prepare("UPDATE ".BFT_USERS." SET code=%s WHERE id=%d", $code, $id);
 			$wpdb->query($sql);
 		}
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
@@ -411,9 +410,9 @@ function bft_template_redirect() {
 	
 	
 	// unsubscribe user
-	if($_REQUEST['bft']=='bft_unsubscribe') {
+	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='bft_unsubscribe') {
 		$email=$wpdb->escape($_GET['email']);
-		$sql="DELETE FROM $users_table WHERE email=\"$email\"";
+		$sql="DELETE FROM ".BFT_USERS." WHERE email=\"$email\"";
 		$wpdb->query($sql);
 		
 		//  notify admin?
@@ -425,15 +424,15 @@ function bft_template_redirect() {
 	}
 	
 	// confirm user registration
-	if($_REQUEST['bft']=='bft_confirm') {
+	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='bft_confirm') {
 		// select user
-		$sql=$wpdb->prepare("SELECT * FROM $users_table WHERE id=%d AND code=%s", $_GET['id'], $_GET['code']);	
+		$sql=$wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d AND code=%s", $_GET['id'], $_GET['code']);	
 		$member=$wpdb->get_row($sql);	
 		
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
 		
 		if($member->id) {
-			$sql="UPDATE $users_table SET 
+			$sql="UPDATE ".BFT_USERS." SET 
 			code='".substr(0,8,md5($code.time()))."',
 			status=1
 			WHERE id='{$member->id}'";		
@@ -454,7 +453,7 @@ function bft_template_redirect() {
 // the actual autoresponder hook - it's run when the index page is loaded
 function bft_hook_up() { 
 	define('BFT_SENDER',get_option( 'bft_sender' ));
-  require(BFT_PATH."/bft_hook.inc");    
+  require(BFT_PATH."/controllers/bft_hook.php");    
 }
 
 // handle shortcode
