@@ -10,7 +10,7 @@ This plugin allows scheduling of automated autoresponder messages, instant newsl
 == Description ==
 
 [PRO](http://calendarscripts.info/bft-pro/ "Go Pro") |
-[Email Support](http://calendarscripts.info/contact.html "Support for PRO and if you don't have a Wordpress acccount") 
+[Email Support](http://calendarscripts.info/contact.html "Support for PRO queries or about the free plugin if you don't have a Wordpress acccount") 
 
 
 This plugin allows scheduling of automated autoresponder messages and newsletters, and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
