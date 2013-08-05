@@ -1,8 +1,8 @@
 === BFT Autoresponder ===
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
-Requires at least: 2.0.2
-Tested up to: 3.5.2
+Requires at least: 3.0
+Tested up to: 3.6
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -10,7 +10,7 @@ This plugin allows scheduling of automated autoresponder messages, instant newsl
 == Description ==
 
 [PRO](http://calendarscripts.info/bft-pro/ "Go Pro") |
-[Email Support](http://calendarscripts.info/contact/ "Support only if you don't have a Wordpress acccount")
+[Email Support](http://calendarscripts.info/contact.html "Support for PRO and if you don't have a Wordpress acccount") 
 
 
 This plugin allows scheduling of automated autoresponder messages and newsletters, and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
