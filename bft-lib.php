@@ -105,9 +105,11 @@ function bft_subscribe_notify($mid) {
 }
 
 // send notice when someone unsubscribes
-function bft_unsubscribe_notify($email) {
+function bft_unsubscribe_notify($user) {
 	 $subject = __("An user unsubscribed from the mailing list at", 'broadfast').' '.get_option('blogname');	
-	 $message = __('User email:', 'broadfast').' '.$email;
+	 $message = __('User name:', 'broadfast').' <b>'.$user->name."</b><br>";
+	 $message .= __('User email:', 'broadfast').' <b>'.$user->email."</b><br>";
+	 $message .= __('Registration date:', 'broadfast').' <b>'.date(get_option('date_format', strtotime($user->date)))."</b>";
 	 
 	 $admin_email = get_option('bft_sender');	
 	 bft_mail($admin_email, $admin_email, $subject, $message);	 
@@ -125,5 +127,6 @@ function bft_mail($from,$to,$subject,$message) {
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
    $message=wpautop($message);
+   
    return wp_mail($to, $subject, $message, $headers);
 }

@@ -4,7 +4,7 @@ Plugin Name: BFT Light
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0
+Version: 2.0.2
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -139,9 +139,9 @@ function bft_options() {
 function bft_list(){
 	global $wpdb;
 	
-	if(isset($_POST['email'])) $email=$wpdb->escape($_POST['email']);
-	if(isset($_POST['user_name'])) $name=$wpdb->escape($_POST['user_name']);
-	if(isset($_POST['id'])) $id=$wpdb->escape($_POST['id']);
+	if(isset($_POST['email'])) $email=esc_sql($_POST['email']);
+	if(isset($_POST['user_name'])) $name=esc_sql($_POST['user_name']);
+	if(isset($_POST['id'])) $id=esc_sql($_POST['id']);
 	$status=@$_POST['status'];
 	
     $error=false;
@@ -201,11 +201,11 @@ function bft_messages() {
     // prepare date
     if(!empty($_POST['dateyear'])) $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
     else $date = date("Y-m-d");
-    $date=$wpdb->escape($date);
+    $date=esc_sql($date);
 
 	if(!empty($_POST['add_message'])) {
 		$sql=$wpdb->prepare("INSERT INTO ".BFT_MAILS." (subject,message,days,send_on_date,date)
-		VALUES (%s, %s, %d, %d, %s)", $subject, $message, $days, $send_on_date, $date);
+		VALUES (%s, %s, %d, %d, %s)", $subject, $message, @$days, $send_on_date, $date);
 		$wpdb->query($sql);
 	}
 	
@@ -338,8 +338,8 @@ function bft_template_redirect() {
 	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='register') {
 		$status=!get_option( 'bft_optin' );
 		
-		$email=$wpdb->escape($_POST['email']);
-		$name=$wpdb->escape($_POST['user_name']);
+		$email=esc_sql($_POST['email']);
+		$name=esc_sql($_POST['user_name']);
 		
 		$code=substr(md5($email.microtime()),0,8);
 		
@@ -396,15 +396,17 @@ function bft_template_redirect() {
 	
 	
 	// unsubscribe user
-	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='bft_unsubscribe') {
-		$email=$wpdb->escape($_GET['email']);
-		$sql="DELETE FROM ".BFT_USERS." WHERE email=\"$email\"";
-		$wpdb->query($sql);
-		
+	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='bft_unsubscribe') {		
 		//  notify admin?
 		if(get_option('bft_unsubscribe_notify')) {
-			bft_unsubscribe_notify($email);
+			// select this user
+			$user = $wpdb->get_row( $wpdb->prepare(" SELECT * FROM ".BFT_USERS." WHERE email=%s", $_GET['email']));			
+			
+			bft_unsubscribe_notify($user);
 		}
+		
+		$sql="DELETE FROM ".BFT_USERS." WHERE email=%s";
+		$wpdb->query($wpdb->prepare($sql, $_GET['email']));
 		
 		wp_redirect(get_option('siteurl'));
 	}

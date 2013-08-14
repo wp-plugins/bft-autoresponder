@@ -29,6 +29,10 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
+= Changes in 2.0.2 =
+1. Added user's name and registration date in unsubscribe notification emails
+2. Removed several deprecated usages of wpdb::escape()
+
 = Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about
 2. Improved the cron job logic further to avoid simultaneous runnings of the same
