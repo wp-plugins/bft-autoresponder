@@ -1,4 +1,4 @@
-=== BFT Autoresponder ===
+=== BFT Autoresponder and Newsletter ===
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 3.0
@@ -29,9 +29,10 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.0.2 =
+= Changes in 2.0.3 =
 1. Added user's name and registration date in unsubscribe notification emails
 2. Removed several deprecated usages of wpdb::escape()
+3. Added basic validation for empty email on subscribe
 
 = Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about

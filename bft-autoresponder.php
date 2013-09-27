@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: BFT Light
+Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0.2
+Version: 2.0.3
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -340,6 +340,8 @@ function bft_template_redirect() {
 		
 		$email=esc_sql($_POST['email']);
 		$name=esc_sql($_POST['user_name']);
+		
+		if(empty($email) or !strstr($email, '@')) wp_die(__("Please enter valid email address", 'broadfast'));
 		
 		$code=substr(md5($email.microtime()),0,8);
 		
