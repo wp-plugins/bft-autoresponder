@@ -295,12 +295,12 @@ function bft_welcome_mail($uid) {
 	$sql="SELECT * FROM ".BFT_MAILS." WHERE days=0";	
 	$mail=$wpdb->get_row($sql);
 		
-	if(!$mail->id) return false;
+	if(empty($mail->id)) return false;
 	
 	// select member
 	$sql="SELECT * FROM ".BFT_USERS." WHERE id='$uid' AND status=1";
 	$member=$wpdb->get_row($sql);
-	if(!$member->id) return false;
+	if(empty($member->id)) return false;
 	
 	bft_customize($mail,$member);
 }
@@ -365,8 +365,8 @@ function bft_template_redirect() {
 			$mid = $wpdb->insert_id;
 			bft_welcome_mail($mid);
 					
-			// notify admin?
-			if(get_option('bft_subscribe_notify')) {
+			// notify admin?			
+			if(get_option('bft_subscribe_notify')) {				
 				bft_subscribe_notify($mid);
 			}	
 			
@@ -430,7 +430,7 @@ function bft_template_redirect() {
 			
 			bft_welcome_mail($member->id);
 			
-			// notify admin?
+			// notify admin?			
 			if(get_option('bft_subscribe_notify')) {
 				bft_subscribe_notify($member->id);
 			}

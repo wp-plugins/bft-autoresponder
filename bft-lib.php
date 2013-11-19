@@ -93,14 +93,14 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
 
 // send notice when someone subscribes
 function bft_subscribe_notify($mid) {
-	global $wpdb;
-	
+	global $wpdb;	
 	$member = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d", $mid));
 	$subject = __("New user subscribed to the mailing list at", 'broadfast').' '.get_option('blogname');
 	$message = __('User details:', 'broadfast')."<br><p>".__('Name:', 'broadfast').' '.$member->name.
 		'</p><p>'.__('Email:', 'broadfast').' '.$member->email;
 	
-	$admin_email = get_option('bft_sender');	
+	$admin_email = get_option('bft_sender');
+	
 	bft_mail($admin_email, $admin_email, $subject, $message);	 
 }
 
@@ -127,6 +127,6 @@ function bft_mail($from,$to,$subject,$message) {
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
    $message=wpautop($message);
-   
+  // echo $message;
    return wp_mail($to, $subject, $message, $headers);
 }
