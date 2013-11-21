@@ -18,30 +18,13 @@
 }
 </style>
 
-<div id="bft-ad" class="bft-sidebox">
-	<h3><?php _e('Help To Spread The Word!', 'broadfast')?></h3>
-	
-	<p><?php _e('If you like this plugin you can do some of the following:', 'broadfast')?></p>
-	
-	<ol>
-		<li><a href="http://wordpress.org/extend/plugins/bft-autoresponder/" target="_blank"><?php _e('Rate it 5 starts at Wordpress.org', 'broadfast')?></a></li>
-		<li><?php _e('Let others know about it by blogging or posting', 'broadfast')?> <a href="http://calendarscripts.info/autoresponder-wordpress.html" target="_blank"><?php _e('our home page', 'broadfast')?></a> <?php _e('on social networks.', 'broadfast')?></li>
-		<li><a href="http://calendarscripts.info/bft-pro/" target="_blank"><?php _e('Go PRO', 'broadfast')?></a> <?php _e('to empower your site with extra benefits', 'broadfast')?></li>
-	</ol>
-</div>
-
-<div id="bft-help" class="bft-sidebox">
-	<h3><?php _e('Need Support?', 'broadfast')?></h3>
-	
-	<p><?php _e('Please ask your question in the', 'broadfast')?> <a href="http://wordpress.org/support/plugin/bft-autoresponder" target="_blank"><?php _e('support forum at Wordpress.', 'broadfast')?></a></p>	
-</div>
-
 <div id="bft-related" class="bft-sidebox">
 	<h3><?php _e('Go PRO!', 'broadfast')?></h3>
 	
 	<p><?php _e('Get more powerful features by', 'broadfast')?> <a href="http://calendarscripts.info/bft-pro/" target="_blank"><?php _e('upgrading to the PRO version:', 'broadfast')?></a></p>
 	
 	<ol>
+		<li><strong><?php _e('Premium support', 'breadfast')?></strong>. <?php _e('Free email support for 1 year after purchase', 'broadfast')?></li>
 		<li><strong><?php _e('Multiple mailing lists', 'broadfast')?></strong>. <?php _e('Each one can be assigned to multiple auto responder campaigns.', 'broadfast')?></li>
 		<li><strong><?php _e('Multiple auto-responder marketing campaigns', 'broadfast')?></strong></li>
 		<li><strong><?php _e('Differen email types:', 'broadfast')?></strong> <?php _e('sequential emails, fixed date emails, weeday messages, repeatable mails', 'broadfast')?></li>
@@ -58,4 +41,22 @@
 	<p><?php _e('Just go ahead and', 'broadfast')?> <a href="http://calendarscripts.info/bft-pro/tour.html" target="_blank"><?php _e('take the tour', 'broadfast')?></a> <?php _e('or check the', 'broadfast')?> <a href="http://calendarscripts.info/bft-pro/demo.html" target="_blank"><?php _e('online demo.', 'broadfast')?></a></p>
 	
 	<p><?php _e('Upgrading to PRO comes with 60 days money-back guarantee, one year free upgrades and one year free support.', 'broadfast')?></p>
+</div>
+
+<div id="bft-ad" class="bft-sidebox">
+	<h3><?php _e('Help To Spread The Word!', 'broadfast')?></h3>
+	
+	<p><?php _e('If you like this plugin you can do some of the following:', 'broadfast')?></p>
+	
+	<ol>
+		<li><a href="http://wordpress.org/extend/plugins/bft-autoresponder/" target="_blank"><?php _e('Rate it 5 starts at Wordpress.org', 'broadfast')?></a></li>
+		<li><?php _e('Let others know about it by blogging or posting', 'broadfast')?> <a href="http://calendarscripts.info/autoresponder-wordpress.html" target="_blank"><?php _e('our home page', 'broadfast')?></a> <?php _e('on social networks.', 'broadfast')?></li>
+		<li><a href="http://calendarscripts.info/bft-pro/" target="_blank"><?php _e('Go PRO', 'broadfast')?></a> <?php _e('to empower your site with extra benefits', 'broadfast')?></li>
+	</ol>
+</div>
+
+<div id="bft-help" class="bft-sidebox">
+	<h3><?php _e('Need Support?', 'broadfast')?></h3>
+	
+	<p><?php _e('Please ask your question in the', 'broadfast')?> <a href="http://wordpress.org/support/plugin/bft-autoresponder" target="_blank"><?php _e('support forum at Wordpress.', 'broadfast')?></a></p>	
 </div>

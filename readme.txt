@@ -1,8 +1,8 @@
 === BFT Autoresponder and Newsletter ===
 Contributors: Bobby Handzhiev, prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
-Requires at least: 3.0
-Tested up to: 3.6
+Requires at least: 3.3
+Tested up to: 3.7.1
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -13,7 +13,7 @@ This plugin allows scheduling of automated autoresponder messages, instant newsl
 [Email Support](http://calendarscripts.info/contact.html "Support for PRO queries or about the free plugin if you don't have a Wordpress acccount") 
 
 
-This plugin allows scheduling of automated autoresponder messages and newsletters, and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages.
+This plugin allows scheduling of automated autoresponder messages and newsletters, and managing a mailing list. You can add/edit/delete and import/export members. There is also a registration form which can be placed in any website or blog. You can schedule unlimited number of email messages. Messages can be sent on defined number of days after user registration, or on a fixed date.
 
 From version 1.5 you can also send fixed date messages.
 
@@ -29,10 +29,12 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.0.3 =
+= Changes in 2.0.5 =
 1. Added user's name and registration date in unsubscribe notification emails
 2. Removed several deprecated usages of wpdb::escape()
 3. Added basic validation for empty email on subscribe
+4. Double opt-in message is now configurable
+5. Created a help page (moved the manual out of the options page)
 
 = Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about
@@ -69,3 +71,15 @@ Yes, there is no limitation. However you'd better not set more than one email to
 = Is there unsubscribe link? =
 
 Yes, unsubscribe link is automatically added to every outgoing message.
+
+= What to do if it doesn't send emails? = 
+
+Please install a plugin like WP Mail SMTP or Easy WP SMTP and try to send a test email. If the test email isn't received, it means the problem is not in the autoresponder and you should talk to your hosting support.
+
+== Screenshots ==
+
+1. Main settings page. Get the signup form code, configure double opt-in, and more.
+2. Manage your mailing list, add/edit/delete subscribers
+3. Import and export contacts to/from CSV file
+4. Create a new autoresponder message
+5. Send instant newsletter to all active subscribers

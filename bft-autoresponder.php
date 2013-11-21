@@ -4,12 +4,12 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0.3
+Version: 2.0.5
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
 
-/*  Copyright 2012  Bobby Handzhiev (email : admin@pimteam.net)
+/*  Copyright 2012  Kiboko Labs
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,6 +31,7 @@ define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
 require_once(ABSPATH . 'wp-includes/pluggable.php');
 include(BFT_PATH."/bft-lib.php");
 include(BFT_PATH."/controllers/newsletter.php");
+include(BFT_PATH."/controllers/help.php");
 
 // initialize plugin
 function bft_init() {
@@ -50,6 +51,7 @@ function bft_autoresponder_menu() {
   add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
   add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
   add_submenu_page('bft_options',__('Send Newsletter', 'broadfast'), __('Send Newsletter', 'broadfast'), 'manage_options', "bft_newsletter", "bft_newsletter");  
+  add_submenu_page('bft_options',__('Help', 'broadfast'), __('Help', 'broadfast'), 'manage_options', "bft_help", "bft_help");
 }
 
 /* Creates the mysql tables needed to store mailing list and messages */
@@ -130,9 +132,13 @@ function bft_options() {
   $bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
   $bft_optin = stripslashes( get_option( 'bft_optin' ) );	
   
-  echo '<div class="wrap">';
+  // double opt-in message
+  if(!empty($_POST['double_optin_ok'])) {
+  	 update_option('bft_optin_subject', $_POST['optin_subject']);
+  	 update_option('bft_optin_message', $_POST['optin_message']);
+  }
+  
   require(BFT_PATH."/views/bft_main.html.php");
-  echo '</div>';
 }
 
 /* Manages the mailing list */
@@ -381,9 +387,19 @@ function bft_template_redirect() {
 			// send confirmation email
 			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
 			
-			$subject=__("Please confirm your email", 'broadfast');				
-			$message=__("Please click on the link below or copy and paste it in the browser address bar:<br><br>", 'broadfast').
-			'<a href="'.$url.'">'.$url.'</a>';		
+			$subject = get_option('bft_optin_subject');
+			if(empty($subject)) $subject=__("Please confirm your email", 'broadfast');
+			
+			$message = get_option('bft_optin_message');	
+			if(empty($message)) {							
+				$message=__("Please click on the link below or copy and paste it in the browser address bar:<br><br>", 'broadfast').
+				'<a href="'.$url.'">'.$url.'</a>';
+			} else {
+				if(strstr($message, '{{url}}')) $message = str_replace('{{url}}', $url, $message);
+				else $message .= '<br><br><a href="'.$url.'">'.$url.'</a>';
+			}
+
+			// send the optin email			
 			bft_mail(BFT_SENDER,$_POST['email'],$subject,$message);
 			
 			echo "<script language='javascript'>

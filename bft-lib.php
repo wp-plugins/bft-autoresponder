@@ -127,6 +127,6 @@ function bft_mail($from,$to,$subject,$message) {
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
    $message=wpautop($message);
-  // echo $message;
+   // die( $subject.'<br>'.$message);  
    return wp_mail($to, $subject, $message, $headers);
 }
