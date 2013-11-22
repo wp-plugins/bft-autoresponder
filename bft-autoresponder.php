@@ -105,8 +105,7 @@ function bft_install() {
 	  $old_bft_db_version=get_option('bft_db_version');
 	  
 	  // DB version 1.2, plugin version 1.5
-      if(empty($old_bft_db_version) or $old_bft_db_version<1.2)
-     {
+      if(!empty($old_bft_db_version) and $old_bft_db_version<1.2) {
          $sql="ALTER TABLE ".BFT_MAILS." ADD `send_on_date` TINYINT UNSIGNED NOT NULL,
             ADD `date` DATE NOT NULL";
          $wpdb->query($sql);
