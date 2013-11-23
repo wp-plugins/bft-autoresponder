@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0.5
+Version: 2.0.6
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -377,7 +377,7 @@ function bft_template_redirect() {
 			
 			// display success message
 			echo "<script language='javascript'>
-			alert('".__('You have been subcribed!', 'broadfast')."');
+			alert('".__('You have been subscribed!', 'broadfast')."');
 			window.location='".($bft_redirect?$bft_redirect:site_url())."';
 			</script>";
 			exit;
@@ -425,7 +425,11 @@ function bft_template_redirect() {
 		$sql="DELETE FROM ".BFT_USERS." WHERE email=%s";
 		$wpdb->query($wpdb->prepare($sql, $_GET['email']));
 		
-		wp_redirect(get_option('siteurl'));
+		echo "<script language='javascript'>
+			alert('".__('You have been unsubscribed.', 'broadfast')."');
+			window.location='".($bft_redirect?$bft_redirect:site_url())."';
+			</script>";
+			exit;
 	}
 	
 	// confirm user registration
@@ -451,7 +455,12 @@ function bft_template_redirect() {
 			}
 		}
 		
-		wp_redirect($bft_redirect?$bft_redirect:get_option('siteurl'));
+		// display success message
+		echo "<script language='javascript'>
+		alert('".__('Your email address has been confirmed!', 'broadfast')."');
+		window.location='".($bft_redirect?$bft_redirect:site_url())."';
+		</script>";
+		exit;
 	}
 }
 
