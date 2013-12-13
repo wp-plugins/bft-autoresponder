@@ -26,7 +26,7 @@
 			<div style="width:300px;float:left;padding:10px;">
 				<h2><?php _e('Signup Form', 'broadfast')?></h2>
 				<p><?php _e('Registration form HTML code <br>(Copy and paste in a post, page or your wordpress template):', 'broadfast')?></p>
-				<textarea rows="8" cols="60" onclick="this.select();"><?php require(BFT_PATH."/views/signup-form.html.php");?></textarea>
+				<textarea rows="10" cols="40" onclick="this.select();"><?php require(BFT_PATH."/views/signup-form.html.php");?></textarea>
 				
 				<p><?php _e('Or use Wordpress shortcode', 'broadfast')?> <strong>[BFTWP]</strong> <?php _e('inside a post or page.', 'broadfast')?></p>
 			</div>
