@@ -20,12 +20,12 @@
     <p>&nbsp;</p>
 
 		<table class="widefat">
-			<tr><th width="23%"><a href="admin.php?page=bft_list&ob=email"><?php _e('User Email', 'broadfast')?></a></th>
-			<th width="23%"><a href="admin.php?page=bft_list&ob=name"><?php _e('User Name', 'broadfast')?></a></th>
-			<th width="9%"><a href="admin.php?page=bft_list&ob=ip"><?php _e('IP', 'broadfast')?></a></th>
+			<tr><th width="30%"><a href="admin.php?page=bft_list&ob=email"><?php _e('User Email Address', 'broadfast')?></a></th>
+			<th width="27%"><a href="admin.php?page=bft_list&ob=name"><?php _e('User Name', 'broadfast')?></a></th>
+			<th width="9%"><a href="admin.php?page=bft_list&ob=ip"><?php _e('IP Address', 'broadfast')?></a></th>
 			<th width="15%"><a href="admin.php?page=bft_list&ob=date"><?php _e('Date Signed', 'broadfast')?></a></th>
-			<th width="9%"><a href="admin.php?page=bft_list&ob=status,email"><?php _e('Active?', 'broadfast')?></a></th>
-			<th width="21%"><a<?php _e('Action', 'broadfast')?></th></tr>
+			<th width="5%"><a href="admin.php?page=bft_list&ob=status,email"><?php _e('Active?', 'broadfast')?></a></th>
+			<th width="16%"><?php _e('Action', 'broadfast')?></th></tr>
 		</table>
 		
     <?php foreach($users as $user): ?>
@@ -45,6 +45,11 @@
     </form>
     <?php endforeach; ?>
     </table>
+    
+    <p align="center">
+    	<?php if($offset > 0):?><a href="admin.php?page=bft_list&ob=<?php echo $ob?>&offset=<?php echo $offset-$per_page?>"><?php _e('previous page')?></a> &nbsp;<?php endif;?>
+    	<?php if($offset + $per_page < $count):?><a href="admin.php?page=bft_list&ob=<?php echo $ob?>&offset=<?php echo $offset+$per_page?>"><?php _e('next page')?></a> &nbsp;<?php endif;?>
+    </p>
   </div>
 	<div id="bft-sidebar">
 				<?php require(BFT_PATH."/views/sidebar.html.php");?>

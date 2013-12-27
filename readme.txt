@@ -1,5 +1,5 @@
 === BFT Autoresponder and Newsletter ===
-Contributors: Bobby Handzhiev, prasunsen
+Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 3.3
 Tested up to: 3.8
@@ -23,20 +23,21 @@ From version 2.0 you can send immediate newsletters.
 
 1. Unzip the contents and upload the entire `bft-autoresponder` directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Configure the sender address and other options from the main page accessible from the newly appeared "BFT Autoresponder" menu.
+3. Configure the sender address and other options from the main page accessible from the newly appeared "BFT Light" menu.
 4. Manage your email messages and mailing list.
 5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it.
 
 == Changelog ==
 
-= Changes in 2.0.2 =
+= Changes in 2.0.8 =
 1. Added user's name and registration date in unsubscribe notification emails
 2. Removed several deprecated usages of wpdb::escape()
 3. Added basic validation for empty email on subscribe
 4. Double opt-in message is now configurable
 5. Created a help page (moved the manual out of the options page)
 6. Added alerts when user unsubscribes or confirms their email address
-- Fixed for compatibility with WordPress 3.8
+7. Fixed for compatibility with WordPress 3.8
+8. Added pagination on the mailing list page
 
 = Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about

@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0.7
+Version: 2.0.8
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -144,6 +144,9 @@ function bft_options() {
 function bft_list(){
 	global $wpdb;
 	
+	$per_page = 20;
+	$offset = empty($_GET['offset']) ? 0 : intval($_GET['offset']);		
+	
 	if(isset($_POST['email'])) $email=esc_sql($_POST['email']);
 	if(isset($_POST['user_name'])) $name=esc_sql($_POST['user_name']);
 	if(isset($_POST['id'])) $id=esc_sql($_POST['id']);
@@ -186,8 +189,10 @@ function bft_list(){
 	
 	// select users from the mailing list
 	$ob = in_array(@$_GET['ob'], array("email","name","ip","date","status,email"))? $_GET['ob'] : 'email';
-	$sql="SELECT * FROM ".BFT_USERS." ORDER BY $ob";
+	$sql="SELECT SQL_CALC_FOUND_ROWS * FROM ".BFT_USERS." ORDER BY $ob LIMIT $offset, $per_page";
 	$users=$wpdb->get_results($sql);
+	
+	$count = $wpdb->get_var("SELECT FOUND_ROWS()");
 	
 	require(BFT_PATH."/views/bft_list.html.php");	
 }

@@ -6,7 +6,7 @@
 				<h2><?php _e('Main Settings', 'broadfast')?></h2>
 				<form method="post">
 				<input type="hidden" name="settings_ok" value="Y">
-				<p><label><?php _e('Sender of all emails:', 'broadfast')?></label> <input type="text" name="bft_sender" value="<?php echo $bft_sender?>"><br>
+				<p><label><?php _e('Sender of all emails:', 'broadfast')?></label> <input type="text" name="bft_sender" value="<?php echo $bft_sender?>" size="30"><br>
 				<?php _e('Fill valid email address or name/email like this:</br> "Name &lt;email@domain.com&gt;"', 'broadfast')?></p>
 				<p><label><?php _e('URL to redirect to after registration (optional):', 'broadfast')?></label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>" size="40"></p>
 				<p><label><?php _e('Double opt-in:', 'broadfast')?></label> 
