@@ -29,7 +29,7 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.0.8 =
+= Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails
 2. Removed several deprecated usages of wpdb::escape()
 3. Added basic validation for empty email on subscribe
@@ -38,6 +38,8 @@ From version 2.0 you can send immediate newsletters.
 6. Added alerts when user unsubscribes or confirms their email address
 7. Fixed for compatibility with WordPress 3.8
 8. Added pagination on the mailing list page
+9. You can now configure subscribe and unsubscribe notification messages
+10. Fixed missing "unsubscribe" link in instant newsletters
 
 = Changes in 2.0 =
 1. Changed the cron job logic in attempt to avoid a multiple emails issue that some people complain about

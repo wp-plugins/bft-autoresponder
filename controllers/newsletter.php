@@ -12,8 +12,9 @@ function bft_newsletter() {
 		$subject = stripslashes($_POST['subject']);
 		$message = stripslashes($_POST['message']);
 		
+		$mail = (object) array("subject"=>$subject, "message"=>$message, "sender" => $sender);
 		foreach($users as $user) {
-			if(bft_mail($sender, $user->email, $subject, $message)) $num_mails_sent++;
+			if(bft_customize($mail,$user)) $num_mails_sent++;
 		}
 	}
 	

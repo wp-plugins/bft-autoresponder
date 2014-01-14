@@ -8,16 +8,23 @@
 				<input type="hidden" name="settings_ok" value="Y">
 				<p><label><?php _e('Sender of all emails:', 'broadfast')?></label> <input type="text" name="bft_sender" value="<?php echo $bft_sender?>" size="30"><br>
 				<?php _e('Fill valid email address or name/email like this:</br> "Name &lt;email@domain.com&gt;"', 'broadfast')?></p>
-				<p><label><?php _e('URL to redirect to after registration (optional):', 'broadfast')?></label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>" size="40"></p>
+				<p><label><?php _e('URL to redirect to after registration (optional):', 'broadfast')?></label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>" size="30"></p>
 				<p><label><?php _e('Double opt-in:', 'broadfast')?></label> 
 				<select name="bft_optin" onchange="if(this.value == '1') { jQuery('#bftOptinConfig').show();} else {jQuery('#bftOptinConfig').hide();}">
 				<option value="0" <?if(empty($bft_optin)) echo "selected";?>><?php _e('No', 'broadfast')?></option>
 				<option value="1" <?if($bft_optin) echo "selected";?>><?php _e('Yes', 'broadfast')?></option>
 				</select></p>
 				
-				<p><input type="checkbox" name="subscribe_notify" value="1" <?php if(get_option('bft_subscribe_notify')) echo 'checked'?>> <?php _e('Notify me when someone subscribes/activates', 'broadfast')?></p>
+				<p><input type="checkbox" name="subscribe_notify" value="1" <?php if($subscribe_notify) echo 'checked'?> onclick="this.checked ? jQuery('#subscribeNotify').show() : jQuery('#subscribeNotify').hide();"> <?php _e('Notify me when someone subscribes/activates', 'broadfast')?></p>
+				<div id="subscribeNotify" style="display:<?php echo $subscribe_notify ? 'block' : 'none';?>">
+					[<a href="admin.php?page=bft_messages_config&message=subscribe_notify"><?php _e('Configure this message', 'broadfast')?></a>]				
+				</div>
 				
-				<p><input type="checkbox" name="unsubscribe_notify" value="1" <?php if(get_option('bft_unsubscribe_notify')) echo 'checked'?>> <?php _e('Notify me when someone unsubscribes', 'broadfast')?></p>			
+				<p><input type="checkbox" name="unsubscribe_notify" value="1" <?php if($unsubscribe_notify) echo 'checked'?>  onclick="this.checked ? jQuery('#unsubscribeNotify').show() : jQuery('#unsubscribeNotify').hide();"> <?php _e('Notify me when someone unsubscribes', 'broadfast')?></p>			
+				
+				<div id="unsubscribeNotify" style="display:<?php echo $unsubscribe_notify ? 'block' : 'none';?>">
+					[<a href="admin.php?page=bft_messages_config&message=unsubscribe_notify"><?php _e('Configure this message', 'broadfast')?></a>]				
+				</div>
 				
 				<p><input type="submit" value="<?php _e('Save Settings', 'broadfast')?>"></p>
 				</form>

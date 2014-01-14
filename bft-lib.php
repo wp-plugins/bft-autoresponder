@@ -1,4 +1,4 @@
-<?php
+	<?php
 // Adapted code from the MIT licensed QuickDD class
 // created also by me
 function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_year=1900, $end_year=2100) {
@@ -16,8 +16,7 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
     $errors=array();
     
     // let's output
-    foreach($format_parts as $cnt=>$f)
-    {
+    foreach($format_parts as $cnt=>$f) {
         if(preg_match("/[^YMD]/",$f)) 
         { 
             $errors[]="Unrecognized format part: '$f'. Skipped.";
@@ -95,9 +94,20 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
 function bft_subscribe_notify($mid) {
 	global $wpdb;	
 	$member = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d", $mid));
-	$subject = __("New user subscribed to the mailing list at", 'broadfast').' '.get_option('blogname');
-	$message = __('User details:', 'broadfast')."<br><p>".__('Name:', 'broadfast').' '.$member->name.
-		'</p><p>'.__('Email:', 'broadfast').' '.$member->email;
+
+	$subject = get_option('bft_subscribe_notify_subject');
+	if(empty($subject)) $subject = __("New user subscribed to the mailing list at", 'broadfast').' '.get_option('blogname');
+	$message = get_option('bft_subscribe_notify_message');
+	if(empty($message)) $message = __('User details:', 'broadfast')."<br><p>".__('Name:', 'broadfast').' '.$member->name.'</p><p>'.__('Email:', 'broadfast').' '.$member->email;
+	
+	// replace variables if any
+	$message = str_replace('{{{blog-name}}}', get_option('blogname'), $message);
+	$message = str_replace('{{{subscriber-name}}}', $member->name, $message);
+	$message = str_replace('{{{subscriber-email}}}', $member->email, $message);
+	$message = str_replace('{{{date}}}', date(get_option('date_format'), time()), $message);
+	
+	$subject = stripslashes($subject);
+	$message = stripslashes($message);
 	
 	$admin_email = get_option('bft_sender');
 	
@@ -106,10 +116,25 @@ function bft_subscribe_notify($mid) {
 
 // send notice when someone unsubscribes
 function bft_unsubscribe_notify($user) {
-	 $subject = __("An user unsubscribed from the mailing list at", 'broadfast').' '.get_option('blogname');	
-	 $message = __('User name:', 'broadfast').' <b>'.$user->name."</b><br>";
-	 $message .= __('User email:', 'broadfast').' <b>'.$user->email."</b><br>";
-	 $message .= __('Registration date:', 'broadfast').' <b>'.date(get_option('date_format', strtotime($user->date)))."</b>";
+	
+	 $subject = get_option('bft_unsubscribe_notify_subject');
+	 if(empty($subject)) $subject = __("An user unsubscribed from the mailing list at", 'broadfast').' '.get_option('blogname');	
+	 
+	 $message = get_option('bft_unsubscribe_notify_message');
+	 if(empty($message)) {
+		 $message = __('User name:', 'broadfast').' <b>'.$user->name."</b><br>";
+		 $message .= __('User email:', 'broadfast').' <b>'.$user->email."</b><br>";
+		 $message .= __('Registration date:', 'broadfast').' <b>'.date(get_option('date_format', strtotime($user->date)))."</b>";
+ 	 }
+ 	 
+ 	 // replace variables if any
+	$message = str_replace('{{{blog-name}}}', get_option('blogname'), $message);
+	$message = str_replace('{{{subscriber-name}}}', $user->name, $message);
+	$message = str_replace('{{{subscriber-email}}}', $user->email, $message);
+	$message = str_replace('{{{date}}}', date(get_option('date_format'), strtotime($user->date)), $message);
+ 	 
+ 	 $subject = stripslashes($subject);
+	 $message = stripslashes($message);
 	 
 	 $admin_email = get_option('bft_sender');	
 	 bft_mail($admin_email, $admin_email, $subject, $message);	 
@@ -127,6 +152,6 @@ function bft_mail($from,$to,$subject,$message) {
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
    $message=wpautop($message);
-   // die( $subject.'<br>'.$message);  
+   // echo( $subject.'<br>'.$message);  
    return wp_mail($to, $subject, $message, $headers);
 }

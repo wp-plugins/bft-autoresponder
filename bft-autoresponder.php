@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.0.8
+Version: 2.1
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -32,6 +32,7 @@ require_once(ABSPATH . 'wp-includes/pluggable.php');
 include(BFT_PATH."/bft-lib.php");
 include(BFT_PATH."/controllers/newsletter.php");
 include(BFT_PATH."/controllers/help.php");
+include(BFT_PATH."/controllers/config.php");
 
 // initialize plugin
 function bft_init() {
@@ -52,6 +53,9 @@ function bft_autoresponder_menu() {
   add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
   add_submenu_page('bft_options',__('Send Newsletter', 'broadfast'), __('Send Newsletter', 'broadfast'), 'manage_options', "bft_newsletter", "bft_newsletter");  
   add_submenu_page('bft_options',__('Help', 'broadfast'), __('Help', 'broadfast'), 'manage_options', "bft_help", "bft_help");
+  
+  // not in the menu
+  add_submenu_page(null, __('Configure Email Message', 'broadfast'), __('Configure Email Message', 'broadfast'), 'manage_options', 'bft_messages_config', 'bft_message_config');
 }
 
 /* Creates the mysql tables needed to store mailing list and messages */
@@ -136,6 +140,9 @@ function bft_options() {
   	 update_option('bft_optin_subject', $_POST['optin_subject']);
   	 update_option('bft_optin_message', $_POST['optin_message']);
   }
+  
+  $subscribe_notify = get_option('bft_subscribe_notify');
+  $unsubscribe_notify = get_option('bft_unsubscribe_notify');
   
   require(BFT_PATH."/views/bft_main.html.php");
 }
@@ -336,7 +343,9 @@ function bft_customize($mail,$member) {
 	
 	$message = do_shortcode($message);
 	
-	bft_mail(BFT_SENDER,$member->email,$subject,$message);
+	$sender = empty($mail->sender) ? BFT_SENDER : $mail->sender;
+	
+	return bft_mail($sender,$member->email,$subject,$message);
 }
 
 // handle all this stuff on template_redirect call so
@@ -445,9 +454,9 @@ function bft_template_redirect() {
 		
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
 		
-		if($member->id) {
+		if(!empty($member->id)) {			
 			$sql="UPDATE ".BFT_USERS." SET 
-			code='".substr(0,8,md5($code.time()))."',
+			code='".substr(md5($_GET['code'].time()), 0,8)."',
 			status=1
 			WHERE id='{$member->id}'";		
 			$wpdb->query($sql);
