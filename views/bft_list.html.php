@@ -18,24 +18,28 @@
     
     <p>&nbsp;</p>
     <p>&nbsp;</p>
-
+	<?php if(sizeof($users)):?>	
 		<table class="widefat">
-			<tr><th width="30%"><a href="admin.php?page=bft_list&ob=email"><?php _e('User Email Address', 'broadfast')?></a></th>
+			<tr><th><input type="checkbox" onclick="this.checked ? jQuery('.subscriber_chk').attr('checked', 'true') : jQuery('.subscriber_chk').removeAttr('checked');showHideDelSubs();"></th><th width="30%"><a href="admin.php?page=bft_list&ob=email"><?php _e('User Email Address', 'broadfast')?></a></th>
 			<th width="27%"><a href="admin.php?page=bft_list&ob=name"><?php _e('User Name', 'broadfast')?></a></th>
 			<th width="9%"><a href="admin.php?page=bft_list&ob=ip"><?php _e('IP Address', 'broadfast')?></a></th>
 			<th width="15%"><a href="admin.php?page=bft_list&ob=date"><?php _e('Date Signed', 'broadfast')?></a></th>
 			<th width="5%"><a href="admin.php?page=bft_list&ob=status,email"><?php _e('Active?', 'broadfast')?></a></th>
 			<th width="16%"><?php _e('Action', 'broadfast')?></th></tr>
 		</table>
+	<?php else: ?>
+		<p><?php _e('This mailing list is empty.', 'broadfast')?></p>
+	<?php endif;?>	
 		
     <?php foreach($users as $user): ?>
     
     <form method="post" style="margin:none;" onsubmit="return validateUser(this);">
     <table class="widefat">
-	    <tr><td width="23%"><input type="text" name="email" value="<?=$user->email?>"></td>
-	    <td width="23%"><input type="text" name="user_name" value="<?=$user->name?>"></td>
-	    <td width="9%"><?=$user->ip?></td>
-	    <td width="15%"><?=$user->date?></td>
+	    <tr><td><input type="checkbox" value="<?php echo $user->id?>" class="subscriber_chk" onclick="showHideDelSubs();"></td>
+	    <td width="23%"><input type="text" name="email" value="<?php echo $user->email?>"></td>
+	    <td width="23%"><input type="text" name="user_name" value="<?php echo $user->name?>"></td>
+	    <td width="9%"><?php echo $user->ip?></td>
+	    <td width="15%"><?php echo $user->date?></td>
 	    <td width="9%" align="center"><input type="checkbox" name="status" value="1" <?if($user->status) echo "checked"?>></td>
 	    <td width="21%"><input type="submit" name="save_user" value="<?php _e('Save User', 'broadfast')?>">	
       <input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delUser(this.form);"></td></tr>
@@ -44,12 +48,20 @@
     <input type="hidden" name="id" value="<?=$user->id?>">
     </form>
     <?php endforeach; ?>
-    </table>
+   
     
     <p align="center">
     	<?php if($offset > 0):?><a href="admin.php?page=bft_list&ob=<?php echo $ob?>&offset=<?php echo $offset-$per_page?>"><?php _e('previous page')?></a> &nbsp;<?php endif;?>
     	<?php if($offset + $per_page < $count):?><a href="admin.php?page=bft_list&ob=<?php echo $ob?>&offset=<?php echo $offset+$per_page?>"><?php _e('next page')?></a> &nbsp;<?php endif;?>
     </p>
+    
+    <div id="massSubscribersAction" style="display:none;">
+    	<form method="post" action="admin.php?page=bft_list&ob=<?php echo $ob?>&offset=<?php echo $offset?>">
+    	<p align="center"><input type="hidden" name="mass_delete" value="0">
+    	<input type="button" value="<?php _e('Delete Selected Subscribers', 'broadfast')?>" onclick="bftMassDelete(this.form);"></p> 
+    	<input type="hidden" name="del_ids" value="0">
+    	</form>
+    </div>
   </div>
 	<div id="bft-sidebar">
 				<?php require(BFT_PATH."/views/sidebar.html.php");?>
@@ -57,24 +69,37 @@
 </div>
 
 <script language="javascript">
-function delUser(frm)
-{
-	if(confirm("<?php _e('Are you sure?', 'broadfast')?>"))
-	{
+function delUser(frm) {
+	if(confirm("<?php _e('Are you sure?', 'broadfast')?>")) {
 		frm.del_user.value=1;
 		frm.submit();
 	}
 }
 
-function validateUser(frm)
-{
-	if(frm.email.value=="")
-	{
+function validateUser(frm) {
+	if(frm.email.value=="") {
 		alert("<?php _e('Please enter email', 'broadfast')?>");
 		frm.email.focus();
 		return false;
-	}
-	
+	}	
 	return true;
+}
+
+// show or hide the mass-action button(s)
+function showHideDelSubs() {
+	var len = jQuery(".subscriber_chk:checked").length;
+	
+	if(len) jQuery('#massSubscribersAction').show();
+	else jQuery('#massSubscribersAction').hide();
+}
+
+function bftMassDelete(frm) {
+	if(confirm("<?php _e('Are you sure?', 'broadfast')?>")) {
+		jQuery(".subscriber_chk:checked").each(function(){
+			frm.del_ids.value += "," + jQuery(this).val();
+		})
+		frm.mass_delete.value = 1;
+		frm.submit();
+	}
 }
 </script>
