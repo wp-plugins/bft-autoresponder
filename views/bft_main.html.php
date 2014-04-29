@@ -49,6 +49,7 @@
 					<p><label><?php _e('Message subject:', 'broadfast')?></label> <input type="text" size="60" name="optin_subject" value="<?php echo get_option('bft_optin_subject')?>"></p>
 					<p><?php wp_editor(stripslashes(get_option('bft_optin_message')), 'optin_message')?></p>
 					<p><?php _e('Please use the variable {{url}} to provide the confirmation URL. If you do not provide it, it will be attached at the end of the message.', 'broadfast')?></p>
+					<p><b><?php _e('You can use the variable {{name}} to address the user by name.', 'broadfast')?></b></p>
 					<p><input type="submit" name="double_optin_ok" value="<?php _e('Save Double Opt-in Message', 'broadfast')?>"></p>
 				</form>
 			</div>

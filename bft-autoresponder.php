@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.1.1
+Version: 2.1.2
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -44,11 +44,13 @@ function bft_init() {
 	define( 'BFT_USERS', $wpdb->prefix. "bft_users" );
 	define( 'BFT_MAILS', $wpdb->prefix. "bft_mails" );
 	define( 'BFT_SENTMAILS', $wpdb->prefix. "bft_sentmails" );
+	define( 'BFT_DEBUG', get_option('broadfast_debug'));
 }
 
 /* Adds the menu items */
 function bft_autoresponder_menu() {  
   add_menu_page(__('BFT Light', 'broadfast'), __('BFT Light', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
+  add_submenu_page('bft_options',__('Settings', 'broadfast'), __('Settings', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
   add_submenu_page('bft_options',__('Your Mailing List', 'broadfast'), __('Mailing List', 'broadfast'), 'manage_options', "bft_list", "bft_list");
   add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
   add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
@@ -347,6 +349,7 @@ function bft_template_redirect() {
 			
 			$subject = get_option('bft_optin_subject');
 			if(empty($subject)) $subject=__("Please confirm your email", 'broadfast');
+			$subject = str_replace('{{name}}', $name, $subject);
 			
 			$message = get_option('bft_optin_message');	
 			if(empty($message)) {							
@@ -356,6 +359,7 @@ function bft_template_redirect() {
 				if(strstr($message, '{{url}}')) $message = str_replace('{{url}}', $url, $message);
 				else $message .= '<br><br><a href="'.$url.'">'.$url.'</a>';
 			}
+			$message = str_replace('{{name}}', $name, $message);
 
 			// send the optin email			
 			bft_mail(BFT_SENDER,$_POST['email'],$subject,$message);

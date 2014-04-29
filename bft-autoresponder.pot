@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.1.1\n"
+"Project-Id-Version: BFT Autoresponder 2.1.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2014-03-13 16:13:38+00:00\n"
+"POT-Creation-Date: 2014-04-29 15:26:18+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,73 +12,77 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bft-autoresponder.php:51
+#: bft-autoresponder.php:52
 msgid "BFT Light"
 msgstr ""
 
-#: bft-autoresponder.php:52
-msgid "Your Mailing List"
-msgstr ""
-
-#: bft-autoresponder.php:52 views/help.html.php:21
-msgid "Mailing List"
-msgstr ""
-
-#: bft-autoresponder.php:53 views/help.html.php:24
-msgid "Import/Export Members"
-msgstr ""
-
 #: bft-autoresponder.php:53
-msgid "Import/Export"
+msgid "Settings"
 msgstr ""
 
 #: bft-autoresponder.php:54
-msgid "Manage Messages"
+msgid "Your Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:54 views/help.html.php:29
-msgid "Email Messages"
+#: bft-autoresponder.php:54 views/help.html.php:21
+msgid "Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:55 views/newsletter.html.php:19
-msgid "Send Newsletter"
+#: bft-autoresponder.php:55 views/help.html.php:24
+msgid "Import/Export Members"
+msgstr ""
+
+#: bft-autoresponder.php:55
+msgid "Import/Export"
 msgstr ""
 
 #: bft-autoresponder.php:56
+msgid "Manage Messages"
+msgstr ""
+
+#: bft-autoresponder.php:56 views/help.html.php:29
+msgid "Email Messages"
+msgstr ""
+
+#: bft-autoresponder.php:57 views/newsletter.html.php:19
+msgid "Send Newsletter"
+msgstr ""
+
+#: bft-autoresponder.php:58
 msgid "Help"
 msgstr ""
 
-#: bft-autoresponder.php:59
+#: bft-autoresponder.php:61
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:308
+#: bft-autoresponder.php:310
 msgid "Please enter valid email address"
 msgstr ""
 
-#: bft-autoresponder.php:339
+#: bft-autoresponder.php:341
 msgid "You have been subscribed!"
 msgstr ""
 
-#: bft-autoresponder.php:349
+#: bft-autoresponder.php:351
 msgid "Please confirm your email"
 msgstr ""
 
-#: bft-autoresponder.php:353
+#: bft-autoresponder.php:356
 msgid ""
 "Please click on the link below or copy and paste it in the browser address "
 "bar:<br><br>"
 msgstr ""
 
-#: bft-autoresponder.php:364
+#: bft-autoresponder.php:368
 msgid "Please check your email. A confirmation link is sent to it."
 msgstr ""
 
-#: bft-autoresponder.php:388
+#: bft-autoresponder.php:392
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:419
+#: bft-autoresponder.php:423
 msgid "Your email address has been confirmed!"
 msgstr ""
 
@@ -210,7 +214,7 @@ msgstr ""
 msgid "Save User"
 msgstr ""
 
-#: views/bft_list.html.php:45 views/bft_messages.html.php:33
+#: views/bft_list.html.php:45 views/bft_messages.html.php:35
 msgid "Delete"
 msgstr ""
 
@@ -227,7 +231,7 @@ msgid "Delete Selected Subscribers"
 msgstr ""
 
 #: views/bft_list.html.php:73 views/bft_list.html.php:97
-#: views/bft_messages.html.php:49
+#: views/bft_messages.html.php:51
 msgid "Are you sure?"
 msgstr ""
 
@@ -319,52 +323,62 @@ msgid ""
 msgstr ""
 
 #: views/bft_main.html.php:52
+msgid "You can use the variable {{name}} to address the user by name."
+msgstr ""
+
+#: views/bft_main.html.php:53
 msgid "Save Double Opt-in Message"
 msgstr ""
 
 #: views/bft_messages.html.php:5
+msgid ""
+"Note: you can use the variable {{name}} in any message to address the user "
+"by name."
+msgstr ""
+
+#: views/bft_messages.html.php:7
 msgid "Create New Message:"
 msgstr ""
 
-#: views/bft_messages.html.php:10 views/bft_messages.html.php:27
+#: views/bft_messages.html.php:12 views/bft_messages.html.php:29
 #: views/message-config.html.php:9
 msgid "Subject:"
 msgstr ""
 
-#: views/bft_messages.html.php:11 views/bft_messages.html.php:28
+#: views/bft_messages.html.php:13 views/bft_messages.html.php:30
 #: views/message-config.html.php:10
 msgid "Message:"
 msgstr ""
 
-#: views/bft_messages.html.php:12 views/bft_messages.html.php:29
+#: views/bft_messages.html.php:14 views/bft_messages.html.php:31
 msgid "Days after registration:"
 msgstr ""
 
-#: views/bft_messages.html.php:13 views/bft_messages.html.php:31
+#: views/bft_messages.html.php:15 views/bft_messages.html.php:33
 msgid "or"
 msgstr ""
 
-#: views/bft_messages.html.php:13 views/bft_messages.html.php:31
+#: views/bft_messages.html.php:15 views/bft_messages.html.php:33
 msgid "send on"
 msgstr ""
 
-#: views/bft_messages.html.php:14
+#: views/bft_messages.html.php:16
 msgid "Add Message"
 msgstr ""
 
-#: views/bft_messages.html.php:21
+#: views/bft_messages.html.php:23
 msgid "Existing Messages:"
 msgstr ""
 
-#: views/bft_messages.html.php:32 views/message-config.html.php:12
+#: views/bft_messages.html.php:34 views/message-config.html.php:12
 msgid "Save Message"
 msgstr ""
 
-#: views/bft_messages.html.php:60 views/newsletter.html.php:31
+#: views/bft_messages.html.php:62 views/newsletter.html.php:31
 msgid "Please enter subject"
 msgstr ""
 
-#: views/bft_messages.html.php:67
+#: views/bft_messages.html.php:69
 msgid "Please enter number of days after registration"
 msgstr ""
 

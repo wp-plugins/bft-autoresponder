@@ -27,10 +27,8 @@ if($last_date!=date("Y-m-d")) {
 		ORDER BY id";			
 		$members=$wpdb->get_results($sql);
         		
-		if(sizeof($members))
-		{
-			foreach($members as $member)
-			{
+		if(sizeof($members))	{
+			foreach($members as $member)	{
 				bft_customize($mail,$member);
 			}
 		}

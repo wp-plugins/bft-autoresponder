@@ -1,6 +1,8 @@
 <div class="wrap">
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
+	
+	<p><b><?php _e('Note: you can use the variable {{name}} in any message to address the user by name.', 'broadfast')?></b></p>
 
 		<h2><?php _e('Create New Message:', 'broadfast')?></h2>
 		

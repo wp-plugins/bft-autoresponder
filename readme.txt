@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 3.3
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -29,8 +29,9 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.1 =
+= Changes in 2.1.2 =
 1. Added "Mass delete" option in the mailing list
+2. The "{{name}}" mask can now be used also in the double optin email
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails
