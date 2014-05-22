@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter
 Requires at least: 3.3
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -29,9 +29,10 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.2 =
+= Changes in 2.1.3 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
+3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails
@@ -84,6 +85,10 @@ Yes, unsubscribe link is automatically added to every outgoing message.
 = What to do if it doesn't send emails? = 
 
 Please install a plugin like WP Mail SMTP or Easy WP SMTP and try to send a test email. If the test email isn't received, it means the problem is not in the autoresponder and you should talk to your hosting support.
+
+= Are there any limitsto how many emails can be sent? = 
+
+The autoresponder itself does not impose any limits, but your hosting company probably does. If you plan to have large mailing list, you will need the pro version because it lets you fine-tune the number of emails sent to comply with your hosting company limitations.
 
 == Screenshots ==
 

@@ -26,6 +26,8 @@
 					[<a href="admin.php?page=bft_messages_config&message=unsubscribe_notify"><?php _e('Configure this message', 'broadfast')?></a>]				
 				</div>
 				
+				<p><input type="checkbox" name="auto_subscribe" <?php if(get_option('bft_auto_subscribe') == 1) echo 'checked'?> value="1"> <?php _e('Automatically subscribe to the mailing list all new users who register in my blog. (To avoid spam this will happen when users login for the first time)', 'broadfast')?></p>
+				
 				<p><input type="submit" value="<?php _e('Save Settings', 'broadfast')?>"></p>
 				</form>
 			</div>

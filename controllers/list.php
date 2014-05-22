@@ -60,3 +60,31 @@ function bft_list(){
 	
 	require(BFT_PATH."/views/bft_list.html.php");	
 }
+
+// auto-subscribe user
+function bft_auto_subscribe($user_login, $user) {
+	global $wpdb;
+	
+	// only do this if the setting is selected
+	if(!get_option('bft_auto_subscribe')) return false;
+		
+	// if already logged in, return false to avoid needless queries
+	if(get_user_meta($user->ID, 'bft_logged_in', true)) return false;
+		
+	add_user_meta( $user->ID, 'bft_logged_in', 1, true);
+	
+	$code = substr(md5(microtime().$user_login), 0, 8);	
+	$sql=$wpdb->prepare("INSERT IGNORE INTO ".BFT_USERS." (name,email,status,code,date,ip)
+	VALUES (%s,%s,1,%s,CURDATE(),%s)", $user_login, $user->user_email, $code, $_SERVER['REMOTE_ADDR']);		
+	$wpdb->query($sql);
+	$mid = $wpdb->insert_id;
+	
+	if(empty($mid)) return true;
+	
+	bft_welcome_mail($mid);
+	
+	// notify admin?			
+	if(get_option('bft_subscribe_notify')) {				
+		bft_subscribe_notify($mid);
+	}	
+} // end auto-subscribe
