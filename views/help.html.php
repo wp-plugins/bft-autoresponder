@@ -3,7 +3,7 @@
 	<div class="postbox-container" style="width:73%;margin-right:2%;">
 	<h2><?php _e('User Manual', 'broadfast')?></h2>
 			
-			<p><?php _e('This is a short introduction to BFT Lite. It is very simple and easy to use. For more advanced features you can check our <a href="http://calendarscripts.info/bft-pro">PRO version</a>.', 'broadfast')?></p>
+			<p><?php _e('This is a short introduction to BFT Lite. It is very simple and easy to use. For more advanced features you can check our <a href="http://calendarscripts.info/bft-pro">PRO version</a>. You can copy all your data with a single click.', 'broadfast')?></p>
 			
 			
 			<h3><?php _e('Automated autoresponder emails', 'broadfast')?></h3>

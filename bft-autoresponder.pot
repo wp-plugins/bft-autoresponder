@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.1.3\n"
+"Project-Id-Version: BFT Autoresponder 2.1.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2014-05-22 13:56:52+00:00\n"
+"POT-Creation-Date: 2014-06-10 12:49:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,77 +12,59 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bft-autoresponder.php:52
+#: bft-autoresponder.php:59
 msgid "BFT Light"
 msgstr ""
 
-#: bft-autoresponder.php:53
+#: bft-autoresponder.php:60
 msgid "Settings"
 msgstr ""
 
-#: bft-autoresponder.php:54
+#: bft-autoresponder.php:61
 msgid "Your Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:54 views/help.html.php:21
+#: bft-autoresponder.php:61 views/help.html.php:21
 msgid "Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:55 views/help.html.php:24
+#: bft-autoresponder.php:62 views/help.html.php:24
 msgid "Import/Export Members"
 msgstr ""
 
-#: bft-autoresponder.php:55
+#: bft-autoresponder.php:62
 msgid "Import/Export"
 msgstr ""
 
-#: bft-autoresponder.php:56
+#: bft-autoresponder.php:63
 msgid "Manage Messages"
 msgstr ""
 
-#: bft-autoresponder.php:56 views/help.html.php:29
+#: bft-autoresponder.php:63 views/help.html.php:29
 msgid "Email Messages"
 msgstr ""
 
-#: bft-autoresponder.php:57 views/newsletter.html.php:19
+#: bft-autoresponder.php:64 views/newsletter.html.php:19
 msgid "Send Newsletter"
 msgstr ""
 
-#: bft-autoresponder.php:58
+#: bft-autoresponder.php:65
 msgid "Help"
 msgstr ""
 
-#: bft-autoresponder.php:61
+#: bft-autoresponder.php:68
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:311
-msgid "Please enter valid email address"
+#: bft-autoresponder.php:69
+msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:342
-msgid "You have been subscribed!"
-msgstr ""
-
-#: bft-autoresponder.php:352
-msgid "Please confirm your email"
-msgstr ""
-
-#: bft-autoresponder.php:357
-msgid ""
-"Please click on the link below or copy and paste it in the browser address "
-"bar:<br><br>"
-msgstr ""
-
-#: bft-autoresponder.php:369
-msgid "Please check your email. A confirmation link is sent to it."
-msgstr ""
-
-#: bft-autoresponder.php:393
+#: bft-autoresponder.php:337
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:424
+#: bft-autoresponder.php:368
 msgid "Your email address has been confirmed!"
 msgstr ""
 
@@ -116,6 +98,28 @@ msgstr ""
 
 #: bft-lib.php:127
 msgid "Registration date:"
+msgstr ""
+
+#: bft-lib.php:164
+msgid "Please enter valid email address"
+msgstr ""
+
+#: bft-lib.php:195
+msgid "You have been subscribed!"
+msgstr ""
+
+#: bft-lib.php:205
+msgid "Please confirm your email"
+msgstr ""
+
+#: bft-lib.php:210
+msgid ""
+"Please click on the link below or copy and paste it in the browser address "
+"bar:<br><br>"
+msgstr ""
+
+#: bft-lib.php:222
+msgid "Please check your email. A confirmation link is sent to it."
 msgstr ""
 
 #: controllers/config.php:6
@@ -309,30 +313,34 @@ msgstr ""
 msgid "inside a post or page."
 msgstr ""
 
-#: views/bft_main.html.php:48
+#: views/bft_main.html.php:42
+msgid "Integrate in Contact Form 7"
+msgstr ""
+
+#: views/bft_main.html.php:50
 msgid "Double Opt-in Email Message Configuration"
 msgstr ""
 
-#: views/bft_main.html.php:49
+#: views/bft_main.html.php:51
 msgid ""
 "Feel free to leave this empty - in such case a default message will be used."
 msgstr ""
 
-#: views/bft_main.html.php:51
+#: views/bft_main.html.php:53
 msgid "Message subject:"
 msgstr ""
 
-#: views/bft_main.html.php:53
+#: views/bft_main.html.php:55
 msgid ""
 "Please use the variable {{url}} to provide the confirmation URL. If you do "
 "not provide it, it will be attached at the end of the message."
 msgstr ""
 
-#: views/bft_main.html.php:54
+#: views/bft_main.html.php:56
 msgid "You can use the variable {{name}} to address the user by name."
 msgstr ""
 
-#: views/bft_main.html.php:55
+#: views/bft_main.html.php:57
 msgid "Save Double Opt-in Message"
 msgstr ""
 
@@ -396,7 +404,8 @@ msgstr ""
 msgid ""
 "This is a short introduction to BFT Lite. It is very simple and easy to use. "
 "For more advanced features you can check our <a href=\"http://"
-"calendarscripts.info/bft-pro\">PRO version</a>."
+"calendarscripts.info/bft-pro\">PRO version</a>. You can copy all your data "
+"with a single click."
 msgstr ""
 
 #: views/help.html.php:9
@@ -520,6 +529,58 @@ msgid ""
 "po and .mo files should go into folder languages/"
 msgstr ""
 
+#: views/integration-contact-form.html.php:2
+msgid "Mailing List to Contact Form Integration"
+msgstr ""
+
+#: views/integration-contact-form.html.php:4
+msgid "Back to settings"
+msgstr ""
+
+#: views/integration-contact-form.html.php:6
+msgid ""
+"Using the shortcode below will display a checkbox for subscribing in the "
+"mailing list inside your contact form. We currently support integration with "
+"the most popular contact form plugin - <a href=\"%s\" target=\"_blank"
+"\">Contact Form 7</a>."
+msgstr ""
+
+#: views/integration-contact-form.html.php:12
+msgid "Checked by default"
+msgstr ""
+
+#: views/integration-contact-form.html.php:14
+msgid "CSS classes (optional):"
+msgstr ""
+
+#: views/integration-contact-form.html.php:15
+msgid "HTML ID (optional):"
+msgstr ""
+
+#: views/integration-contact-form.html.php:16
+msgid "Refresh Shortcode"
+msgstr ""
+
+#: views/integration-contact-form.html.php:18
+msgid "Shortcode to use in contact form:"
+msgstr ""
+
+#: views/integration-contact-form.html.php:19
+msgid "Subscribe for the mailing list"
+msgstr ""
+
+#: views/integration-contact-form.html.php:21
+msgid ""
+"Place this shortcode inside your Contact Form 7 contact form - right where "
+"you want the checkbox to appear."
+msgstr ""
+
+#: views/integration-contact-form.html.php:25
+msgid ""
+"In the <a href=\"%s\" target=\"_blank\">PRO Version</a> you can also include "
+"all custom fields directly in your contact form."
+msgstr ""
+
 #: views/message-config.html.php:2
 msgid "Configure Email Notification Message"
 msgstr ""
@@ -619,132 +680,157 @@ msgid "Differen email types:"
 msgstr ""
 
 #: views/sidebar.html.php:30
-msgid "sequential emails, fixed date emails, weeday messages, repeatable mails"
+msgid ""
+"sequential emails, fixed date emails, weekday messages, repeatable mails"
 msgstr ""
 
 #: views/sidebar.html.php:31
+msgid "Attachment"
+msgstr ""
+
+#: views/sidebar.html.php:31
+msgid "can be inserted in your messages"
+msgstr ""
+
+#: views/sidebar.html.php:32
 msgid "Send newsletters"
 msgstr ""
 
-#: views/sidebar.html.php:31
+#: views/sidebar.html.php:32
 msgid "to selected mailing list(s)"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "Widgets, shortcodes and template tags"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "to embed your signup form easily"
 msgstr ""
 
-#: views/sidebar.html.php:33
-msgid "Optional reCaptcha"
+#: views/sidebar.html.php:34
+msgid "Optional reCaptcha or question based captcha"
 msgstr ""
 
-#: views/sidebar.html.php:33
+#: views/sidebar.html.php:34
 msgid "to prevent spam submissions"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "Fine-tune the number of emails"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "that will be sent at once, and per day."
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "Localization-ready"
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "with translation .po files"
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "Unlimited domains license"
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "for domains you own"
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "Customize the messages"
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "with dynamic tags (variables)"
 msgstr ""
 
-#: views/sidebar.html.php:38
+#: views/sidebar.html.php:39
+msgid "Custom fields"
+msgstr ""
+
+#: views/sidebar.html.php:39
+msgid "can be inserted in the subscribe forms"
+msgstr ""
+
+#: views/sidebar.html.php:40
+msgid "Bounce tracking"
+msgstr ""
+
+#: views/sidebar.html.php:40
+msgid "with a designated email account"
+msgstr ""
+
+#: views/sidebar.html.php:41
 msgid "And a lot more - just come to see!"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:44
 msgid "Just go ahead and"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:44
 msgid "take the tour"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:44
 msgid "or check the"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:44
 msgid "online demo."
 msgstr ""
 
-#: views/sidebar.html.php:43
+#: views/sidebar.html.php:46
 msgid ""
 "Upgrading to PRO comes with 60 days money-back guarantee, one year free "
 "upgrades and one year free support."
 msgstr ""
 
-#: views/sidebar.html.php:47
+#: views/sidebar.html.php:50
 msgid "Help To Spread The Word!"
 msgstr ""
 
-#: views/sidebar.html.php:49
+#: views/sidebar.html.php:52
 msgid "If you like this plugin you can do some of the following:"
 msgstr ""
 
-#: views/sidebar.html.php:52
+#: views/sidebar.html.php:55
 msgid "Rate it 5 starts at Wordpress.org"
 msgstr ""
 
-#: views/sidebar.html.php:53
+#: views/sidebar.html.php:56
 msgid "Let others know about it by blogging or posting"
 msgstr ""
 
-#: views/sidebar.html.php:53
+#: views/sidebar.html.php:56
 msgid "our home page"
 msgstr ""
 
-#: views/sidebar.html.php:53
+#: views/sidebar.html.php:56
 msgid "on social networks."
 msgstr ""
 
-#: views/sidebar.html.php:54
+#: views/sidebar.html.php:57
 msgid "Go PRO"
 msgstr ""
 
-#: views/sidebar.html.php:54
+#: views/sidebar.html.php:57
 msgid "to empower your site with extra benefits"
 msgstr ""
 
-#: views/sidebar.html.php:59
+#: views/sidebar.html.php:62
 msgid "Need Support?"
 msgstr ""
 
-#: views/sidebar.html.php:61
+#: views/sidebar.html.php:64
 msgid "Please ask your question in the"
 msgstr ""
 
-#: views/sidebar.html.php:61
+#: views/sidebar.html.php:64
 msgid "support forum at Wordpress."
 msgstr ""
 

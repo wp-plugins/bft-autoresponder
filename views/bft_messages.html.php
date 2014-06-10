@@ -26,15 +26,15 @@
 		<div style="clear:both;float:left;">
 		<hr />
 			<div style="float:left;">
-			<p><label><?php _e('Subject:', 'broadfast')?>&nbsp; </label> <input type="text" name="subject" value="<?=stripslashes($mail->subject)?>" size="80"></p>
+			<p><label><?php _e('Subject:', 'broadfast')?>&nbsp; </label> <input type="text" name="subject" value="<?php echo stripslashes($mail->subject)?>" size="80"></p>
 			<p><label><?php _e('Message:', 'broadfast')?> </label> <?php wp_editor(stripslashes($mail->message), "message".$mail->id, array("textarea_name"=>"message"))?></p>
 			<p><label><?php _e('Days after registration:', 'broadfast')?></label> 
-			<input type="text" name="days" size="4" value="<?=$mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
+			<input type="text" name="days" size="4" value="<?php echo $mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
 		    <?php _e('or', 'broadfast')?> <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> <?php _e('send on', 'broadfast')?> <?php echo BFTquickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
 			<p><input type="submit" name="save_message" value="<?php _e('Save Message', 'broadfast')?>">	
 			<input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delMessage(this.form);"></p></div>
 		</div>
-		<input type="hidden" name="id" value="<?=$mail->id?>">
+		<input type="hidden" name="id" value="<?php echo $mail->id?>">
 		<input type="hidden" name="del_message" value="0">
 		</form>
 		<?php endforeach; ?>

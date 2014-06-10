@@ -1,6 +1,6 @@
 === BFT Autoresponder and Newsletter ===
 Contributors: prasunsen
-Tags: autoresponder, auto responder, mailing list, newsletter
+Tags: autoresponder, auto responder, mailing list, newsletter, wpmu, contact form
 Requires at least: 3.3
 Tested up to: 3.9.1
 Stable tag: trunk
@@ -19,6 +19,8 @@ From version 1.5 you can also send fixed date messages.
 
 From version 2.0 you can send immediate newsletters.
 
+**Built-in integration with [Contact Form 7](http://wordpress.org/plugins/contact-form-7/ "Contact Form 7")**
+
 == Installation ==
 
 1. Unzip the contents and upload the entire `bft-autoresponder` directory to the `/wp-content/plugins/` directory
@@ -29,10 +31,11 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.3 =
+= Changes in 2.1.4 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
 3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
+4. Built-in integration with Contact Form 7 lets you signup users when they fill your contact form
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails

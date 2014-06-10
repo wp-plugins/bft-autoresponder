@@ -45,7 +45,7 @@
       <input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delUser(this.form);"></td></tr>
     </table> 
     <input type="hidden" name="del_user" value="0">
-    <input type="hidden" name="id" value="<?=$user->id?>">
+    <input type="hidden" name="id" value="<?php echo $user->id?>">
     </form>
     <?php endforeach; ?>
    

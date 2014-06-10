@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.3
+Version: 2.1.4
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -34,6 +34,8 @@ include(BFT_PATH."/controllers/newsletter.php");
 include(BFT_PATH."/controllers/help.php");
 include(BFT_PATH."/controllers/config.php");
 include(BFT_PATH."/controllers/list.php");
+include(BFT_PATH."/controllers/integrations.php");
+include(BFT_PATH."/controllers/integrations/contact.php");
 
 // initialize plugin
 function bft_init() {
@@ -45,6 +47,11 @@ function bft_init() {
 	define( 'BFT_MAILS', $wpdb->prefix. "bft_mails" );
 	define( 'BFT_SENTMAILS', $wpdb->prefix. "bft_sentmails" );
 	define( 'BFT_DEBUG', get_option('broadfast_debug'));
+	
+	// contact form 7 integration
+	add_filter( 'wpcf7_form_elements', array('BFTContactForm7', 'shortcode_filter') );
+	add_action( 'wpcf7_before_send_mail', array('BFTContactForm7', 'signup') );
+	add_shortcode( 'bft-int-chk', array("BFTContactForm7", 'int_chk'));
 }
 
 /* Adds the menu items */
@@ -59,6 +66,7 @@ function bft_autoresponder_menu() {
   
   // not in the menu
   add_submenu_page(null, __('Configure Email Message', 'broadfast'), __('Configure Email Message', 'broadfast'), 'manage_options', 'bft_messages_config', 'bft_message_config');
+  add_submenu_page(NULL,__('Integrate in Contact Form', 'broadfast'), __('Integrate in Contact Form', 'broadfast'), 'manage_options', "bft_integrate_contact", array("BFTIntegrations", "contact_form"));
 }
 
 /* Creates the mysql tables needed to store mailing list and messages */
@@ -303,74 +311,10 @@ function bft_template_redirect() {
 	
 	//  subscribe user
 	if(!empty($_REQUEST['bft']) and $_REQUEST['bft']=='register') {
-		$status=!get_option( 'bft_optin' );
-		
 		$email=esc_sql($_POST['email']);
 		$name=esc_sql($_POST['user_name']);
 		
-		if(empty($email) or !strstr($email, '@')) wp_die(__("Please enter valid email address", 'broadfast'));
-		
-		$code=substr(md5($email.microtime()),0,8);
-		
-		// user exists
-		$sql=$wpdb->prepare("SELECT id FROM ".BFT_USERS." WHERE email=%s", $email);
-		$id = $wpdb->get_var($sql);		
-		
-		if(!$id) {			
-			$sql="INSERT IGNORE INTO ".BFT_USERS." (name,email,status,code,date,ip)
-			VALUES (\"$name\",\"$email\",'$status','$code',CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
-			$wpdb->query($sql);
-			$id = $wpdb->insert_id;
-		}
-		else {
-			$sql=$wpdb->prepare("UPDATE ".BFT_USERS." SET code=%s WHERE id=%d", $code, $id);
-			$wpdb->query($sql);
-		}
-		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
-		
-		if($status) {
-			$mid = $wpdb->insert_id;
-			bft_welcome_mail($mid);
-					
-			// notify admin?			
-			if(get_option('bft_subscribe_notify')) {				
-				bft_subscribe_notify($mid);
-			}	
-			
-			// display success message
-			echo "<script language='javascript'>
-			alert('".__('You have been subscribed!', 'broadfast')."');
-			window.location='".($bft_redirect?$bft_redirect:site_url())."';
-			</script>";
-			exit;
-		}
-		else {
-			// send confirmation email
-			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
-			
-			$subject = get_option('bft_optin_subject');
-			if(empty($subject)) $subject=__("Please confirm your email", 'broadfast');
-			$subject = str_replace('{{name}}', $name, $subject);
-			
-			$message = get_option('bft_optin_message');	
-			if(empty($message)) {							
-				$message=__("Please click on the link below or copy and paste it in the browser address bar:<br><br>", 'broadfast').
-				'<a href="'.$url.'">'.$url.'</a>';
-			} else {
-				if(strstr($message, '{{url}}')) $message = str_replace('{{url}}', $url, $message);
-				else $message .= '<br><br><a href="'.$url.'">'.$url.'</a>';
-			}
-			$message = str_replace('{{name}}', $name, $message);
-
-			// send the optin email			
-			bft_mail(BFT_SENDER,$_POST['email'],$subject,$message);
-			
-			echo "<script language='javascript'>
-			alert('".__('Please check your email. A confirmation link is sent to it.', 'broadfast')."');
-			window.location='".($bft_redirect?$bft_redirect:site_url())."';
-			</script>";
-			exit;
-		}
+		bft_subscribe($email, $name);
 			
 		add_filter('the_content', 'bft_screenmsg');
 	}
@@ -448,7 +392,7 @@ function bft_shortcode_signup($attr) {
 add_action('plugins_loaded', "bft_hook_up");
 
 register_activation_hook(__FILE__,'bft_install');
-add_action('plugins_loaded', 'bft_init');
+add_action('init', 'bft_init');
 add_action('admin_menu', 'bft_autoresponder_menu');
 add_action('template_redirect', 'bft_template_redirect');
 add_shortcode( 'BFTWP', "bft_shortcode_signup" );

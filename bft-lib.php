@@ -155,3 +155,73 @@ function bft_mail($from,$to,$subject,$message) {
    if(BFT_DEBUG) echo( "From: $from To: $to<br>".$subject.'<br>'.$message."<br>");  
    return wp_mail($to, $subject, $message, $headers);
 }
+
+function bft_subscribe($email, $name) {
+	global $wpdb;
+	
+	$status=!get_option( 'bft_optin' );
+	
+	if(empty($email) or !strstr($email, '@')) wp_die(__("Please enter valid email address", 'broadfast'));
+		
+		$code=substr(md5($email.microtime()),0,8);
+		
+		// user exists
+		$sql=$wpdb->prepare("SELECT id FROM ".BFT_USERS." WHERE email=%s", $email);
+		$id = $wpdb->get_var($sql);		
+		
+		if(!$id) {			
+			$sql="INSERT IGNORE INTO ".BFT_USERS." (name,email,status,code,date,ip)
+			VALUES (\"$name\",\"$email\",'$status','$code',CURDATE(),'$_SERVER[REMOTE_ADDR]')";		
+			$wpdb->query($sql);
+			$id = $wpdb->insert_id;
+		}
+		else {
+			$sql=$wpdb->prepare("UPDATE ".BFT_USERS." SET code=%s WHERE id=%d", $code, $id);
+			$wpdb->query($sql);
+		}
+		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
+		
+		if($status) {
+			$mid = $wpdb->insert_id;
+			bft_welcome_mail($mid);
+					
+			// notify admin?			
+			if(get_option('bft_subscribe_notify')) {				
+				bft_subscribe_notify($mid);
+			}	
+			
+			// display success message
+			echo "<script language='javascript'>
+			alert('".__('You have been subscribed!', 'broadfast')."');
+			window.location='".($bft_redirect?$bft_redirect:site_url())."';
+			</script>";
+			exit;
+		}
+		else {
+			// send confirmation email
+			$url=site_url("?bft=bft_confirm&code=$code&id=$id");
+			
+			$subject = get_option('bft_optin_subject');
+			if(empty($subject)) $subject=__("Please confirm your email", 'broadfast');
+			$subject = str_replace('{{name}}', $name, $subject);
+			
+			$message = get_option('bft_optin_message');	
+			if(empty($message)) {							
+				$message=__("Please click on the link below or copy and paste it in the browser address bar:<br><br>", 'broadfast').
+				'<a href="'.$url.'">'.$url.'</a>';
+			} else {
+				if(strstr($message, '{{url}}')) $message = str_replace('{{url}}', $url, $message);
+				else $message .= '<br><br><a href="'.$url.'">'.$url.'</a>';
+			}
+			$message = str_replace('{{name}}', $name, $message);
+
+			// send the optin email			
+			bft_mail(BFT_SENDER,$email,$subject,$message);
+			
+			echo "<script language='javascript'>
+			alert('".__('Please check your email. A confirmation link is sent to it.', 'broadfast')."');
+			window.location='".($bft_redirect?$bft_redirect:site_url())."';
+			</script>";
+			exit;
+		}
+}
