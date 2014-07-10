@@ -141,7 +141,8 @@ function bft_unsubscribe_notify($user) {
 }
 
 /* wrapper for wp_mail() function */
-function bft_mail($from,$to,$subject,$message) {   	
+function bft_mail($from,$to,$subject,$message) {
+	global $wpdb;   	
 	if(empty($from)) $from = get_option('admin_email');
 
    $headers=array();
@@ -153,7 +154,15 @@ function bft_mail($from,$to,$subject,$message) {
    $message=stripslashes($message);   
    $message=wpautop($message);
    if(BFT_DEBUG) echo( "From: $from To: $to<br>".$subject.'<br>'.$message."<br>");  
-   return wp_mail($to, $subject, $message, $headers);
+   $result = wp_mail($to, $subject, $message, $headers);
+   
+   // insert into the email log
+   $status = $result ? 'OK' : 'Error';
+   $wpdb->query($wpdb->prepare("INSERT INTO ".BFT_EMAILLOG." SET
+   	sender=%s, receiver=%s, subject=%s, date=CURDATE(), status=%s",
+   	$from, $to, $subject, $status));
+   
+   return $result;
 }
 
 function bft_subscribe($email, $name) {

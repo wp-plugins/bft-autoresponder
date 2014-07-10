@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.4.1
+Version: 2.1.5
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -36,6 +36,7 @@ include(BFT_PATH."/controllers/config.php");
 include(BFT_PATH."/controllers/list.php");
 include(BFT_PATH."/controllers/integrations.php");
 include(BFT_PATH."/controllers/integrations/contact.php");
+include(BFT_PATH."/controllers/log.php");
 
 // initialize plugin
 function bft_init() {
@@ -46,12 +47,17 @@ function bft_init() {
 	define( 'BFT_USERS', $wpdb->prefix. "bft_users" );
 	define( 'BFT_MAILS', $wpdb->prefix. "bft_mails" );
 	define( 'BFT_SENTMAILS', $wpdb->prefix. "bft_sentmails" );
+	define( 'BFT_EMAILLOG', $wpdb->prefix. "bft_emaillog" );
 	define( 'BFT_DEBUG', get_option('broadfast_debug'));
 	
 	// contact form 7 integration
 	add_filter( 'wpcf7_form_elements', array('BFTContactForm7', 'shortcode_filter') );
 	add_action( 'wpcf7_before_send_mail', array('BFTContactForm7', 'signup') );
 	add_shortcode( 'bft-int-chk', array("BFTContactForm7", 'int_chk'));
+	
+	$version = get_option('bft_db_version');
+	if(empty($version) or $version < 2.11) bft_install(true);
+	bft_hook_up();
 }
 
 /* Adds the menu items */
@@ -62,6 +68,7 @@ function bft_autoresponder_menu() {
   add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
   add_submenu_page('bft_options',__('Manage Messages', 'broadfast'), __('Email Messages', 'broadfast'), 'manage_options', "bft_messages", "bft_messages");
   add_submenu_page('bft_options',__('Send Newsletter', 'broadfast'), __('Send Newsletter', 'broadfast'), 'manage_options', "bft_newsletter", "bft_newsletter");  
+  add_submenu_page('bft_options',__('Raw Email Log', 'broadfast'), __('Raw Email Log', 'broadfast'), 'manage_options', "bft_log", "bft_log");  
   add_submenu_page('bft_options',__('Help', 'broadfast'), __('Help', 'broadfast'), 'manage_options', "bft_help", "bft_help");
   
   // not in the menu
@@ -72,11 +79,11 @@ function bft_autoresponder_menu() {
 /* Creates the mysql tables needed to store mailing list and messages */
 $bft_msg="";
 
-function bft_install() {
+function bft_install($update = false) {
 	 global $wpdb;
 	 
-	 bft_init();
-    $bft_db_version="1.2";
+	 if(!$update) bft_init();
+    $bft_db_version="2.11";
 	 
 	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_USERS."'") != BFT_USERS) {        
 			$sql = "CREATE TABLE " . BFT_USERS . " (
@@ -113,6 +120,21 @@ function bft_install() {
 				  `mail_id` INT UNSIGNED NOT NULL,				  
 				  `user_id` INT UNSIGNED NOT NULL,				  
 				  `date` DATE NOT NULL
+				) DEFAULT CHARSET=utf8;";
+			$wpdb->query($sql);
+	  }
+	 
+	  // this is email log of all the messages sent in the system 
+	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_EMAILLOG."'") != BFT_EMAILLOG) {
+	  
+			$sql = "CREATE TABLE `" . BFT_EMAILLOG . "` (
+				  `id` int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+				  `sender` VARCHAR(255) NOT NULL DEFAULT '',
+				  `receiver` VARCHAR(255) NOT NULL DEFAULT '',
+				  `subject` VARCHAR(255) NOT NULL DEFAULT '',
+				  `date` DATE,
+				  `datetime` TIMESTAMP,
+				  `status` VARCHAR(100) NOT NULL DEFAULT 'OK'				  
 				) DEFAULT CHARSET=utf8;";
 			$wpdb->query($sql);
 	  }
@@ -387,9 +409,6 @@ function bft_shortcode_signup($attr) {
 	
 	return $contents;
 }
-
-// handle this properly
-add_action('plugins_loaded', "bft_hook_up");
 
 register_activation_hook(__FILE__,'bft_install');
 add_action('init', 'bft_init');

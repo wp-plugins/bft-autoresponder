@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.1.4\n"
+"Project-Id-Version: BFT Autoresponder 2.1.5\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2014-06-10 12:49:17+00:00\n"
+"POT-Creation-Date: 2014-07-10 14:24:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,59 +12,63 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bft-autoresponder.php:59
+#: bft-autoresponder.php:65
 msgid "BFT Light"
 msgstr ""
 
-#: bft-autoresponder.php:60
+#: bft-autoresponder.php:66
 msgid "Settings"
 msgstr ""
 
-#: bft-autoresponder.php:61
+#: bft-autoresponder.php:67
 msgid "Your Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:61 views/help.html.php:21
+#: bft-autoresponder.php:67 views/help.html.php:21
 msgid "Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:62 views/help.html.php:24
+#: bft-autoresponder.php:68 views/help.html.php:24
 msgid "Import/Export Members"
 msgstr ""
 
-#: bft-autoresponder.php:62
+#: bft-autoresponder.php:68
 msgid "Import/Export"
 msgstr ""
 
-#: bft-autoresponder.php:63
+#: bft-autoresponder.php:69
 msgid "Manage Messages"
 msgstr ""
 
-#: bft-autoresponder.php:63 views/help.html.php:29
+#: bft-autoresponder.php:69 views/help.html.php:29
 msgid "Email Messages"
 msgstr ""
 
-#: bft-autoresponder.php:64 views/newsletter.html.php:19
+#: bft-autoresponder.php:70 views/newsletter.html.php:19
 msgid "Send Newsletter"
 msgstr ""
 
-#: bft-autoresponder.php:65
+#: bft-autoresponder.php:71
+msgid "Raw Email Log"
+msgstr ""
+
+#: bft-autoresponder.php:72
 msgid "Help"
 msgstr ""
 
-#: bft-autoresponder.php:68
+#: bft-autoresponder.php:75
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:69
+#: bft-autoresponder.php:76
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:337
+#: bft-autoresponder.php:359
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:368
+#: bft-autoresponder.php:390
 msgid "Your email address has been confirmed!"
 msgstr ""
 
@@ -100,25 +104,25 @@ msgstr ""
 msgid "Registration date:"
 msgstr ""
 
-#: bft-lib.php:164
+#: bft-lib.php:173
 msgid "Please enter valid email address"
 msgstr ""
 
-#: bft-lib.php:195
+#: bft-lib.php:204
 msgid "You have been subscribed!"
 msgstr ""
 
-#: bft-lib.php:205
+#: bft-lib.php:214
 msgid "Please confirm your email"
 msgstr ""
 
-#: bft-lib.php:210
+#: bft-lib.php:219
 msgid ""
 "Please click on the link below or copy and paste it in the browser address "
 "bar:<br><br>"
 msgstr ""
 
-#: bft-lib.php:222
+#: bft-lib.php:231
 msgid "Please check your email. A confirmation link is sent to it."
 msgstr ""
 
@@ -641,6 +645,49 @@ msgid ""
 "flexibility over the number of emails you send at once and per day. You can "
 "also see and reuse old newsletters, customize them with dynamic tags, see "
 "reports and a lot more"
+msgstr ""
+
+#: views/raw-email-log.html.php:2
+msgid "Email Log"
+msgstr ""
+
+#: views/raw-email-log.html.php:5
+msgid ""
+"This is a raw email log showing you all emails sent from the autoresponder. "
+"It incldues activation, double opt-in emails, drip marketing emails, "
+"newsletters, etc. A lot more specific logs are available in the PRO version."
+msgstr ""
+
+#: views/raw-email-log.html.php:8
+msgid "Log date:"
+msgstr ""
+
+#: views/raw-email-log.html.php:9
+msgid "Show log"
+msgstr ""
+
+#: views/raw-email-log.html.php:13
+msgid "No emails have been sent on the selected date."
+msgstr ""
+
+#: views/raw-email-log.html.php:16
+msgid "Time"
+msgstr ""
+
+#: views/raw-email-log.html.php:16
+msgid "Sender"
+msgstr ""
+
+#: views/raw-email-log.html.php:16
+msgid "Receiver"
+msgstr ""
+
+#: views/raw-email-log.html.php:17
+msgid "Subject"
+msgstr ""
+
+#: views/raw-email-log.html.php:17
+msgid "Status"
 msgstr ""
 
 #: views/sidebar.html.php:22

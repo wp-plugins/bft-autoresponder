@@ -31,11 +31,12 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.4 =
+= Changes in 2.1.5 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
 3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
 4. Built-in integration with Contact Form 7 lets you signup users when they fill your contact form
+5. Added raw email log of all emails sent. This will help you know what emails have been sent on each day
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails
