@@ -3,7 +3,7 @@ class BFTContactForm7 {
 	static function signup($contactform) {
 		global $wpdb;
 		
-		$data = $contactform->posted_data;
+		$data = $_POST;
 		if(empty($data['bft_int_signup'])) return true;
 		
 		// signup activated, so let's get data
@@ -24,7 +24,7 @@ class BFTContactForm7 {
 	
 	static function int_chk($atts) {
 		// allow passing CSS, ID, onlick, default checked, etc		
-		$html_id = $classes = $chedked = '';
+		$html_id = $classes = $checked = '';
 		if(!empty($atts['required']) and $atts['required'] == 'true') $classes .= ' wpcf7-validates-as-required ';
 		if(!empty($atts['css_classes'])) $classes .= ' '.$atts['css_classes'].' ';
 		if(!empty($atts['html_id'])) $html_id = $atts['html_id'];
