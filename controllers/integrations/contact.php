@@ -15,7 +15,7 @@ class BFTContactForm7 {
 			$user['name'] = trim( $data['your-first-name']).' '.trim($data['your-last-name']) ;
 		}
 		
-		bft_subscribe($user['email'], $user['name']);			
+		bft_subscribe($user['email'], $user['name'], true);			
 	} // end signup
 	
 	static function shortcode_filter($form) {

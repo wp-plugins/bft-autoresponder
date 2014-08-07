@@ -94,7 +94,7 @@ function BFTquickDD_date($name, $date=NULL, $format=NULL, $markup=NULL, $start_y
 function bft_subscribe_notify($mid) {
 	global $wpdb;	
 	$member = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d", $mid));
-
+ 
 	$subject = get_option('bft_subscribe_notify_subject');
 	if(empty($subject)) $subject = __("New user subscribed to the mailing list at", 'broadfast').' '.get_option('blogname');
 	$message = get_option('bft_subscribe_notify_message');
@@ -165,7 +165,7 @@ function bft_mail($from,$to,$subject,$message) {
    return $result;
 }
 
-function bft_subscribe($email, $name) {
+function bft_subscribe($email, $name, $noalert = false) {
 	global $wpdb;
 	
 	$status=!get_option( 'bft_optin' );
@@ -191,7 +191,7 @@ function bft_subscribe($email, $name) {
 		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
 		
 		if($status) {
-			$mid = $wpdb->insert_id;
+			$mid = $id;
 			bft_welcome_mail($mid);
 					
 			// notify admin?			
@@ -200,6 +200,7 @@ function bft_subscribe($email, $name) {
 			}	
 			
 			// display success message
+			if($noalert) return true;
 			echo "<script language='javascript'>
 			alert('".__('You have been subscribed!', 'broadfast')."');
 			window.location='".($bft_redirect?$bft_redirect:site_url())."';
@@ -226,7 +227,7 @@ function bft_subscribe($email, $name) {
 
 			// send the optin email			
 			bft_mail(BFT_SENDER,$email,$subject,$message);
-			
+			if($noalert) return true;
 			echo "<script language='javascript'>
 			alert('".__('Please check your email. A confirmation link is sent to it.', 'broadfast')."');
 			window.location='".($bft_redirect?$bft_redirect:site_url())."';
