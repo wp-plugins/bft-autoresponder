@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter, wpmu, contact form
 Requires at least: 3.3
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -31,12 +31,13 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.5 =
+= Changes in 2.1.6 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
 3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
 4. Built-in integration with Contact Form 7 lets you signup users when they fill your contact form
 5. Added raw email log of all emails sent. This will help you know what emails have been sent on each day
+6. Added option to automatically cleanup the raw email log after given number of days
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails

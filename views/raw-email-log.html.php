@@ -6,7 +6,9 @@
 		
 		<form method="post">
 			<p><label><?php _e('Log date:', 'broadfast')?></label> <input type="text" name="date" class="datepicker" value="<?php echo $date?>">
-			<input type="submit" value="<?php _e('Show log', 'broadfast')?>"></p>
+			<input type="submit" value="<?php _e('Show log', 'broadfast')?>">
+			&nbsp;			
+			<?php _e('Automatically cleanup old logs after', 'broadfast')?> <input type="text" size="4" name="cleanup_days" value="<?php echo $cleanup_raw_log?>"> <?php _e('days', 'broadfast')?> <input type="submit" name="cleanup" value="<?php _e('Set Cleanup', 'broadfast')?>"></p>
 		</form>		
 		
 		<?php if(!sizeof($emails)):?>
