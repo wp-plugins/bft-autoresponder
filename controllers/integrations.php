@@ -20,4 +20,15 @@ class BFTIntegrations {
 		
 		require(BFT_PATH."/views/integration-contact-form.html.php");
 	}
+	
+	// signup user from contact form 7 or jetpack
+	// $data - $_POST data
+	static function signup($data, $user) {
+		global $wpdb;
+		
+		$data = $_POST;
+		if(empty($data['bft_int_signup'])) return true;
+				
+		bft_subscribe($user['email'], $user['name'], true);
+	}
 }

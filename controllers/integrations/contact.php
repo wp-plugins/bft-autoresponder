@@ -11,11 +11,7 @@ class BFTContactForm7 {
 		$user['email'] = !empty( $data['your-email'] ) ? trim( $data['your-email'] ) : '';
 	   $user['name'] = !empty( $data['your-name'] ) ? trim( $data['your-name'] ) : '';
 	   
-		if ( !empty( $data['your-first-name'] ) and !empty( $data['your-last-name'] ) ) {
-			$user['name'] = trim( $data['your-first-name']).' '.trim($data['your-last-name']) ;
-		}
-		
-		bft_subscribe($user['email'], $user['name'], true);			
+		BFTIntegrations :: signup($data, $user);		
 	} // end signup
 	
 	static function shortcode_filter($form) {

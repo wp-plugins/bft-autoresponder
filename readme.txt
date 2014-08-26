@@ -20,6 +20,7 @@ From version 1.5 you can also send fixed date messages.
 From version 2.0 you can send immediate newsletters.
 
 **Built-in integration with [Contact Form 7](http://wordpress.org/plugins/contact-form-7/ "Contact Form 7")**
+**Built-in integration with [Jetpack Contact Form](http://wordpress.org/plugins/jetpack/ "Jetpack")**
 
 == Installation ==
 
@@ -31,13 +32,14 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.6 =
+= Changes in 2.1.7 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
 3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
 4. Built-in integration with Contact Form 7 lets you signup users when they fill your contact form
 5. Added raw email log of all emails sent. This will help you know what emails have been sent on each day
 6. Added option to automatically cleanup the raw email log after given number of days
+7. Added built-in integration with Jetpack contact form
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.1.6\n"
+"Project-Id-Version: BFT Autoresponder 2.1.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2014-08-19 14:40:49+00:00\n"
+"POT-Creation-Date: 2014-08-26 12:51:00+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,63 +12,63 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bft-autoresponder.php:69
+#: bft-autoresponder.php:73
 msgid "BFT Light"
 msgstr ""
 
-#: bft-autoresponder.php:70
+#: bft-autoresponder.php:74
 msgid "Settings"
 msgstr ""
 
-#: bft-autoresponder.php:71
+#: bft-autoresponder.php:75
 msgid "Your Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:71 views/help.html.php:21
+#: bft-autoresponder.php:75 views/help.html.php:21
 msgid "Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:72 views/help.html.php:24
+#: bft-autoresponder.php:76 views/help.html.php:24
 msgid "Import/Export Members"
 msgstr ""
 
-#: bft-autoresponder.php:72
+#: bft-autoresponder.php:76
 msgid "Import/Export"
 msgstr ""
 
-#: bft-autoresponder.php:73
+#: bft-autoresponder.php:77
 msgid "Manage Messages"
 msgstr ""
 
-#: bft-autoresponder.php:73 views/help.html.php:29
+#: bft-autoresponder.php:77 views/help.html.php:29
 msgid "Email Messages"
 msgstr ""
 
-#: bft-autoresponder.php:74 views/newsletter.html.php:19
+#: bft-autoresponder.php:78 views/newsletter.html.php:19
 msgid "Send Newsletter"
 msgstr ""
 
-#: bft-autoresponder.php:75
+#: bft-autoresponder.php:79
 msgid "Raw Email Log"
 msgstr ""
 
-#: bft-autoresponder.php:76
+#: bft-autoresponder.php:80
 msgid "Help"
 msgstr ""
 
-#: bft-autoresponder.php:79
+#: bft-autoresponder.php:83
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:80
+#: bft-autoresponder.php:84 views/bft_main.html.php:42
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:363
+#: bft-autoresponder.php:367
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:394
+#: bft-autoresponder.php:398
 msgid "Your email address has been confirmed!"
 msgstr ""
 
@@ -317,10 +317,6 @@ msgstr ""
 msgid "inside a post or page."
 msgstr ""
 
-#: views/bft_main.html.php:42
-msgid "Integrate in Contact Form 7"
-msgstr ""
-
 #: views/bft_main.html.php:50
 msgid "Double Opt-in Email Message Configuration"
 msgstr ""
@@ -545,8 +541,8 @@ msgstr ""
 msgid ""
 "Using the shortcode below will display a checkbox for subscribing in the "
 "mailing list inside your contact form. We currently support integration with "
-"the most popular contact form plugin - <a href=\"%s\" target=\"_blank"
-"\">Contact Form 7</a>."
+"the most popular contact form plugins - <a href=\"%s\" target=\"_blank"
+"\">Contact Form 7</a> and JetPack."
 msgstr ""
 
 #: views/integration-contact-form.html.php:12
@@ -574,12 +570,26 @@ msgid "Subscribe for the mailing list"
 msgstr ""
 
 #: views/integration-contact-form.html.php:21
+msgid "Contact Form 7 Integration"
+msgstr ""
+
+#: views/integration-contact-form.html.php:22
 msgid ""
 "Place this shortcode inside your Contact Form 7 contact form - right where "
 "you want the checkbox to appear."
 msgstr ""
 
+#: views/integration-contact-form.html.php:24
+msgid "Jetpack Contact Form Integration"
+msgstr ""
+
 #: views/integration-contact-form.html.php:25
+msgid ""
+"Place this shortcode inside the published shortcode of your contact form - "
+"somewhere before the closing \"[/contact-form]\" shortcode."
+msgstr ""
+
+#: views/integration-contact-form.html.php:29
 msgid ""
 "In the <a href=\"%s\" target=\"_blank\">PRO Version</a> you can also include "
 "all custom fields directly in your contact form."

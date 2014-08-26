@@ -39,7 +39,7 @@
 				
 				<p><?php _e('Or use Wordpress shortcode', 'broadfast')?> <strong>[BFTWP]</strong> <?php _e('inside a post or page.', 'broadfast')?></p>
 				
-				<p align="center"><a href="admin.php?page=bft_integrate_contact"><?php _e('Integrate in Contact Form 7', 'bftpro')?></a></p>
+				<p align="center"><a href="admin.php?page=bft_integrate_contact"><?php _e('Integrate in Contact Form', 'bftpro')?></a></p>
 			</div>
 			
 			
