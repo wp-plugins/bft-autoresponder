@@ -157,7 +157,7 @@ function bft_install($update = false) {
      }  
 	  
 	  update_option( 'bft_db_version', $bft_db_version);
-	  //exit;
+	  // exit;
 }
 
 /* Stores the autoresponder configuration */
