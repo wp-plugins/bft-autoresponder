@@ -1,7 +1,6 @@
 <?php
 if( !defined( 'ABSPATH') && !defined('WP_UNINSTALL_PLUGIN') )
 	    exit();
-require_once(ABSPATH . 'wp-includes/pluggable.php');
 global $wpdb;		
 	 
 delete_option('bft_sender');

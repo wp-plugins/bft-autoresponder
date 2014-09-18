@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.7
+Version: 2.1.7.1
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -28,7 +28,6 @@ License: GPL 2
 
 define( 'BFT_PATH', dirname( __FILE__ ) );
 define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
-require_once(ABSPATH . 'wp-includes/pluggable.php');
 include(BFT_PATH."/bft-lib.php");
 include(BFT_PATH."/controllers/newsletter.php");
 include(BFT_PATH."/controllers/help.php");
