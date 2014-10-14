@@ -18,7 +18,7 @@
 		
 		<h2><?php _e('Export Members to CSV File', 'broadfast')?></h2>
 		
-		<form method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+		<form method="post" action="admin.php?page=bft_import&noheader=1">
 		<p><input type="checkbox" checked="true"> <?php _e('Export only confirmed members', 'broadfast')?></p>
 		<p><input type="submit" name="export" value="<?php _e('Export members', 'broadfast')?>"></p>
 		</form>

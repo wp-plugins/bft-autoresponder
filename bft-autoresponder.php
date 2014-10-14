@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.7.1
+Version: 2.1.8
 Author URI: http://calendarscripts.info
 License: GPL 2
 */ 
@@ -58,9 +58,11 @@ function bft_init() {
 	// jetpack contact form integration
 	add_action('grunion_pre_message_sent', array('BFTJetPack', 'signup'));
 	
-	$cleanup_raw_log = get_option('bft_cleanup_raw_log');
-	if(empty($cleanup_raw_log)) $cleanup_raw_log = 7;
-	$wpdb->query($wpdb->prepare("DELETE FROM ".BFT_EMAILLOG." WHERE date < CURDATE() - INTERVAL %d DAY", $cleanup_raw_log));
+	if($wpdb->get_var("SHOW TABLES LIKE '".BFT_EMAILLOG."'") == BFT_EMAILLOG) {
+		$cleanup_raw_log = get_option('bft_cleanup_raw_log');
+		if(empty($cleanup_raw_log)) $cleanup_raw_log = 7;
+		$wpdb->query($wpdb->prepare("DELETE FROM ".BFT_EMAILLOG." WHERE date < CURDATE() - INTERVAL %d DAY", $cleanup_raw_log));				
+	}
 	
 	$version = get_option('bft_db_version');
 	if(empty($version) or $version < 2.11) bft_install(true);
@@ -155,8 +157,7 @@ function bft_install($update = false) {
          $wpdb->query($sql);
      }  
 	  
-	  update_option( 'bft_db_version', $bft_db_version);
-	  // exit;
+	  update_option( 'bft_db_version', $bft_db_version);	 
 }
 
 /* Stores the autoresponder configuration */
@@ -270,7 +271,8 @@ function bft_import() {
 	}
 	
 	if(!empty($_POST['export'])) {
-		if($_POST['active']) {
+		$active_sql = '';
+		if(!empty($_POST['active'])) {
 			$active_sql=" AND status='1' ";
 		}
 	
@@ -278,11 +280,26 @@ function bft_import() {
 		ORDER BY email";		
 		$members=$wpdb->get_results($sql);
 		
-		$content="";
+		$newline = broadfast_define_newline();
+		
+		$content=__('Email', 'broadfast').','.__('Name', 'broadfast').','.
+			__('IP Address', 'broadfast').','.__('Date signed', 'broadfast').$newline;
 			
 		foreach($members as $member) {
-			$content.="{$member->email},{$member->name}\n";
+			$content.="{$member->email},{$member->name},{$member->ip},{$member->date}".$newline;
 		}
+		
+		// credit to http://yoast.com/wordpress/users-to-csv/	
+		$now = gmdate('D, d M Y H:i:s') . ' GMT';
+		
+		$filename = 'subscribers.csv';
+	
+		header('Content-Type: ' . broadfast_get_mime_type());
+		header('Expires: ' . $now);
+		header('Content-Disposition: attachment; filename="'.$filename.'"');
+		header('Pragma: no-cache');
+		echo $content;
+		exit;
 	}
 
 	require(BFT_PATH."/views/bft_import.html.php");
