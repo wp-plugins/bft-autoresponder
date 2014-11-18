@@ -12,6 +12,11 @@
 		
 		<div><label><?php _e('Newsletter contents:', 'broadfast')?></label> <?php echo wp_editor(stripslashes(@$_POST['message']), 'message')?></div>
 		
+		<p><label><?php _e("Email type:", 'broadfast')?></label> <select name="content_type">
+				<option value="text/html"><?php _e("HTML", 'broadfast');?></option>
+				<option value="text/plain"><?php _e("Text", 'broadfast');?></option>
+			</p>	
+		
 		<p class="bft-warning"><b><?php _e("Important!", 'broadfast')?></b> <?php _e('This newsletter will be sent immediately to all your confirmed subscribers. If you have a large mailing lists (anything over 500 subscribers) this might be a problem for your server. So please double-check if you can send many emails at once. If your mailing list is small you have nothing to worry about.', 'broadfast')?></p>
 		
 		<p><?php _e('Our <a href="http://calendarscripts.info/bft-pro/" target="_blank">PRO Version</a> offers delayed sending of newsletters and much better flexibility over the number of emails you send at once and per day. You can also see and reuse old newsletters, customize them with dynamic tags, see reports and a lot more', 'broadfast')?></p>

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.1.8\n"
+"Project-Id-Version: BFT Autoresponder 2.1.9\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2014-10-14 15:27:25+00:00\n"
+"POT-Creation-Date: 2014-11-18 15:22:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Email Messages"
 msgstr ""
 
-#: bft-autoresponder.php:79 views/newsletter.html.php:19
+#: bft-autoresponder.php:79 views/newsletter.html.php:24
 msgid "Send Newsletter"
 msgstr ""
 
@@ -64,27 +64,31 @@ msgstr ""
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:285
+#: bft-autoresponder.php:291
 msgid "Email"
 msgstr ""
 
-#: bft-autoresponder.php:285
+#: bft-autoresponder.php:291
 msgid "Name"
 msgstr ""
 
-#: bft-autoresponder.php:286 views/bft_list.html.php:25
+#: bft-autoresponder.php:292 views/bft_list.html.php:25
 msgid "IP Address"
 msgstr ""
 
-#: bft-autoresponder.php:286
+#: bft-autoresponder.php:292
 msgid "Date signed"
 msgstr ""
 
-#: bft-autoresponder.php:383
+#: bft-autoresponder.php:350 bft-autoresponder.php:355
+msgid "To unsubscribe from our list visit the url below:"
+msgstr ""
+
+#: bft-autoresponder.php:395
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:414
+#: bft-autoresponder.php:426
 msgid "Your email address has been confirmed!"
 msgstr ""
 
@@ -234,7 +238,7 @@ msgstr ""
 msgid "Save User"
 msgstr ""
 
-#: views/bft_list.html.php:45 views/bft_messages.html.php:35
+#: views/bft_list.html.php:45 views/bft_messages.html.php:43
 msgid "Delete"
 msgstr ""
 
@@ -251,7 +255,7 @@ msgid "Delete Selected Subscribers"
 msgstr ""
 
 #: views/bft_list.html.php:73 views/bft_list.html.php:97
-#: views/bft_messages.html.php:51
+#: views/bft_messages.html.php:59
 msgid "Are you sure?"
 msgstr ""
 
@@ -366,45 +370,60 @@ msgstr ""
 msgid "Create New Message:"
 msgstr ""
 
-#: views/bft_messages.html.php:12 views/bft_messages.html.php:29
+#: views/bft_messages.html.php:12 views/bft_messages.html.php:33
 #: views/message-config.html.php:9
 msgid "Subject:"
 msgstr ""
 
-#: views/bft_messages.html.php:13 views/bft_messages.html.php:30
+#: views/bft_messages.html.php:13 views/bft_messages.html.php:34
 #: views/message-config.html.php:10
 msgid "Message:"
 msgstr ""
 
-#: views/bft_messages.html.php:14 views/bft_messages.html.php:31
+#: views/bft_messages.html.php:14 views/bft_messages.html.php:35
 msgid "Days after registration:"
 msgstr ""
 
-#: views/bft_messages.html.php:15 views/bft_messages.html.php:33
+#: views/bft_messages.html.php:15 views/bft_messages.html.php:37
 msgid "or"
 msgstr ""
 
-#: views/bft_messages.html.php:15 views/bft_messages.html.php:33
+#: views/bft_messages.html.php:15 views/bft_messages.html.php:37
 msgid "send on"
 msgstr ""
 
-#: views/bft_messages.html.php:16
+#: views/bft_messages.html.php:16 views/bft_messages.html.php:38
+#: views/newsletter.html.php:15
+msgid "Email type:"
+msgstr ""
+
+#: views/bft_messages.html.php:17 views/bft_messages.html.php:39
+#: views/newsletter.html.php:16
+msgid "HTML"
+msgstr ""
+
+#: views/bft_messages.html.php:18 views/bft_messages.html.php:40
+#: views/newsletter.html.php:17
+msgid "Text"
+msgstr ""
+
+#: views/bft_messages.html.php:20
 msgid "Add Message"
 msgstr ""
 
-#: views/bft_messages.html.php:23
+#: views/bft_messages.html.php:27
 msgid "Existing Messages:"
 msgstr ""
 
-#: views/bft_messages.html.php:34 views/message-config.html.php:12
+#: views/bft_messages.html.php:42 views/message-config.html.php:12
 msgid "Save Message"
 msgstr ""
 
-#: views/bft_messages.html.php:62 views/newsletter.html.php:31
+#: views/bft_messages.html.php:70 views/newsletter.html.php:36
 msgid "Please enter subject"
 msgstr ""
 
-#: views/bft_messages.html.php:69
+#: views/bft_messages.html.php:77
 msgid "Please enter number of days after registration"
 msgstr ""
 
@@ -647,11 +666,11 @@ msgstr ""
 msgid "Newsletter contents:"
 msgstr ""
 
-#: views/newsletter.html.php:15
+#: views/newsletter.html.php:20
 msgid "Important!"
 msgstr ""
 
-#: views/newsletter.html.php:15
+#: views/newsletter.html.php:20
 msgid ""
 "This newsletter will be sent immediately to all your confirmed subscribers. "
 "If you have a large mailing lists (anything over 500 subscribers) this might "
@@ -660,7 +679,7 @@ msgid ""
 "about."
 msgstr ""
 
-#: views/newsletter.html.php:17
+#: views/newsletter.html.php:22
 msgid ""
 "Our <a href=\"http://calendarscripts.info/bft-pro/\" target=\"_blank\">PRO "
 "Version</a> offers delayed sending of newsletters and much better "

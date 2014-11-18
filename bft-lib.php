@@ -111,7 +111,7 @@ function bft_subscribe_notify($mid) {
 	
 	$admin_email = get_option('bft_sender');
 	
-	bft_mail($admin_email, $admin_email, $subject, $message);	 
+	bft_mail($admin_email, $admin_email, $subject, $message, 'text/html');	 
 }
 
 // send notice when someone unsubscribes
@@ -137,18 +137,18 @@ function bft_unsubscribe_notify($user) {
 	 $message = stripslashes($message);
 	 
 	 $admin_email = get_option('bft_sender');	
-	 bft_mail($admin_email, $admin_email, $subject, $message);	 
+	 bft_mail($admin_email, $admin_email, $subject, $message, 'text/html');	 
 }
 
 /* wrapper for wp_mail() function */
-function bft_mail($from,$to,$subject,$message) {
+function bft_mail($from, $to, $subject, $message, $content_type = 'text/html') {
 	global $wpdb;   	
 	if(empty($from)) $from = get_option('admin_email');
-
+	
    $headers=array();
-	 $headers[] = "Content-Type: text/html";
-	 $headers[] = 'From: '.$from;
-	 $headers[] = 'sendmail_from: '.$from;
+	$headers[] = "Content-Type: ".$content_type;
+	$headers[] = 'From: '.$from;
+	$headers[] = 'sendmail_from: '.$from;
    
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
@@ -226,7 +226,7 @@ function bft_subscribe($email, $name, $noalert = false) {
 			$message = str_replace('{{name}}', $name, $message);
 
 			// send the optin email			
-			bft_mail(BFT_SENDER,$email,$subject,$message);
+			bft_mail(BFT_SENDER,$email,$subject,$message, 'text/html');
 			if($noalert) return true;
 			echo "<script language='javascript'>
 			alert('".__('Please check your email. A confirmation link is sent to it.', 'broadfast')."');

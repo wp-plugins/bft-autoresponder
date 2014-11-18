@@ -4,9 +4,10 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.8
+Version: 2.1.9
 Author URI: http://calendarscripts.info
 License: GPL 2
+Text domain: broadfast
 */ 
 
 /*  Copyright 2012  Kiboko Labs
@@ -65,7 +66,7 @@ function bft_init() {
 	}
 	
 	$version = get_option('bft_db_version');
-	if(empty($version) or $version < 2.11) bft_install(true);
+	if(empty($version) or $version < 2.12) bft_install(true);
 	bft_hook_up();
 }
 
@@ -92,7 +93,7 @@ function bft_install($update = false) {
 	 global $wpdb;
 	 
 	 if(!$update) bft_init();
-    $bft_db_version="2.11";
+    $bft_db_version="2.12";
 	 
 	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_USERS."'") != BFT_USERS) {        
 			$sql = "CREATE TABLE " . BFT_USERS . " (
@@ -147,6 +148,11 @@ function bft_install($update = false) {
 				) DEFAULT CHARSET=utf8;";
 			$wpdb->query($sql);
 	  }
+	  
+	  // add DB fields	  
+	  bft_add_db_fields(array(
+		  array("name"=>"content_type", "type"=>"VARCHAR(100) NOT NULL DEFAULT 'text/html'"),  		  
+	  ), BFT_MAILS);
 	  
 	  $old_bft_db_version=get_option('bft_db_version');
 	  
@@ -207,8 +213,8 @@ function bft_messages() {
     $date=esc_sql($date);
 
 	if(!empty($_POST['add_message'])) {
-		$sql=$wpdb->prepare("INSERT INTO ".BFT_MAILS." (subject,message,days,send_on_date,date)
-		VALUES (%s, %s, %d, %d, %s)", $subject, $message, @$days, $send_on_date, $date);
+		$sql=$wpdb->prepare("INSERT INTO ".BFT_MAILS." (subject,message,days,send_on_date,date, content_type)
+		VALUES (%s, %s, %d, %d, %s, %s)", $subject, $message, @$days, $send_on_date, $date, $_POST['content_type']);
 		$wpdb->query($sql);
 	}
 	
@@ -218,8 +224,9 @@ function bft_messages() {
 		message=%s,
 		days=%d,
    	send_on_date=%d,
-    date=%s
-		WHERE id=%d", $subject, $message, $days, $send_on_date, $date, $id);		
+      date=%s,
+      content_type = %s
+		WHERE id=%d", $subject, $message, $days, $send_on_date, $date, $_POST['content_type'], $id);		
 		$wpdb->query($sql);
 	}
 	
@@ -335,19 +342,25 @@ function bft_customize($mail,$member) {
 	
 	$message=str_replace("{{name}}",$member->name,$message);
 	$message=str_replace("{{email}}",$member->email,$message);
+	
+	$content_type = empty($mail->content_type) ? 'text/html' : $mail->content_type;
 				
 	// add unsubscribe link
 	$unsub_url = get_option('siteurl')."/?bft=bft_unsubscribe&email=".$member->email;
-	$message.="<br><br>
-	To unsubscribe from our list visit the url below:<br>
-	<a href='$unsub_url'>$unsub_url</a>";
-	$message=str_replace("\t","",$message);
+	if($content_type == 'text/html') {
+		$message.= "<br><br>".__('To unsubscribe from our list visit the url below:', 'broadfast').
+		"<br><a href='$unsub_url'>$unsub_url</a>";
+		$message=str_replace("\t","",$message);
+	}
+	else {
+		$message.= "\n\n".__('To unsubscribe from our list visit the url below:', 'broadfast')."\n".$unsub_url;		
+	}	
 	
 	$message = do_shortcode($message);
 	
 	$sender = empty($mail->sender) ? BFT_SENDER : $mail->sender;
 	
-	return bft_mail($sender,$member->email,$subject,$message);
+	return bft_mail($sender,$member->email,$subject,$message, $content_type);
 }
 
 // handle all this stuff on template_redirect call so
@@ -432,6 +445,36 @@ function bft_shortcode_signup($attr) {
 	ob_end_clean();
 	
 	return $contents;
+}
+
+
+// function to conditionally add DB fields
+function bft_add_db_fields($fields, $table) {
+		global $wpdb;
+		
+		// check fields
+		$table_fields = $wpdb->get_results("SHOW COLUMNS FROM `$table`");
+		$table_field_names = array();
+		foreach($table_fields as $f) $table_field_names[] = $f->Field;		
+		$fields_to_add=array();
+		
+		foreach($fields as $field) {
+			 if(!in_array($field['name'], $table_field_names)) {
+			 	  $fields_to_add[] = $field;
+			 } 
+		}
+		
+		// now if there are fields to add, run the query
+		if(!empty($fields_to_add)) {
+			 $sql = "ALTER TABLE `$table` ";
+			 
+			 foreach($fields_to_add as $cnt => $field) {
+			 	 if($cnt > 0) $sql .= ", ";
+			 	 $sql .= "ADD $field[name] $field[type]";
+			 } 
+			 
+			 $wpdb->query($sql);
+		}
 }
 
 register_activation_hook(__FILE__,'bft_install');

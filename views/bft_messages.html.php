@@ -13,6 +13,10 @@
 			<p><label><?php _e('Message:', 'broadfast')?> </label> <?php wp_editor("", "message")?></p>
 			<p><label><?php _e('Days after registration:', 'broadfast')?></label> <input type="text" name="days" size="4">
 		    <?php _e('or', 'broadfast')?> <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);"> <?php _e('send on', 'broadfast')?> <?php echo BFTquickDD_date("date", NULL, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
+		    <p><label><?php _e("Email type:", 'broadfast')?></label> <select name="content_type">
+				<option value="text/html"><?php _e("HTML", 'broadfast');?></option>
+				<option value="text/plain"><?php _e("Text", 'broadfast');?></option>
+			</p>	
 			<p><input type="submit" value="<?php _e('Add Message', 'broadfast')?>"></p></div>
 		</div>
 		<input type="hidden" name="add_message" value="1">
@@ -31,6 +35,10 @@
 			<p><label><?php _e('Days after registration:', 'broadfast')?></label> 
 			<input type="text" name="days" size="4" value="<?php echo $mail->days?>" <?php if($mail->send_on_date) echo "disabled"?>>
 		    <?php _e('or', 'broadfast')?> <input type="checkbox" name="send_on_date" value="1" onclick="sendOnDate(this);" <?php if($mail->send_on_date) echo "checked"?>> <?php _e('send on', 'broadfast')?> <?php echo BFTquickDD_date("date", $mail->date, "YYYY-MM-DD", NULL, date("Y"),date("Y")+10);?></p>
+		     <p><label><?php _e("Email type:", 'broadfast')?></label> <select name="content_type">
+				<option value="text/html" <?php if(!empty($mail->content_type) and $mail->content_type=='text/html') echo 'selected'?>><?php _e("HTML", 'broadfast');?></option>
+				<option value="text/plain" <?php if(!empty($mail->content_type) and $mail->content_type=='text/plain') echo 'selected'?>><?php _e("Text", 'broadfast');?></option>
+			</p>	
 			<p><input type="submit" name="save_message" value="<?php _e('Save Message', 'broadfast')?>">	
 			<input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delMessage(this.form);"></p></div>
 		</div>
