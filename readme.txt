@@ -19,6 +19,8 @@ From version 1.5 you can also send fixed date messages.
 
 From version 2.0 you can send immediate newsletters.
 
+From version 2.2 you can add attachments to your autoresponder emails
+
 **Built-in integration with [Contact Form 7](http://wordpress.org/plugins/contact-form-7/ "Contact Form 7")**
 **Built-in integration with [Jetpack Contact Form](http://wordpress.org/plugins/jetpack/ "Jetpack")**
 
@@ -32,7 +34,7 @@ From version 2.0 you can send immediate newsletters.
 
 == Changelog ==
 
-= Changes in 2.1.9 =
+= Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list
 2. The "{{name}}" mask can now be used also in the double optin email
 3. Option to automatically subscribe users who register to the blog. Note that this happens when they first login to avoid bot subscriptions.
@@ -42,6 +44,7 @@ From version 2.0 you can send immediate newsletters.
 7. Added built-in integration with Jetpack contact form
 8. Improved the export format and made it download a file
 9. Now you can select if you want to send HTML or text/plain emails
+10. We have added attachments for your autoresponder emails
 
 = Changes in 2.1 =
 1. Added user's name and registration date in unsubscribe notification emails

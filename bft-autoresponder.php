@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.1.9
+Version: 2.2
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -30,6 +30,7 @@ Text domain: broadfast
 define( 'BFT_PATH', dirname( __FILE__ ) );
 define( 'BFT_RELATIVE_PATH', dirname( plugin_basename( __FILE__ )));
 include(BFT_PATH."/bft-lib.php");
+include(BFT_PATH."/models/attachment.php");
 include(BFT_PATH."/controllers/newsletter.php");
 include(BFT_PATH."/controllers/help.php");
 include(BFT_PATH."/controllers/config.php");
@@ -38,6 +39,7 @@ include(BFT_PATH."/controllers/integrations.php");
 include(BFT_PATH."/controllers/integrations/contact.php");
 include(BFT_PATH."/controllers/integrations/jetpack.php");
 include(BFT_PATH."/controllers/log.php");
+include(BFT_PATH."/controllers/messages.php");
 
 // initialize plugin
 function bft_init() {
@@ -50,6 +52,7 @@ function bft_init() {
 	define( 'BFT_SENTMAILS', $wpdb->prefix. "bft_sentmails" );
 	define( 'BFT_EMAILLOG', $wpdb->prefix. "bft_emaillog" );
 	define( 'BFT_DEBUG', get_option('broadfast_debug'));
+    define( 'BFT_ATTACHMENTS', $wpdb->prefix. "bft_attachments" );
 	
 	// contact form 7 integration
 	add_filter( 'wpcf7_form_elements', array('BFTContactForm7', 'shortcode_filter') );
@@ -66,7 +69,7 @@ function bft_init() {
 	}
 	
 	$version = get_option('bft_db_version');
-	if(empty($version) or $version < 2.12) bft_install(true);
+	if(empty($version) or $version < 2.13) bft_install(true);
 	bft_hook_up();
 }
 
@@ -93,7 +96,7 @@ function bft_install($update = false) {
 	 global $wpdb;
 	 
 	 if(!$update) bft_init();
-    $bft_db_version="2.12";
+    $bft_db_version="2.13";
 	 
 	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_USERS."'") != BFT_USERS) {        
 			$sql = "CREATE TABLE " . BFT_USERS . " (
@@ -148,6 +151,20 @@ function bft_install($update = false) {
 				) DEFAULT CHARSET=utf8;";
 			$wpdb->query($sql);
 	  }
+
+       // attachments table      
+        if($wpdb->get_var("SHOW TABLES LIKE '".BFT_ATTACHMENTS."'") != BFT_ATTACHMENTS) {             
+            $sql = "CREATE TABLE IF NOT EXISTS `".BFT_ATTACHMENTS."` (
+              `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+              `mail_id` int(10) unsigned NOT NULL DEFAULT 0,
+              `nl_id` int(10) unsigned NOT NULL DEFAULT 0,
+              `file_name` VARCHAR(255) NOT NULL DEFAULT '',
+              `file_path` VARCHAR(255) NOT NULL DEFAULT '',
+              `url` VARCHAR(255) NOT NULL DEFAULT '',
+              PRIMARY KEY (`id`)
+            ) DEFAULT CHARSET=utf8;";
+            $wpdb->query($sql);
+      } 
 	  
 	  // add DB fields	  
 	  bft_add_db_fields(array(
@@ -193,53 +210,6 @@ function bft_options() {
   $unsubscribe_notify = get_option('bft_unsubscribe_notify');
   
   require(BFT_PATH."/views/bft_main.html.php");
-}
-
-
-/* Manages the messages */
-function bft_messages() {
-	global $wpdb;
-	
-	$send_on_date='';
-	if(isset($_POST['subject'])) $subject=$_POST['subject'];
-	if(isset($_POST['message'])) $message=$_POST['message'];
-	if(isset($_POST['days'])) $days=$_POST['days'];
-	if(isset($_POST['id'])) $id=$_POST['id'];
-   if(isset($_POST['send_on_date'])) $send_on_date=$_POST['send_on_date'];
-    
-    // prepare date
-    if(!empty($_POST['dateyear'])) $date=$_POST['dateyear']."-".$_POST['datemonth']."-".$_POST['dateday'];
-    else $date = date("Y-m-d");
-    $date=esc_sql($date);
-
-	if(!empty($_POST['add_message'])) {
-		$sql=$wpdb->prepare("INSERT INTO ".BFT_MAILS." (subject,message,days,send_on_date,date, content_type)
-		VALUES (%s, %s, %d, %d, %s, %s)", $subject, $message, @$days, $send_on_date, $date, $_POST['content_type']);
-		$wpdb->query($sql);
-	}
-	
-	if(!empty($_POST['save_message'])) {
-		$sql=$wpdb->prepare("UPDATE ".BFT_MAILS." SET
-		subject=%s,
-		message=%s,
-		days=%d,
-   	send_on_date=%d,
-      date=%s,
-      content_type = %s
-		WHERE id=%d", $subject, $message, $days, $send_on_date, $date, $_POST['content_type'], $id);		
-		$wpdb->query($sql);
-	}
-	
-	if(!empty($_POST['del_message'])) {
-		$sql="DELETE FROM ".BFT_MAILS." WHERE id='$id'";		
-		$wpdb->query($sql);
-	}
-	
-	// select all messages ordered by days
-	$sql="SELECT * FROM ".BFT_MAILS." ORDER BY days";
-	$mails=$wpdb->get_results($sql);
-	
-	require(BFT_PATH."/views/bft_messages.html.php");
 }
 
 /* import/export */
@@ -328,11 +298,14 @@ function bft_welcome_mail($uid) {
 	$member=$wpdb->get_row($sql);
 	if(empty($member->id)) return false;
 	
-	bft_customize($mail,$member);
+	$attachments = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".BFT_ATTACHMENTS."
+					WHERE mail_id = %d ORDER BY id", $mail->id));	
+	
+	bft_customize($mail,$member, $attachments);
 }
 
 /* private function called to customize an email message and send it */
-function bft_customize($mail,$member) {
+function bft_customize($mail,$member, $attachments = null) {
 	// send mail to member
 	$subject=$mail->subject;				
 	$message=$mail->message;
@@ -360,7 +333,7 @@ function bft_customize($mail,$member) {
 	
 	$sender = empty($mail->sender) ? BFT_SENDER : $mail->sender;
 	
-	return bft_mail($sender,$member->email,$subject,$message, $content_type);
+	return bft_mail($sender,$member->email,$subject,$message, $content_type, $attachments);
 }
 
 // handle all this stuff on template_redirect call so

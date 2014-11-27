@@ -20,6 +20,9 @@ if($last_date!=date("Y-m-d")) {
 	$mails=$wpdb->get_results($sql);
         			
 	foreach($mails as $mail) {
+		$attachments = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".BFT_ATTACHMENTS."
+					WHERE mail_id = %d ORDER BY id", $mail->id));	
+				
 		// get users who need to get this mail sent today and send it
 		$sql="SELECT * FROM {$wpdb->prefix}bft_users
 		WHERE date=CURDATE() - INTERVAL $mail->days DAY

@@ -141,7 +141,7 @@ function bft_unsubscribe_notify($user) {
 }
 
 /* wrapper for wp_mail() function */
-function bft_mail($from, $to, $subject, $message, $content_type = 'text/html') {
+function bft_mail($from, $to, $subject, $message, $content_type = 'text/html', $attachments = NULL) {
 	global $wpdb;   	
 	if(empty($from)) $from = get_option('admin_email');
 	
@@ -153,8 +153,19 @@ function bft_mail($from, $to, $subject, $message, $content_type = 'text/html') {
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
    $message=wpautop($message);
+
+   // strip tags from non-HTML emails
+   if($content_type != 'text/html') $message = strip_tags($message);    
+   
+   	// prepare attachments if any	
+	if($attachments and is_array($attachments)) {
+		$atts = array();
+		foreach($attachments as $attachment) $atts[] = $attachment->file_path;
+		$attachments = $atts;
+	} 
+
    if(BFT_DEBUG) echo( "From: $from To: $to<br>".$subject.'<br>'.$message."<br>");  
-   $result = wp_mail($to, $subject, $message, $headers);
+   $result = wp_mail($to, $subject, $message, $headers, $attachments);
    
    // insert into the email log
    $status = $result ? 'OK' : 'Error';

@@ -6,7 +6,7 @@
 
 		<h2><?php _e('Create New Message:', 'broadfast')?></h2>
 		
-		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
+		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);" enctype="multipart/form-data">
 		<div style="clear:both;float:left;">
 			<div style="float:left;">
 			<p><label><?php _e('Subject:', 'broadfast')?>&nbsp; </label> <input type="text" name="subject" size="80"></p>
@@ -16,8 +16,14 @@
 		    <p><label><?php _e("Email type:", 'broadfast')?></label> <select name="content_type">
 				<option value="text/html"><?php _e("HTML", 'broadfast');?></option>
 				<option value="text/plain"><?php _e("Text", 'broadfast');?></option>
+				</select>
 			</p>	
-			<p><input type="submit" value="<?php _e('Add Message', 'broadfast')?>"></p></div>
+			<hr>
+			<p><label><?php _e('Upload attachments (optional):', 'broadfast')?></label> <input type="file" name="attachments[]" multiple="multiple"></p>
+			<?php wp_nonce_field('bft_attach_nonce','bft_attach_nonce');?>
+		
+			<p><input type="submit" value="<?php _e('Add Message', 'broadfast')?>"></p>
+			</div>	
 		</div>
 		<input type="hidden" name="add_message" value="1">
 		</form>
@@ -26,7 +32,7 @@
 		
 		<h2><?php _e('Existing Messages:', 'broadfast')?></h2>
 		<?php foreach($mails as $mail): ?>
-		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);">
+		<form method="post" style="margin:none;" onsubmit="return validateMessage(this);" enctype="multipart/form-data">
 		<div style="clear:both;float:left;">
 		<hr />
 			<div style="float:left;">
@@ -38,7 +44,13 @@
 		     <p><label><?php _e("Email type:", 'broadfast')?></label> <select name="content_type">
 				<option value="text/html" <?php if(!empty($mail->content_type) and $mail->content_type=='text/html') echo 'selected'?>><?php _e("HTML", 'broadfast');?></option>
 				<option value="text/plain" <?php if(!empty($mail->content_type) and $mail->content_type=='text/plain') echo 'selected'?>><?php _e("Text", 'broadfast');?></option>
+				</select>
 			</p>	
+			<hr>
+			<p><label><?php _e('Upload attachments (optional):', 'broadfast')?></label> <input type="file" name="attachments[]" multiple="multiple"></p>
+			<?php wp_nonce_field('bft_attach_nonce','bft_attach_nonce');?>
+			<?php $_att->list_editable(@$mail->attachments);?>
+			
 			<p><input type="submit" name="save_message" value="<?php _e('Save Message', 'broadfast')?>">	
 			<input type="button" value="<?php _e('Delete', 'broadfast')?>" onclick="delMessage(this.form);"></p></div>
 		</div>
