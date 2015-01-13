@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter, wpmu, contact form
 Requires at least: 3.3
-Tested up to: 4.0
+Tested up to: 4.1
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -33,6 +33,9 @@ From version 2.2 you can add attachments to your autoresponder emails
 5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it.
 
 == Changelog ==
+
+= Changes in 2.2.1 =
+1. Now keeps track of all the previous newsletters and lets you edit and re-send them
 
 = Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list

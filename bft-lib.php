@@ -283,3 +283,8 @@ function broadfast_get_mime_type()  {
 				: 'application/octet-stream';
 	return $mime_type;
 }
+
+function bft_redirect($url) {
+	echo "<meta http-equiv='refresh' content='0;url=$url' />"; 
+	exit;
+}
