@@ -20,6 +20,7 @@
 					
 					<h3><?php _e('Contact Form 7 Integration', 'broadfast')?></h3>
 					<p><b><?php _e('Place this shortcode inside your Contact Form 7 contact form - right where you want the checkbox to appear.', 'broadfast')?></b></p>
+					<p style="color:red;font-weight:bold;"><?php _e('Do not change the default contact form field names for name and email when editing your Contact Form 7 contact form. They should remain "your-name" and "your-email", otherwise the integration will not work.', 'broadfast');?></p>
 					
 					<h3><?php _e('Jetpack Contact Form Integration', 'broadfast')?></h3>
 					<p><b><?php _e('Place this shortcode inside the published shortcode of your contact form - somewhere before the closing "[/contact-form]" shortcode.', 'broadfast')?></b></p>

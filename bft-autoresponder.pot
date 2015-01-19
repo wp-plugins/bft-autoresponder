@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.2.1\n"
+"Project-Id-Version: BFT Autoresponder 2.2.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2015-01-13 15:33:57+00:00\n"
+"POT-Creation-Date: 2015-01-19 15:32:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -623,17 +623,24 @@ msgid ""
 "you want the checkbox to appear."
 msgstr ""
 
-#: views/integration-contact-form.html.php:24
-msgid "Jetpack Contact Form Integration"
+#: views/integration-contact-form.html.php:23
+msgid ""
+"Do not change the default contact form field names for name and email when "
+"editing your Contact Form 7 contact form. They should remain \"your-name\" "
+"and \"your-email\", otherwise the integration will not work."
 msgstr ""
 
 #: views/integration-contact-form.html.php:25
+msgid "Jetpack Contact Form Integration"
+msgstr ""
+
+#: views/integration-contact-form.html.php:26
 msgid ""
 "Place this shortcode inside the published shortcode of your contact form - "
 "somewhere before the closing \"[/contact-form]\" shortcode."
 msgstr ""
 
-#: views/integration-contact-form.html.php:29
+#: views/integration-contact-form.html.php:30
 msgid ""
 "In the <a href=\"%s\" target=\"_blank\">PRO Version</a> you can also include "
 "all custom fields directly in your contact form."
