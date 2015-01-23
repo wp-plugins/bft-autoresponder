@@ -34,8 +34,9 @@ From version 2.2 you can add attachments to your autoresponder emails
 
 == Changelog ==
 
-= Changes in 2.2.1 =
+= Changes in 2.2.2 =
 1. Now keeps track of all the previous newsletters and lets you edit and re-send them
+2. Added configurable field names for the Contact Form 7 Integration
 
 = Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list

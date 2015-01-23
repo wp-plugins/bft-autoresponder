@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.2.1.1\n"
+"Project-Id-Version: BFT Autoresponder 2.2.2\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2015-01-19 15:32:35+00:00\n"
+"POT-Creation-Date: 2015-01-23 11:20:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -625,22 +625,39 @@ msgstr ""
 
 #: views/integration-contact-form.html.php:23
 msgid ""
-"Do not change the default contact form field names for name and email when "
-"editing your Contact Form 7 contact form. They should remain \"your-name\" "
-"and \"your-email\", otherwise the integration will not work."
+"<b>IMPORTANT:</b> By default Contact Form 7 creates shortcodes with "
+"parameters \"your-name\" for the name field, and \"your-email\" for the "
+"email field. If you have changed this you must reflect this in the boxes "
+"below otherwise the integration will not work."
 msgstr ""
 
 #: views/integration-contact-form.html.php:25
-msgid "Jetpack Contact Form Integration"
+msgid "Name field name:"
 msgstr ""
 
 #: views/integration-contact-form.html.php:26
+msgid "email field name:"
+msgstr ""
+
+#: views/integration-contact-form.html.php:28
+msgid "These field names are the same for all your mailing lists."
+msgstr ""
+
+#: views/integration-contact-form.html.php:29
+msgid "Change field names"
+msgstr ""
+
+#: views/integration-contact-form.html.php:31
+msgid "Jetpack Contact Form Integration"
+msgstr ""
+
+#: views/integration-contact-form.html.php:32
 msgid ""
 "Place this shortcode inside the published shortcode of your contact form - "
 "somewhere before the closing \"[/contact-form]\" shortcode."
 msgstr ""
 
-#: views/integration-contact-form.html.php:30
+#: views/integration-contact-form.html.php:36
 msgid ""
 "In the <a href=\"%s\" target=\"_blank\">PRO Version</a> you can also include "
 "all custom fields directly in your contact form."

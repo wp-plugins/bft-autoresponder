@@ -20,7 +20,13 @@
 					
 					<h3><?php _e('Contact Form 7 Integration', 'broadfast')?></h3>
 					<p><b><?php _e('Place this shortcode inside your Contact Form 7 contact form - right where you want the checkbox to appear.', 'broadfast')?></b></p>
-					<p style="color:red;font-weight:bold;"><?php _e('Do not change the default contact form field names for name and email when editing your Contact Form 7 contact form. They should remain "your-name" and "your-email", otherwise the integration will not work.', 'broadfast');?></p>
+					<p><?php _e('<b>IMPORTANT:</b> By default Contact Form 7 creates shortcodes with parameters "your-name" for the name field, and "your-email" for the email field. If you have changed this you must reflect this in the boxes below otherwise the integration will not work.', 'broadfast')?></p>
+					
+					<p><label><?php _e('Name field name:', 'broadfast')?></label> <input type="text" name="cf7_name_field" value="<?php echo $name_name?>"></p>
+					<p><label><?php _e('email field name:', 'broadfast')?></label> <input type="text" name="cf7_email_field" value="<?php echo $email_name?>"></p>
+					
+					<p><b><?php _e('These field names are the same for all your mailing lists.', 'broadfast')?></b></p>
+					<p><input type="submit" name="change_defaults" value="<?php _e('Change field names', 'broadfast')?>"></p>
 					
 					<h3><?php _e('Jetpack Contact Form Integration', 'broadfast')?></h3>
 					<p><b><?php _e('Place this shortcode inside the published shortcode of your contact form - somewhere before the closing "[/contact-form]" shortcode.', 'broadfast')?></b></p>

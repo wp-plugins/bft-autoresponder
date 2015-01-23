@@ -6,10 +6,17 @@ class BFTContactForm7 {
 		$data = $_POST;
 		if(empty($data['bft_int_signup'])) return true;
 		
+		// field names default to 'your-name' and 'your-email' but user can change them.
+		// in such case they need to setup this in the integrations page
+		$custom_name_field_name = get_option('bft_cf7_name_field');
+		$name_name = !empty($custom_name_field_name) ? $custom_name_field_name : 'your-name'; 
+		$custom_email_field_name = get_option('bft_cf7_email_field');
+		$email_name = !empty($custom_email_field_name) ? $custom_email_field_name : 'your-email';
+		
 		// signup activated, so let's get data
 		$user = array('email' => "", "name"=>"");	
-		$user['email'] = !empty( $data['your-email'] ) ? trim( $data['your-email'] ) : '';
-	   $user['name'] = !empty( $data['your-name'] ) ? trim( $data['your-name'] ) : '';
+		$user['email'] = !empty( $data[$email_name] ) ? trim( $data[$email_name] ) : '';
+	   $user['name'] = !empty( $data[$name_name] ) ? trim( $data[$name_name] ) : '';
 	   
 		BFTIntegrations :: signup($data, $user);		
 	} // end signup

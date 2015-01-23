@@ -18,6 +18,18 @@ class BFTIntegrations {
 			$shortcode_atts .= ' html_id="'.$_POST['html_id'].'" ';
 		}
 		
+		// change your-name and your-email to custom field names
+		if(!empty($_POST['change_defaults'])) {
+			update_option('bft_cf7_name_field', $_POST['cf7_name_field']);
+			update_option('bft_cf7_email_field', $_POST['cf7_email_field']);
+		}
+		
+		// load default field names
+		$custom_name_field_name = get_option('bft_cf7_name_field');
+		$name_name = !empty($custom_name_field_name) ? $custom_name_field_name : 'your-name'; 
+		$custom_email_field_name = get_option('bft_cf7_email_field');
+		$email_name = !empty($custom_email_field_name) ? $custom_email_field_name : 'your-email';
+		
 		require(BFT_PATH."/views/integration-contact-form.html.php");
 	}
 	
