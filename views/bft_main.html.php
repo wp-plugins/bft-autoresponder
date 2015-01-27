@@ -2,7 +2,7 @@
 
 	<div class="postbox-container" style="width:73%;margin-right:2%;">	
 
-			<div style="width:300px;float:left;padding:10px;">
+			<div style="width:500px;float:left;padding:10px;">
 				<h2><?php _e('Main Settings', 'broadfast')?></h2>
 				<form method="post">
 				<input type="hidden" name="settings_ok" value="Y">
@@ -28,11 +28,22 @@
 				
 				<p><input type="checkbox" name="auto_subscribe" <?php if(get_option('bft_auto_subscribe') == 1) echo 'checked'?> value="1"> <?php _e('Automatically subscribe to the mailing list all new users who register in my blog. (To avoid spam this will happen when users login for the first time)', 'broadfast')?></p>
 				
+				<p><input type="checkbox" name="use_cron_job" value="1" <?php if($use_cron_job == 1) echo 'checked'?> onclick="this.checked ? jQuery('#bftCronJob').show() : jQuery('#bftCronJob').hide();"> <?php _e('I will set up a cron job to send my autoresponder emails.', 'watupro')?><br>
+				<?php _e("(If you don't select this option the email sending will be done the first time when someone (or a bot) visits your site for the day.)", 'watupro')?></p>
+				
+				<div id="bftCronJob" style="display:<?php echo ($use_cron_job == 1) ? 'block': 'none';?>">
+					<?php _e('Cron jobs are scheduled tasks that run on your server. This is the preferred setting but you will need to set up a cron job through your web host control panel. To handle this I recommend to set up a cron job on your server. It needs to run once per day, at a time chosen by you. Here is a <a href="http://calendarscripts.info/cron-jobs-tutorial.html" target="_blank">quick and easy guide</a> how to do it. The exact command you need to set is:', 'broadfast')?></p>	  
+				   <p><input type="text" size="80" value="curl <?php echo site_url("?bft_cron=1");?>" readonly="readonly" onclick="this.select()"></p>				  
+				   <p><?php _e('In case the above does not work on your host please try:', 'broadfast')?></p>				  
+				   <p><input type="text" size="80" value="wget <?php echo site_url("?bft_cron=1");?>" readonly="readonly" onclick="this.select()"></p>				  
+				   <p><?php printf(__('You can also run the cron job manually by visiting <a href="%s" target="_blank">the link</a> in your browser. If there are no errors you will see just a blank page with text "Running in cron job mode".', 'broadfast'), site_url("?bft_cron=1"))?></p>						
+				</div>
+				
 				<p><input type="submit" value="<?php _e('Save Settings', 'broadfast')?>"></p>
 				</form>
 			</div>
 			
-			<div style="width:300px;float:left;padding:10px;">
+			<div style="width:400px;float:left;padding:10px;">
 				<h2><?php _e('Signup Form', 'broadfast')?></h2>
 				<p><?php _e('Registration form HTML code <br>(Copy and paste in a post, page or your wordpress template):', 'broadfast')?></p>
 				<textarea rows="10" cols="40" onclick="this.select();"><?php require(BFT_PATH."/views/signup-form.html.php");?></textarea>

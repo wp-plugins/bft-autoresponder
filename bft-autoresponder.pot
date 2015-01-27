@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the BFT Autoresponder package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.2.2\n"
+"Project-Id-Version: BFT Autoresponder 2.2.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2015-01-23 11:20:22+00:00\n"
+"POT-Creation-Date: 2015-01-27 15:40:45+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -60,36 +60,40 @@ msgstr ""
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:90 views/bft_main.html.php:42
+#: bft-autoresponder.php:90 views/bft_main.html.php:53
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:278
+#: bft-autoresponder.php:280
 msgid "Email"
 msgstr ""
 
-#: bft-autoresponder.php:278
+#: bft-autoresponder.php:280
 msgid "Name"
 msgstr ""
 
-#: bft-autoresponder.php:279 views/bft_list.html.php:25
+#: bft-autoresponder.php:281 views/bft_list.html.php:25
 msgid "IP Address"
 msgstr ""
 
-#: bft-autoresponder.php:279
+#: bft-autoresponder.php:281
 msgid "Date signed"
 msgstr ""
 
-#: bft-autoresponder.php:340 bft-autoresponder.php:345
+#: bft-autoresponder.php:342 bft-autoresponder.php:347
 msgid "To unsubscribe from our list visit the url below:"
 msgstr ""
 
-#: bft-autoresponder.php:385
+#: bft-autoresponder.php:387
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:416
+#: bft-autoresponder.php:418
 msgid "Your email address has been confirmed!"
+msgstr ""
+
+#: bft-autoresponder.php:436
+msgid "Running in cron job mode"
 msgstr ""
 
 #: bft-lib.php:99
@@ -144,6 +148,14 @@ msgstr ""
 
 #: bft-lib.php:243
 msgid "Please check your email. A confirmation link is sent to it."
+msgstr ""
+
+#: controllers/bft_hook.php:10
+msgid "Running in cron job mode."
+msgstr ""
+
+#: controllers/bft_hook.php:64
+msgid "Cron job was already executed earlier today."
 msgstr ""
 
 #: controllers/config.php:6
@@ -321,51 +333,83 @@ msgid ""
 msgstr ""
 
 #: views/bft_main.html.php:31
-msgid "Save Settings"
+msgid "I will set up a cron job to send my autoresponder emails."
 msgstr ""
 
-#: views/bft_main.html.php:36
-msgid "Signup Form"
+#: views/bft_main.html.php:32
+msgid ""
+"(If you don't select this option the email sending will be done the first "
+"time when someone (or a bot) visits your site for the day.)"
+msgstr ""
+
+#: views/bft_main.html.php:35
+msgid ""
+"Cron jobs are scheduled tasks that run on your server. This is the preferred "
+"setting but you will need to set up a cron job through your web host control "
+"panel. To handle this I recommend to set up a cron job on your server. It "
+"needs to run once per day, at a time chosen by you. Here is a <a href="
+"\"http://calendarscripts.info/cron-jobs-tutorial.html\" target=\"_blank"
+"\">quick and easy guide</a> how to do it. The exact command you need to set "
+"is:"
 msgstr ""
 
 #: views/bft_main.html.php:37
+msgid "In case the above does not work on your host please try:"
+msgstr ""
+
+#: views/bft_main.html.php:39
+msgid ""
+"You can also run the cron job manually by visiting <a href=\"%s\" target="
+"\"_blank\">the link</a> in your browser. If there are no errors you will see "
+"just a blank page with text \"Running in cron job mode\"."
+msgstr ""
+
+#: views/bft_main.html.php:42
+msgid "Save Settings"
+msgstr ""
+
+#: views/bft_main.html.php:47
+msgid "Signup Form"
+msgstr ""
+
+#: views/bft_main.html.php:48
 msgid ""
 "Registration form HTML code <br>(Copy and paste in a post, page or your "
 "wordpress template):"
 msgstr ""
 
-#: views/bft_main.html.php:40
+#: views/bft_main.html.php:51
 msgid "Or use Wordpress shortcode"
 msgstr ""
 
-#: views/bft_main.html.php:40
+#: views/bft_main.html.php:51
 msgid "inside a post or page."
 msgstr ""
 
-#: views/bft_main.html.php:50
+#: views/bft_main.html.php:61
 msgid "Double Opt-in Email Message Configuration"
 msgstr ""
 
-#: views/bft_main.html.php:51
+#: views/bft_main.html.php:62
 msgid ""
 "Feel free to leave this empty - in such case a default message will be used."
 msgstr ""
 
-#: views/bft_main.html.php:53
+#: views/bft_main.html.php:64
 msgid "Message subject:"
 msgstr ""
 
-#: views/bft_main.html.php:55
+#: views/bft_main.html.php:66
 msgid ""
 "Please use the variable {{url}} to provide the confirmation URL. If you do "
 "not provide it, it will be attached at the end of the message."
 msgstr ""
 
-#: views/bft_main.html.php:56
+#: views/bft_main.html.php:67
 msgid "You can use the variable {{name}} to address the user by name."
 msgstr ""
 
-#: views/bft_main.html.php:57
+#: views/bft_main.html.php:68
 msgid "Save Double Opt-in Message"
 msgstr ""
 

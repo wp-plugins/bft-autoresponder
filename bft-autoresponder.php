@@ -4,7 +4,7 @@ Plugin Name: BFT Autoresponder
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.2.2
+Version: 2.2.3
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -210,6 +210,7 @@ function bft_options() {
 		 update_option( 'bft_subscribe_notify', @$_POST['subscribe_notify'] );
 		 update_option( 'bft_unsubscribe_notify', @$_POST['unsubscribe_notify'] );
 		 update_option( 'bft_auto_subscribe', @$_POST['auto_subscribe'] );
+		 update_option( 'bft_use_cron_job', @$_POST['use_cron_job'] );
   }
 
   $bft_sender = stripslashes( get_option( 'bft_sender' ) );	
@@ -224,6 +225,7 @@ function bft_options() {
   
   $subscribe_notify = get_option('bft_subscribe_notify');
   $unsubscribe_notify = get_option('bft_unsubscribe_notify');
+  $use_cron_job = get_option('bft_use_cron_job');
   
   require(BFT_PATH."/views/bft_main.html.php");
 }
@@ -421,9 +423,17 @@ function bft_template_redirect() {
 }
 
 // the actual autoresponder hook - it's run when the index page is loaded
-function bft_hook_up() { 
-	define('BFT_SENDER',get_option( 'bft_sender' ));
+function bft_hook_up() {
+  $use_cron_job = get_option('bft_use_cron_job');
+
+	// If user chose to run cron job, execute this only when the GET param is present  
+  if($use_cron_job == 1 and empty($_GET['bft_cron'])) return true;
+  	 
+  define('BFT_SENDER',get_option( 'bft_sender' ));
   require(BFT_PATH."/controllers/bft_hook.php");    
+
+  // for real cron job exit here  
+  if($use_cron_job == 1 and !empty($_GET['bft_cron'])) die(__('Running in cron job mode', 'broadfast'));
 }
 
 // handle shortcode
@@ -435,7 +445,6 @@ function bft_shortcode_signup($attr) {
 	
 	return $contents;
 }
-
 
 // function to conditionally add DB fields
 function bft_add_db_fields($fields, $table) {

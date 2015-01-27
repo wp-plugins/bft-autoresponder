@@ -30,13 +30,14 @@ From version 2.2 you can add attachments to your autoresponder emails
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Configure the sender address and other options from the main page accessible from the newly appeared "BFT Light" menu.
 4. Manage your email messages and mailing list.
-5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it.
+5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it using the command shown in your BFT Light Settings page.
 
 == Changelog ==
 
-= Changes in 2.2.2 =
+= Changes in 2.2.3 =
 1. Now keeps track of all the previous newsletters and lets you edit and re-send them
 2. Added configurable field names for the Contact Form 7 Integration
+3. Added option to use real cron job. This will help you to define what time of the day to send your emails by scheduling the cron job for that time.
 
 = Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list

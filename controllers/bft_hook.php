@@ -1,13 +1,15 @@
 <?php
 global $wpdb;
-
 $last_date=get_option("bft_date");
 
 // don't start again if there is currently running cron job
 // or if there is one, it should be at least 5 minutes old.
 // used to avoid simultaneously running cron jobs
 $last_start = get_option('bft_last_start');
-if(!empty($last_start) and $last_start > (time() - 300)) return true;
+if(!empty($last_start) and $last_start > (time() - 300)) {
+	if($use_cron_job == 1) die(__('Running in cron job mode.', 'broadfast'));
+	else return true;
+}
 
 // run only once per day
 if($last_date!=date("Y-m-d")) {
@@ -58,3 +60,6 @@ if($last_date!=date("Y-m-d")) {
     
     update_option( 'bft_last_start', '' ); // finished successfully
 }	
+else {
+	if($use_cron_job) die(__('Cron job was already executed earlier today.', 'broadfast'));
+}
