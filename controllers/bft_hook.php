@@ -27,14 +27,18 @@ if($last_date!=date("Y-m-d")) {
 				
 		// get users who need to get this mail sent today and send it
 		$sql="SELECT * FROM {$wpdb->prefix}bft_users
-		WHERE date=CURDATE() - INTERVAL $mail->days DAY
+		WHERE date='".date("Y-m-d")."' - INTERVAL $mail->days DAY
 		AND status=1
 		ORDER BY id";			
 		$members=$wpdb->get_results($sql);
         		
 		if(sizeof($members))	{
 			foreach($members as $member)	{
-				bft_customize($mail,$member);
+				// don't send the same email twice
+				$already_sent = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}bft_emaillog
+					WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
+				
+				if(!$already_sent) bft_customize($mail,$member, $attachments);
 			}
 		}
 	}
@@ -53,7 +57,11 @@ if($last_date!=date("Y-m-d")) {
     foreach($mails as $mail) {        
         if(sizeof($members)) {
             foreach($members as $member) {
-                bft_customize($mail,$member);
+            		// don't send the same email twice
+								$already_sent = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}bft_emaillog
+									WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
+            		
+                if(!$already_sent) bft_customize($mail,$member, $attachments);
             }
         }
     }
