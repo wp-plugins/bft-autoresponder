@@ -1,10 +1,10 @@
-# Copyright (C) 2015 BFT Autoresponder
-# This file is distributed under the same license as the BFT Autoresponder package.
+# Copyright (C) 2015 Arigato Autoresponder and Newsletter
+# This file is distributed under the same license as the Arigato Autoresponder and Newsletter package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BFT Autoresponder 2.2.3\n"
+"Project-Id-Version: Arigato Autoresponder and Newsletter 2.2.4\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2015-01-27 15:40:45+00:00\n"
+"POT-Creation-Date: 2015-02-06 17:05:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,87 +12,87 @@ msgstr ""
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bft-autoresponder.php:79
-msgid "BFT Light"
-msgstr ""
-
-#: bft-autoresponder.php:80
-msgid "Settings"
-msgstr ""
-
 #: bft-autoresponder.php:81
-msgid "Your Mailing List"
-msgstr ""
-
-#: bft-autoresponder.php:81 views/help.html.php:21
-msgid "Mailing List"
-msgstr ""
-
-#: bft-autoresponder.php:82 views/help.html.php:24
-msgid "Import/Export Members"
+msgid "Arigato Light"
 msgstr ""
 
 #: bft-autoresponder.php:82
-msgid "Import/Export"
+msgid "Settings"
 msgstr ""
 
 #: bft-autoresponder.php:83
-msgid "Manage Messages"
+msgid "Your Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:83 views/help.html.php:29
-msgid "Email Messages"
+#: bft-autoresponder.php:83 views/help.html.php:21
+msgid "Mailing List"
 msgstr ""
 
-#: bft-autoresponder.php:84 views/newsletter.html.php:26
-msgid "Send Newsletter"
+#: bft-autoresponder.php:84 views/help.html.php:24
+msgid "Import/Export Members"
+msgstr ""
+
+#: bft-autoresponder.php:84
+msgid "Import/Export"
 msgstr ""
 
 #: bft-autoresponder.php:85
+msgid "Manage Messages"
+msgstr ""
+
+#: bft-autoresponder.php:85 views/help.html.php:29
+msgid "Email Messages"
+msgstr ""
+
+#: bft-autoresponder.php:86 views/newsletter.html.php:26
+msgid "Send Newsletter"
+msgstr ""
+
+#: bft-autoresponder.php:87
 msgid "Raw Email Log"
 msgstr ""
 
-#: bft-autoresponder.php:86
+#: bft-autoresponder.php:88
 msgid "Help"
 msgstr ""
 
-#: bft-autoresponder.php:89
+#: bft-autoresponder.php:91
 msgid "Configure Email Message"
 msgstr ""
 
-#: bft-autoresponder.php:90 views/bft_main.html.php:53
+#: bft-autoresponder.php:92 views/bft_main.html.php:53
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:280
+#: bft-autoresponder.php:282
 msgid "Email"
 msgstr ""
 
-#: bft-autoresponder.php:280
+#: bft-autoresponder.php:282
 msgid "Name"
 msgstr ""
 
-#: bft-autoresponder.php:281 views/bft_list.html.php:25
+#: bft-autoresponder.php:283 views/bft_list.html.php:25
 msgid "IP Address"
 msgstr ""
 
-#: bft-autoresponder.php:281
+#: bft-autoresponder.php:283
 msgid "Date signed"
 msgstr ""
 
-#: bft-autoresponder.php:342 bft-autoresponder.php:347
+#: bft-autoresponder.php:344 bft-autoresponder.php:349
 msgid "To unsubscribe from our list visit the url below:"
 msgstr ""
 
-#: bft-autoresponder.php:387
+#: bft-autoresponder.php:389
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:418
+#: bft-autoresponder.php:420
 msgid "Your email address has been confirmed!"
 msgstr ""
 
-#: bft-autoresponder.php:436
+#: bft-autoresponder.php:438
 msgid "Running in cron job mode"
 msgstr ""
 
@@ -150,11 +150,11 @@ msgstr ""
 msgid "Please check your email. A confirmation link is sent to it."
 msgstr ""
 
-#: controllers/bft_hook.php:10
+#: controllers/bft_hook.php:13
 msgid "Running in cron job mode."
 msgstr ""
 
-#: controllers/bft_hook.php:64
+#: controllers/bft_hook.php:85
 msgid "Cron job was already executed earlier today."
 msgstr ""
 
@@ -490,8 +490,8 @@ msgstr ""
 
 #: views/help.html.php:6
 msgid ""
-"This is a short introduction to BFT Lite. It is very simple and easy to use. "
-"For more advanced features you can check our <a href=\"http://"
+"This is a short introduction to Arigato Lite. It is very simple and easy to "
+"use. For more advanced features you can check our <a href=\"http://"
 "calendarscripts.info/bft-pro\">PRO version</a>. You can copy all your data "
 "with a single click."
 msgstr ""
@@ -554,9 +554,10 @@ msgstr ""
 #: views/help.html.php:25
 msgid ""
 "In addition to adding members manually, you can import them in batches from "
-"a CSV file. BFT autoresponder allows you to import CSV file with any number "
-"and order of columns - you only need to specify which column number (from "
-"left to right) in the CSV contains user email and which one - user name."
+"a CSV file. Arigato autoresponder allows you to import CSV file with any "
+"number and order of columns - you only need to specify which column number "
+"(from left to right) in the CSV contains user email and which one - user "
+"name."
 msgstr ""
 
 #: views/help.html.php:27
@@ -613,8 +614,8 @@ msgstr ""
 #: views/help.html.php:42
 msgid ""
 "To localize the plugin in your language check <a href=\"%s\" target=\"_blank"
-"\">this guide</a>. Note that our plugin textdomain is \"broadfast\" and the ."
-"po and .mo files should go into folder languages/"
+"\">this guide</a>. Note that our plugin textdomain is \"<b>broadfast</b>\" "
+"and the .po and .mo files should go into folder wp-content/languages/plugins"
 msgstr ""
 
 #: views/integration-contact-form.html.php:2
@@ -857,181 +858,185 @@ msgid "upgrading to the PRO version:"
 msgstr ""
 
 #: views/sidebar.html.php:27
-msgid "Premium support"
+msgid "One click transfer of your existing settings and mailing list"
 msgstr ""
 
-#: views/sidebar.html.php:27
+#: views/sidebar.html.php:27 views/sidebar.html.php:28
 msgid "Free email support for 1 year after purchase"
 msgstr ""
 
 #: views/sidebar.html.php:28
-msgid "Multiple mailing lists"
-msgstr ""
-
-#: views/sidebar.html.php:28
-msgid "Each one can be assigned to multiple auto responder campaigns."
+msgid "Premium support"
 msgstr ""
 
 #: views/sidebar.html.php:29
+msgid "Multiple mailing lists"
+msgstr ""
+
+#: views/sidebar.html.php:29
+msgid "Each one can be assigned to multiple auto responder campaigns."
+msgstr ""
+
+#: views/sidebar.html.php:30
 msgid "Multiple auto-responder marketing campaigns"
 msgstr ""
 
-#: views/sidebar.html.php:30
+#: views/sidebar.html.php:31
 msgid "Differen email types:"
 msgstr ""
 
-#: views/sidebar.html.php:30
+#: views/sidebar.html.php:31
 msgid ""
 "sequential emails, fixed date emails, weekday messages, repeatable mails"
 msgstr ""
 
-#: views/sidebar.html.php:31
+#: views/sidebar.html.php:32
 msgid "Attachment"
 msgstr ""
 
-#: views/sidebar.html.php:31
+#: views/sidebar.html.php:32
 msgid "can be inserted in your messages"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "Send newsletters"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "to selected mailing list(s)"
 msgstr ""
 
-#: views/sidebar.html.php:33
+#: views/sidebar.html.php:34
 msgid "Widgets, shortcodes and template tags"
 msgstr ""
 
-#: views/sidebar.html.php:33
+#: views/sidebar.html.php:34
 msgid "to embed your signup form easily"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "Optional reCaptcha or question based captcha"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "to prevent spam submissions"
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "Fine-tune the number of emails"
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "that will be sent at once, and per day."
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "Localization-ready"
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "with translation .po files"
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "Unlimited domains license"
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "for domains you own"
 msgstr ""
 
-#: views/sidebar.html.php:38
+#: views/sidebar.html.php:39
 msgid "Customize the messages"
 msgstr ""
 
-#: views/sidebar.html.php:38
+#: views/sidebar.html.php:39
 msgid "with dynamic tags (variables)"
 msgstr ""
 
-#: views/sidebar.html.php:39
+#: views/sidebar.html.php:40
 msgid "Custom fields"
 msgstr ""
 
-#: views/sidebar.html.php:39
+#: views/sidebar.html.php:40
 msgid "can be inserted in the subscribe forms"
 msgstr ""
 
-#: views/sidebar.html.php:40
+#: views/sidebar.html.php:41
 msgid "Bounce tracking"
 msgstr ""
 
-#: views/sidebar.html.php:40
+#: views/sidebar.html.php:41
 msgid "with a designated email account"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:42
 msgid "And a lot more - just come to see!"
 msgstr ""
 
-#: views/sidebar.html.php:44
+#: views/sidebar.html.php:45
 msgid "Just go ahead and"
 msgstr ""
 
-#: views/sidebar.html.php:44
+#: views/sidebar.html.php:45
 msgid "take the tour"
 msgstr ""
 
-#: views/sidebar.html.php:44
+#: views/sidebar.html.php:45
 msgid "or check the"
 msgstr ""
 
-#: views/sidebar.html.php:44
+#: views/sidebar.html.php:45
 msgid "online demo."
 msgstr ""
 
-#: views/sidebar.html.php:46
+#: views/sidebar.html.php:47
 msgid ""
 "Upgrading to PRO comes with 60 days money-back guarantee, one year free "
 "upgrades and one year free support."
 msgstr ""
 
-#: views/sidebar.html.php:50
+#: views/sidebar.html.php:51
 msgid "Help To Spread The Word!"
 msgstr ""
 
-#: views/sidebar.html.php:52
+#: views/sidebar.html.php:53
 msgid "If you like this plugin you can do some of the following:"
 msgstr ""
 
-#: views/sidebar.html.php:55
+#: views/sidebar.html.php:56
 msgid "Rate it 5 starts at Wordpress.org"
 msgstr ""
 
-#: views/sidebar.html.php:56
+#: views/sidebar.html.php:57
 msgid "Let others know about it by blogging or posting"
 msgstr ""
 
-#: views/sidebar.html.php:56
+#: views/sidebar.html.php:57
 msgid "our home page"
 msgstr ""
 
-#: views/sidebar.html.php:56
+#: views/sidebar.html.php:57
 msgid "on social networks."
 msgstr ""
 
-#: views/sidebar.html.php:57
+#: views/sidebar.html.php:58
 msgid "Go PRO"
 msgstr ""
 
-#: views/sidebar.html.php:57
+#: views/sidebar.html.php:58
 msgid "to empower your site with extra benefits"
 msgstr ""
 
-#: views/sidebar.html.php:62
+#: views/sidebar.html.php:63
 msgid "Need Support?"
 msgstr ""
 
-#: views/sidebar.html.php:64
+#: views/sidebar.html.php:65
 msgid "Please ask your question in the"
 msgstr ""
 
-#: views/sidebar.html.php:64
+#: views/sidebar.html.php:65
 msgid "support forum at Wordpress."
 msgstr ""
 

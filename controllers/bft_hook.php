@@ -2,6 +2,9 @@
 global $wpdb;
 $last_date=get_option("bft_date");
 
+// this array of mail_id-user_id pairs will ensure no duplicates are sent on the same function run
+$currently_sent = array();
+
 // don't start again if there is currently running cron job
 // or if there is one, it should be at least 5 minutes old.
 // used to avoid simultaneously running cron jobs
@@ -34,11 +37,16 @@ if($last_date!=date("Y-m-d")) {
         		
 		if(sizeof($members))	{
 			foreach($members as $member)	{
+				if(in_array($mail->id.'--'.$member->id, $currently_sent)) continue;				
+				
 				// don't send the same email twice
 				$already_sent = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}bft_emaillog
 					WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
 				
-				if(!$already_sent) bft_customize($mail,$member, $attachments);
+				if(!$already_sent) {
+					$currently_sent[] = $mail->id.'--'.$member->id;
+					bft_customize($mail,$member, $attachments);
+				}
 			}
 		}
 	}
@@ -57,11 +65,16 @@ if($last_date!=date("Y-m-d")) {
     foreach($mails as $mail) {        
         if(sizeof($members)) {
             foreach($members as $member) {
-            		// don't send the same email twice
-								$already_sent = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}bft_emaillog
+            	 if(in_array($mail->id.'--'.$member->id, $currently_sent)) continue;
+            	 
+            	 // don't send the same email twice
+					 $already_sent = $wpdb->get_var($wpdb->prepare("SELECT id FROM {$wpdb->prefix}bft_emaillog
 									WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
             		
-                if(!$already_sent) bft_customize($mail,$member, $attachments);
+                if(!$already_sent) {
+                	$currently_sent[] = $mail->id.'--'.$member->id;
+                	bft_customize($mail,$member, $attachments);
+                }
             }
         }
     }

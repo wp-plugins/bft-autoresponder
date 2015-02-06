@@ -1,4 +1,4 @@
-=== BFT Autoresponder and Newsletter ===
+=== Arigato Autoresponder and Newsletter ===
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter, wpmu, contact form
 Requires at least: 3.3
@@ -28,16 +28,18 @@ From version 2.2 you can add attachments to your autoresponder emails
 
 1. Unzip the contents and upload the entire `bft-autoresponder` directory to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Configure the sender address and other options from the main page accessible from the newly appeared "BFT Light" menu.
+3. Configure the sender address and other options from the main page accessible from the newly appeared "Arigato Light" menu.
 4. Manage your email messages and mailing list.
-5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it using the command shown in your BFT Light Settings page.
+5. In order to send automated sequential emails every day your blog should be visited at least once daily. If this is not happening, please set up a cron job to visit it using the command shown in your Arigato Light Settings page.
 
 == Changelog ==
 
-= Changes in 2.2.3 =
+= Changes in 2.2.4 =
 1. Now keeps track of all the previous newsletters and lets you edit and re-send them
 2. Added configurable field names for the Contact Form 7 Integration
 3. Added option to use real cron job. This will help you to define what time of the day to send your emails by scheduling the cron job for that time.
+4. Changed plugin name to Arigato
+5. One more attempt to avoid the odd duplicate emails problem that some users experience
 
 = Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list

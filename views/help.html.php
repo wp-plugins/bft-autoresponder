@@ -3,7 +3,7 @@
 	<div class="postbox-container" style="width:73%;margin-right:2%;">
 	<h2><?php _e('User Manual', 'broadfast')?></h2>
 			
-			<p><?php _e('This is a short introduction to BFT Lite. It is very simple and easy to use. For more advanced features you can check our <a href="http://calendarscripts.info/bft-pro">PRO version</a>. You can copy all your data with a single click.', 'broadfast')?></p>
+			<p><?php _e('This is a short introduction to Arigato Lite. It is very simple and easy to use. For more advanced features you can check our <a href="http://calendarscripts.info/bft-pro">PRO version</a>. You can copy all your data with a single click.', 'broadfast')?></p>
 			
 			
 			<h3><?php _e('Automated autoresponder emails', 'broadfast')?></h3>
@@ -22,7 +22,7 @@
 			<p><?php _e('Manage your mailing list on this page. You can add, edit and delete subscribers and activate/deactivate them. When you add a subscriber as active, she will receive the welcome mail if you have set such (more about welcome mails in "Email Messages" section).', 'broadfast')?></p>
 			
 			<h3><?php _e('Import/Export Members', 'broadfast')?></h3>
-			<p><?php _e('In addition to adding members manually, you can import them in batches from a CSV file. BFT autoresponder allows you to import CSV file with any number and order of columns - you only need to specify which column number (from left to right) in the CSV contains user email and which one - user name.', 'broadfast')?></p>
+			<p><?php _e('In addition to adding members manually, you can import them in batches from a CSV file. Arigato autoresponder allows you to import CSV file with any number and order of columns - you only need to specify which column number (from left to right) in the CSV contains user email and which one - user name.', 'broadfast')?></p>
 			 
 			<p><?php _e('When importing members they will automatically be activated. If there are any welcome mails set, those will be sent out. Importing a lot of members at once and having a welcome mail scheduled at the same time may slow down your site.', 'broadfast')?></p>
 			
@@ -39,7 +39,7 @@
 			
 			<h3><?php _e('Localization / translation', 'broadfast')?></h3>
 			
-			<p><?php printf(__('To localize the plugin in your language check <a href="%s" target="_blank">this guide</a>. Note that our plugin textdomain is "broadfast" and the .po and .mo files should go into folder languages/', 'broadfast'), "http://blog.calendarscripts.info/how-to-translate-a-wordpress-plugin/")?></p>
+			<p><?php printf(__('To localize the plugin in your language check <a href="%s" target="_blank">this guide</a>. Note that our plugin textdomain is "<b>broadfast</b>" and the .po and .mo files should go into folder wp-content/languages/plugins', 'broadfast'), "http://blog.calendarscripts.info/how-to-translate-a-wordpress-plugin/")?></p>
 	</div>		
 			
 	<div id="bft-sidebar">

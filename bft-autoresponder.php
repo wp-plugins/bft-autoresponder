@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: BFT Autoresponder
+Plugin Name: Arigato Autoresponder and Newsletter 
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.2.3.1
+Version: 2.2.4
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -54,6 +54,8 @@ function bft_init() {
 	define( 'BFT_DEBUG', get_option('broadfast_debug'));
    define( 'BFT_ATTACHMENTS', $wpdb->prefix. "bft_attachments" );
    define( 'BFT_NLS', $wpdb->prefix. "bft_newsletters" );
+   
+   if(!defined('BFT_SENDER')) define('BFT_SENDER',get_option( 'bft_sender' ));
 	
 	// contact form 7 integration
 	add_filter( 'wpcf7_form_elements', array('BFTContactForm7', 'shortcode_filter') );
@@ -76,7 +78,7 @@ function bft_init() {
 
 /* Adds the menu items */
 function bft_autoresponder_menu() {  
-  add_menu_page(__('BFT Light', 'broadfast'), __('BFT Light', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
+  add_menu_page(__('Arigato Light', 'broadfast'), __('Arigato Light', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
   add_submenu_page('bft_options',__('Settings', 'broadfast'), __('Settings', 'broadfast'), 'manage_options', 'bft_options', 'bft_options');
   add_submenu_page('bft_options',__('Your Mailing List', 'broadfast'), __('Mailing List', 'broadfast'), 'manage_options', "bft_list", "bft_list");
   add_submenu_page('bft_options',__('Import/Export Members', 'broadfast'), __('Import/Export', 'broadfast'), 'manage_options', "bft_import", "bft_import");
@@ -429,7 +431,7 @@ function bft_hook_up() {
 	// If user chose to run cron job, execute this only when the GET param is present  
   if($use_cron_job == 1 and empty($_GET['bft_cron'])) return true;
   	 
-  define('BFT_SENDER',get_option( 'bft_sender' ));
+  if(!defined('BFT_SENDER')) define('BFT_SENDER',get_option( 'bft_sender' ));
   require(BFT_PATH."/controllers/bft_hook.php");    
 
   // for real cron job exit here  
