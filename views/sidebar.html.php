@@ -24,7 +24,8 @@
 	<p><?php _e('Get more powerful features by', 'broadfast')?> <a href="http://calendarscripts.info/bft-pro/" target="_blank"><?php _e('upgrading to the PRO version:', 'broadfast')?></a></p>
 	
 	<ol>
-		<li><strong><?php _e('One click transfer of your existing settings and mailing list', 'breadfast')?></strong>. <?php _e('Free email support for 1 year after purchase', 'broadfast')?></li>
+		<li><strong><?php _e('One click transfer of your existing settings and mailing list', 'breadfast')?></strong>.</li> 
+		<li><?php _e('Free email support for 1 year after purchase', 'broadfast')?></li>
 		<li><strong><?php _e('Premium support', 'breadfast')?></strong>. <?php _e('Free email support for 1 year after purchase', 'broadfast')?></li>
 		<li><strong><?php _e('Multiple mailing lists', 'broadfast')?></strong>. <?php _e('Each one can be assigned to multiple auto responder campaigns.', 'broadfast')?></li>
 		<li><strong><?php _e('Multiple auto-responder marketing campaigns', 'broadfast')?></strong></li>
