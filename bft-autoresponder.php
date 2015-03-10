@@ -4,7 +4,7 @@ Plugin Name: Arigato Autoresponder and Newsletter
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.2.4
+Version: 2.2.5
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -208,7 +208,7 @@ function bft_options() {
   	 // save autoresponder settings
 		 update_option( 'bft_sender', $_POST['bft_sender'] );
 		 update_option( 'bft_redirect', $_POST['bft_redirect'] );
-		 update_option( 'bft_optin', $_POST['bft_optin'] );
+		 update_option( 'bft_optin', $_POST['bft_optin'] );		 
 		 update_option( 'bft_subscribe_notify', @$_POST['subscribe_notify'] );
 		 update_option( 'bft_unsubscribe_notify', @$_POST['unsubscribe_notify'] );
 		 update_option( 'bft_auto_subscribe', @$_POST['auto_subscribe'] );
@@ -223,11 +223,13 @@ function bft_options() {
   if(!empty($_POST['double_optin_ok'])) {
   	 update_option('bft_optin_subject', $_POST['optin_subject']);
   	 update_option('bft_optin_message', $_POST['optin_message']);
+  	 update_option( 'bft_optin_redirect', $_POST['bft_optin_redirect'] );
   }
   
   $subscribe_notify = get_option('bft_subscribe_notify');
   $unsubscribe_notify = get_option('bft_unsubscribe_notify');
   $use_cron_job = get_option('bft_use_cron_job');
+  $bft_optin_redirect = stripslashes( get_option( 'bft_optin_redirect' ) ); 	  
   
   require(BFT_PATH."/views/bft_main.html.php");
 }
@@ -398,7 +400,8 @@ function bft_template_redirect() {
 		$sql=$wpdb->prepare("SELECT * FROM ".BFT_USERS." WHERE id=%d AND code=%s", $_GET['id'], $_GET['code']);	
 		$member=$wpdb->get_row($sql);	
 		
-		$bft_redirect = stripslashes( get_option( 'bft_redirect' ) );	
+		$bft_redirect = stripslashes( get_option( 'bft_optin_redirect' ) );
+		if(empty($bft_redirect)) $bft_redirect = get_option('bft_redirect');	
 		
 		if(!empty($member->id)) {			
 			$sql="UPDATE ".BFT_USERS." SET 

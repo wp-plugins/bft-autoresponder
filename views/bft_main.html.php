@@ -8,7 +8,7 @@
 				<input type="hidden" name="settings_ok" value="Y">
 				<p><label><?php _e('Sender of all emails:', 'broadfast')?></label> <input type="text" name="bft_sender" value="<?php echo $bft_sender?>" size="30"><br>
 				<span style="color:red;"><?php _e('Fill valid email address or name/email like this:</br> <b>Name &lt;email@domain.com&gt;</b></span>', 'broadfast')?></p>
-				<p><label><?php _e('URL to redirect to after registration (optional):', 'broadfast')?></label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>" size="30"></p>
+				<p><label><?php _e('URL to redirect to after registration (optional):', 'broadfast')?></label> <input type="text" name="bft_redirect" value="<?php echo $bft_redirect?>" size="50"></p>
 				<p><label><?php _e('Double opt-in:', 'broadfast')?></label> 
 				<select name="bft_optin" onchange="if(this.value == '1') { jQuery('#bftOptinConfig').show();} else {jQuery('#bftOptinConfig').hide();}">
 				<option value="0" <?if(empty($bft_optin)) echo "selected";?>><?php _e('No', 'broadfast')?></option>
@@ -58,6 +58,10 @@
 				<hr />
 				
 				<form method="post">
+					<h2><?php _e('Double Opt-in Redirect Configuration', 'broadfast')?></h2>
+					<p><?php _e('URL to redirect after double opt-in (optional):', 'broadfast')?> <input type="text" name="bft_optin_redirect" value="<?php echo $bft_optin_redirect?>" size="50"><br>
+					<?php _e('(If you leave this empty, the value from  "URL to redirect to after registration" will be used)', 'broadfast')?> </p>				
+				
 					<h2><?php _e('Double Opt-in Email Message Configuration', 'broadfast')?></h2>
 					<p><?php _e('Feel free to leave this empty - in such case a default message will be used.', 'broadfast')?></p>
 					

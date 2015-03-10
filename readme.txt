@@ -34,12 +34,13 @@ From version 2.2 you can add attachments to your autoresponder emails
 
 == Changelog ==
 
-= Changes in 2.2.4 =
+= Changes in 2.2.5 =
 1. Now keeps track of all the previous newsletters and lets you edit and re-send them
 2. Added configurable field names for the Contact Form 7 Integration
 3. Added option to use real cron job. This will help you to define what time of the day to send your emails by scheduling the cron job for that time.
 4. Changed plugin name to Arigato
 5. One more attempt to avoid the odd duplicate emails problem that some users experience
+6. Added optional redirect URL after email confirmation
 
 = Changes in 2.2 =
 1. Added "Mass delete" option in the mailing list

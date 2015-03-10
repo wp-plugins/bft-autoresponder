@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Arigato Autoresponder and Newsletter package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Arigato Autoresponder and Newsletter 2.2.4\n"
+"Project-Id-Version: Arigato Autoresponder and Newsletter 2.2.5\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/bft-autoresponder\n"
-"POT-Creation-Date: 2015-02-06 17:05:56+00:00\n"
+"POT-Creation-Date: 2015-03-10 16:07:57+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -64,35 +64,35 @@ msgstr ""
 msgid "Integrate in Contact Form"
 msgstr ""
 
-#: bft-autoresponder.php:282
+#: bft-autoresponder.php:284
 msgid "Email"
 msgstr ""
 
-#: bft-autoresponder.php:282
+#: bft-autoresponder.php:284
 msgid "Name"
 msgstr ""
 
-#: bft-autoresponder.php:283 views/bft_list.html.php:25
+#: bft-autoresponder.php:285 views/bft_list.html.php:25
 msgid "IP Address"
 msgstr ""
 
-#: bft-autoresponder.php:283
+#: bft-autoresponder.php:285
 msgid "Date signed"
 msgstr ""
 
-#: bft-autoresponder.php:344 bft-autoresponder.php:349
+#: bft-autoresponder.php:346 bft-autoresponder.php:351
 msgid "To unsubscribe from our list visit the url below:"
 msgstr ""
 
-#: bft-autoresponder.php:389
+#: bft-autoresponder.php:391
 msgid "You have been unsubscribed."
 msgstr ""
 
-#: bft-autoresponder.php:420
+#: bft-autoresponder.php:423
 msgid "Your email address has been confirmed!"
 msgstr ""
 
-#: bft-autoresponder.php:438
+#: bft-autoresponder.php:441
 msgid "Running in cron job mode"
 msgstr ""
 
@@ -387,29 +387,43 @@ msgid "inside a post or page."
 msgstr ""
 
 #: views/bft_main.html.php:61
-msgid "Double Opt-in Email Message Configuration"
+msgid "Double Opt-in Redirect Configuration"
 msgstr ""
 
 #: views/bft_main.html.php:62
+msgid "URL to redirect after double opt-in (optional):"
+msgstr ""
+
+#: views/bft_main.html.php:63
+msgid ""
+"(If you leave this empty, the value from  \"URL to redirect to after "
+"registration\" will be used)"
+msgstr ""
+
+#: views/bft_main.html.php:65
+msgid "Double Opt-in Email Message Configuration"
+msgstr ""
+
+#: views/bft_main.html.php:66
 msgid ""
 "Feel free to leave this empty - in such case a default message will be used."
 msgstr ""
 
-#: views/bft_main.html.php:64
+#: views/bft_main.html.php:68
 msgid "Message subject:"
 msgstr ""
 
-#: views/bft_main.html.php:66
+#: views/bft_main.html.php:70
 msgid ""
 "Please use the variable {{url}} to provide the confirmation URL. If you do "
 "not provide it, it will be attached at the end of the message."
 msgstr ""
 
-#: views/bft_main.html.php:67
+#: views/bft_main.html.php:71
 msgid "You can use the variable {{name}} to address the user by name."
 msgstr ""
 
-#: views/bft_main.html.php:68
+#: views/bft_main.html.php:72
 msgid "Save Double Opt-in Message"
 msgstr ""
 
@@ -861,182 +875,182 @@ msgstr ""
 msgid "One click transfer of your existing settings and mailing list"
 msgstr ""
 
-#: views/sidebar.html.php:27 views/sidebar.html.php:28
+#: views/sidebar.html.php:28 views/sidebar.html.php:29
 msgid "Free email support for 1 year after purchase"
 msgstr ""
 
-#: views/sidebar.html.php:28
+#: views/sidebar.html.php:29
 msgid "Premium support"
 msgstr ""
 
-#: views/sidebar.html.php:29
+#: views/sidebar.html.php:30
 msgid "Multiple mailing lists"
 msgstr ""
 
-#: views/sidebar.html.php:29
+#: views/sidebar.html.php:30
 msgid "Each one can be assigned to multiple auto responder campaigns."
 msgstr ""
 
-#: views/sidebar.html.php:30
+#: views/sidebar.html.php:31
 msgid "Multiple auto-responder marketing campaigns"
 msgstr ""
 
-#: views/sidebar.html.php:31
+#: views/sidebar.html.php:32
 msgid "Differen email types:"
 msgstr ""
 
-#: views/sidebar.html.php:31
+#: views/sidebar.html.php:32
 msgid ""
 "sequential emails, fixed date emails, weekday messages, repeatable mails"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "Attachment"
 msgstr ""
 
-#: views/sidebar.html.php:32
+#: views/sidebar.html.php:33
 msgid "can be inserted in your messages"
 msgstr ""
 
-#: views/sidebar.html.php:33
+#: views/sidebar.html.php:34
 msgid "Send newsletters"
 msgstr ""
 
-#: views/sidebar.html.php:33
+#: views/sidebar.html.php:34
 msgid "to selected mailing list(s)"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "Widgets, shortcodes and template tags"
 msgstr ""
 
-#: views/sidebar.html.php:34
+#: views/sidebar.html.php:35
 msgid "to embed your signup form easily"
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "Optional reCaptcha or question based captcha"
 msgstr ""
 
-#: views/sidebar.html.php:35
+#: views/sidebar.html.php:36
 msgid "to prevent spam submissions"
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "Fine-tune the number of emails"
 msgstr ""
 
-#: views/sidebar.html.php:36
+#: views/sidebar.html.php:37
 msgid "that will be sent at once, and per day."
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "Localization-ready"
 msgstr ""
 
-#: views/sidebar.html.php:37
+#: views/sidebar.html.php:38
 msgid "with translation .po files"
 msgstr ""
 
-#: views/sidebar.html.php:38
+#: views/sidebar.html.php:39
 msgid "Unlimited domains license"
 msgstr ""
 
-#: views/sidebar.html.php:38
+#: views/sidebar.html.php:39
 msgid "for domains you own"
 msgstr ""
 
-#: views/sidebar.html.php:39
+#: views/sidebar.html.php:40
 msgid "Customize the messages"
 msgstr ""
 
-#: views/sidebar.html.php:39
+#: views/sidebar.html.php:40
 msgid "with dynamic tags (variables)"
 msgstr ""
 
-#: views/sidebar.html.php:40
+#: views/sidebar.html.php:41
 msgid "Custom fields"
 msgstr ""
 
-#: views/sidebar.html.php:40
+#: views/sidebar.html.php:41
 msgid "can be inserted in the subscribe forms"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:42
 msgid "Bounce tracking"
 msgstr ""
 
-#: views/sidebar.html.php:41
+#: views/sidebar.html.php:42
 msgid "with a designated email account"
 msgstr ""
 
-#: views/sidebar.html.php:42
+#: views/sidebar.html.php:43
 msgid "And a lot more - just come to see!"
 msgstr ""
 
-#: views/sidebar.html.php:45
+#: views/sidebar.html.php:46
 msgid "Just go ahead and"
 msgstr ""
 
-#: views/sidebar.html.php:45
+#: views/sidebar.html.php:46
 msgid "take the tour"
 msgstr ""
 
-#: views/sidebar.html.php:45
+#: views/sidebar.html.php:46
 msgid "or check the"
 msgstr ""
 
-#: views/sidebar.html.php:45
+#: views/sidebar.html.php:46
 msgid "online demo."
 msgstr ""
 
-#: views/sidebar.html.php:47
+#: views/sidebar.html.php:48
 msgid ""
 "Upgrading to PRO comes with 60 days money-back guarantee, one year free "
 "upgrades and one year free support."
 msgstr ""
 
-#: views/sidebar.html.php:51
+#: views/sidebar.html.php:52
 msgid "Help To Spread The Word!"
 msgstr ""
 
-#: views/sidebar.html.php:53
+#: views/sidebar.html.php:54
 msgid "If you like this plugin you can do some of the following:"
 msgstr ""
 
-#: views/sidebar.html.php:56
+#: views/sidebar.html.php:57
 msgid "Rate it 5 starts at Wordpress.org"
 msgstr ""
 
-#: views/sidebar.html.php:57
+#: views/sidebar.html.php:58
 msgid "Let others know about it by blogging or posting"
 msgstr ""
 
-#: views/sidebar.html.php:57
+#: views/sidebar.html.php:58
 msgid "our home page"
 msgstr ""
 
-#: views/sidebar.html.php:57
+#: views/sidebar.html.php:58
 msgid "on social networks."
 msgstr ""
 
-#: views/sidebar.html.php:58
+#: views/sidebar.html.php:59
 msgid "Go PRO"
 msgstr ""
 
-#: views/sidebar.html.php:58
+#: views/sidebar.html.php:59
 msgid "to empower your site with extra benefits"
 msgstr ""
 
-#: views/sidebar.html.php:63
+#: views/sidebar.html.php:64
 msgid "Need Support?"
 msgstr ""
 
-#: views/sidebar.html.php:65
+#: views/sidebar.html.php:66
 msgid "Please ask your question in the"
 msgstr ""
 
-#: views/sidebar.html.php:65
+#: views/sidebar.html.php:66
 msgid "support forum at Wordpress."
 msgstr ""
 
