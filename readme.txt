@@ -24,6 +24,10 @@ From version 2.2 you can add attachments to your autoresponder emails
 **Built-in integration with [Contact Form 7](http://wordpress.org/plugins/contact-form-7/ "Contact Form 7")**
 **Built-in integration with [Jetpack Contact Form](http://wordpress.org/plugins/jetpack/ "Jetpack")**
 
+= Community Translations =
+
+Swedish translation available thanks to Patrik: [.po](http://calendarscripts.info/free/wordpress/broadfast-sv_SE.po ".po file") / [.mo](http://calendarscripts.info/free/wordpress/broadfast-sv_SE.mo ".mo file")
+
 == Installation ==
 
 1. Unzip the contents and upload the entire `bft-autoresponder` directory to the `/wp-content/plugins/` directory
