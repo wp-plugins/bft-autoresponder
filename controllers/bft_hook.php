@@ -44,6 +44,10 @@ if($last_date!=date("Y-m-d")) {
 					WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
 				
 				if(!$already_sent) {
+					// insert in sent mails
+					$wpdb->query($wpdb->prepare("INSERT INTO ".BFT_SENTMAILS." SET
+						mail_id=%d, user_id=%d, date=%s", $mail->id, $member->id, date("Y-m-d", current_time('timestamp'))));					
+					
 					$currently_sent[] = $mail->id.'--'.$member->id;
 					bft_customize($mail,$member, $attachments);
 				}
@@ -72,6 +76,9 @@ if($last_date!=date("Y-m-d")) {
 									WHERE subject=%s AND date=%s AND receiver=%s", $mail->subject, date("Y-m-d"), $member->email));				
             		
                 if(!$already_sent) {
+                	$wpdb->query($wpdb->prepare("INSERT INTO ".BFT_SENTMAILS." SET
+							mail_id=%d, user_id=%d, date=%s", $mail->id, $member->id, date("Y-m-d", current_time('timestamp'))));
+						
                 	$currently_sent[] = $mail->id.'--'.$member->id;
                 	bft_customize($mail,$member, $attachments);
                 }

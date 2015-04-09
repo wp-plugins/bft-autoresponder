@@ -34,7 +34,7 @@ From version 2.2 you can add attachments to your autoresponder emails
 
 == Changelog ==
 
-= Changes in 2.2.5 =
+= Changes in 2.2.6 =
 1. Now keeps track of all the previous newsletters and lets you edit and re-send them
 2. Added configurable field names for the Contact Form 7 Integration
 3. Added option to use real cron job. This will help you to define what time of the day to send your emails by scheduling the cron job for that time.

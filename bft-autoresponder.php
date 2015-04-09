@@ -4,7 +4,7 @@ Plugin Name: Arigato Autoresponder and Newsletter
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.2.5
+Version: 2.2.6
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -72,7 +72,7 @@ function bft_init() {
 	}
 	
 	$version = get_option('bft_db_version');
-	if(empty($version) or $version < 2.14) bft_install(true);
+	if(empty($version) or $version < 2.15) bft_install(true);
 	bft_hook_up();
 }
 
@@ -99,7 +99,7 @@ function bft_install($update = false) {
 	 global $wpdb;
 	 
 	 if(!$update) bft_init();
-    $bft_db_version="2.14";
+    $bft_db_version="2.15";
 	 
 	  if($wpdb->get_var("SHOW TABLES LIKE '".BFT_USERS."'") != BFT_USERS) {        
 			$sql = "CREATE TABLE " . BFT_USERS . " (
@@ -188,6 +188,10 @@ function bft_install($update = false) {
 	  bft_add_db_fields(array(
 		  array("name"=>"content_type", "type"=>"VARCHAR(100) NOT NULL DEFAULT 'text/html'"),  		  
 	  ), BFT_MAILS);
+	  
+	   bft_add_db_fields(array(
+		  array("name"=>"nl_id", "type"=>"INT UNSIGNED NOT NULL DEFAULT 0"), /* newsletter ID */ 		  
+	  ), BFT_SENTMAILS);
 	  
 	  $old_bft_db_version=get_option('bft_db_version');
 	  
@@ -322,6 +326,10 @@ function bft_welcome_mail($uid) {
 	
 	$attachments = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".BFT_ATTACHMENTS."
 					WHERE mail_id = %d ORDER BY id", $mail->id));	
+					
+	// insert in sent
+	$wpdb->query($wpdb->prepare("INSERT INTO ".BFT_SENTMAILS." SET
+						mail_id=%d, user_id=%d, date=%s", $mail->id, $uid, date("Y-m-d", current_time('timestamp'))));									
 	
 	bft_customize($mail,$member, $attachments);
 }
