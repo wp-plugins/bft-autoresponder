@@ -2,7 +2,7 @@
 Contributors: prasunsen
 Tags: autoresponder, auto responder, mailing list, newsletter, wpmu, contact form
 Requires at least: 3.3
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: trunk
 
 This plugin allows scheduling of automated autoresponder messages, instant newsletters, and managing a mailing list.
@@ -27,6 +27,7 @@ From version 2.2 you can add attachments to your autoresponder emails
 = Community Translations =
 
 Swedish translation available thanks to Patrik: [.po](http://calendarscripts.info/free/wordpress/broadfast-sv_SE.po ".po file") / [.mo](http://calendarscripts.info/free/wordpress/broadfast-sv_SE.mo ".mo file")
+German translation available thanks to @mpek: [.po](http://calendarscripts.info/free/wordpress/broadfast-de_DE.po ".po file") / [.mo](http://calendarscripts.info/free/wordpress/broadfast-de_DE.mo ".mo file")
 
 == Installation ==
 
