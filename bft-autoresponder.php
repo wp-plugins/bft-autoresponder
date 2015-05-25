@@ -4,7 +4,7 @@ Plugin Name: Arigato Autoresponder and Newsletter
 Plugin URI: http://calendarscripts.info/autoresponder-wordpress.html
 Description: This is a sequential autoresponder that can send automated messages to your mailing list. For more advanced features check our <a href="http://calendarscripts.info/bft-pro">PRO Version</a>
 Author: Kiboko Labs
-Version: 2.2.6
+Version: 2.2.7
 Author URI: http://calendarscripts.info
 License: GPL 2
 Text domain: broadfast
@@ -217,6 +217,7 @@ function bft_options() {
 		 update_option( 'bft_unsubscribe_notify', @$_POST['unsubscribe_notify'] );
 		 update_option( 'bft_auto_subscribe', @$_POST['auto_subscribe'] );
 		 update_option( 'bft_use_cron_job', @$_POST['use_cron_job'] );
+		 update_option( 'bft_mails_per_run', $_POST['mails_per_run'] );
   }
 
   $bft_sender = stripslashes( get_option( 'bft_sender' ) );	

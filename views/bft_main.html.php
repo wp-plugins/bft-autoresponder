@@ -32,12 +32,15 @@
 				<?php _e("(If you don't select this option the email sending will be done the first time when someone (or a bot) visits your site for the day.)", 'watupro')?></p>
 				
 				<div id="bftCronJob" style="display:<?php echo ($use_cron_job == 1) ? 'block': 'none';?>">
-					<?php _e('Cron jobs are scheduled tasks that run on your server. This is the preferred setting but you will need to set up a cron job through your web host control panel. To handle this I recommend to set up a cron job on your server. It needs to run once per day, at a time chosen by you. Here is a <a href="http://calendarscripts.info/cron-jobs-tutorial.html" target="_blank">quick and easy guide</a> how to do it. The exact command you need to set is:', 'broadfast')?></p>	  
+					<?php _e('Cron jobs are scheduled tasks that run on your server. This is the preferred setting but you will need to set up a cron job through your web host control panel. To handle this I recommend to set up a cron job on your server. It needs to run at least once per day (preferably every hour or so), at a time chosen by you. Here is a <a href="http://calendarscripts.info/cron-jobs-tutorial.html" target="_blank">quick and easy guide</a> how to do it. The exact command you need to set is:', 'broadfast')?></p>	  
 				   <p><input type="text" size="80" value="curl <?php echo site_url("?bft_cron=1");?>" readonly="readonly" onclick="this.select()"></p>				  
 				   <p><?php _e('In case the above does not work on your host please try:', 'broadfast')?></p>				  
 				   <p><input type="text" size="80" value="wget <?php echo site_url("?bft_cron=1");?>" readonly="readonly" onclick="this.select()"></p>				  
 				   <p><?php printf(__('You can also run the cron job manually by visiting <a href="%s" target="_blank">the link</a> in your browser. If there are no errors you will see just a blank page with text "Running in cron job mode".', 'broadfast'), site_url("?bft_cron=1"))?></p>						
 				</div>
+				
+				<p><?php _e('Send up to', 'broadfast')?> <input type="text" name="mails_per_run" value="<?php echo get_option('bft_mails_per_run');?>" size="4"> <?php _e('mails at once.', 'broadfast');?><br>
+				<?php _e('Leave 0 or blank for no limit. This option will be useful on shared hosts which limit the number of emails you can send per hour. Note that this limit does not relate to instant newsletters and welcome emails and they will not be considered in the total number of emails sent.', 'broadfast');?></p>
 				
 				<p><input type="submit" value="<?php _e('Save Settings', 'broadfast')?>"></p>
 				</form>
