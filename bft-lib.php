@@ -149,6 +149,12 @@ function bft_mail($from, $to, $subject, $message, $content_type = 'text/html', $
 	$headers[] = "Content-Type: ".$content_type;
 	$headers[] = 'From: '.$from;
 	$headers[] = 'sendmail_from: '.$from;
+	
+	// if $to is in format name <email@dot.com> break it so only email@dot.com is used
+	if(strstr($to, '<')) {
+		$toparts = explode('<', $to);
+		$to = str_replace('>', '', $toparts[1]);		
+	}
    
    $subject=stripslashes($subject);
    $message=stripslashes($message);   
